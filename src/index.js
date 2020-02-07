@@ -6,6 +6,7 @@ import { ConnectedRouter } from "connected-react-router";
 //* Store
 import history from "./store/history";
 import configureStore from "./store";
+import appActions, { media } from "./store/app/actions";
 
 import App from "./views/App";
 import * as serviceWorker from "./serviceWorker";
@@ -19,6 +20,12 @@ ReactDOM.render(
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
+);
+
+store.dispatch(
+  appActions.initApp({
+    media,
+  })
 );
 
 serviceWorker.unregister();

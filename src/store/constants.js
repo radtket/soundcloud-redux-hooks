@@ -21,3 +21,7 @@ export const PAGINATION_PARAMS = `limit=${PAGINATION_LIMIT}&linked_partitioning=
 //*-------------------------------------
 export const FEATURED_TRACKLIST_ID = "featured";
 export const FEATURED_TRACKLIST_USER_ID = 3926410;
+
+export const SESSION_TRACKLIST_ID = "session";
+
+export const TRACKS_PER_PAGE = 12;
