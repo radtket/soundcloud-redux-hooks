@@ -6,6 +6,7 @@ import browser from "./browser/reducer";
 import search from "./search/reducer";
 import tracklists from "./tracklists/tracklists-reducer";
 import tracks from "./tracks/reducer";
+import users from "./users/reducer";
 
 const createRootReducer = history =>
   combineReducers({
@@ -14,6 +15,7 @@ const createRootReducer = history =>
     search,
     tracklists,
     tracks,
+    users,
   });
 
 export default createRootReducer;
