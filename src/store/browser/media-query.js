@@ -10,12 +10,20 @@ export const em = value => {
   return value === 0 ? value : `${value / 16}em`;
 };
 
-export const getMedia = rule => {
-  let media = rule.type || "screen";
+export const getMedia = ({ type, minWidth, maxWidth, orientation }) => {
+  let media = type || "screen";
 
-  if (rule.minWidth) media += ` and (min-width: ${em(rule.minWidth)})`;
-  if (rule.maxWidth) media += ` and (max-width: ${em(rule.maxWidth)})`;
-  if (rule.orientation) media += ` and (orientation: ${rule.orientation})`;
+  if (minWidth) {
+    media += ` and (min-width: ${em(minWidth)})`;
+  }
+
+  if (maxWidth) {
+    media += ` and (max-width: ${em(maxWidth)})`;
+  }
+
+  if (orientation) {
+    media += ` and (orientation: ${orientation})`;
+  }
 
   return media;
 };
@@ -38,8 +46,8 @@ export const getMqlObservables = rules => {
 };
 
 export const getResults = updates => {
-  return updates.reduce((acc, cur) => {
-    acc[cur.rule.id] = cur.mql.matches;
+  return updates.reduce((acc, { rule, mql }) => {
+    acc[rule.id] = mql.matches;
     return acc;
   }, {});
 };
