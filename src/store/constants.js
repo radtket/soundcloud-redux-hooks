@@ -1,11 +1,11 @@
 //* ========================================================
-//*  CONSTANTS
-//*---------------------------------------------------------
+//* CONSTANTS
+//*--------------------------------------------------------
 export const APP_NAME = "soundcloud-redux-hooks";
 
 //* ====================================
-//*  API
-//*-------------------------------------
+//* API
+//*------------------------------------
 export const API_BASE_URL = "https://api.soundcloud.com";
 export const API_TRACKS_URL = `${API_BASE_URL}/tracks`;
 export const API_USERS_URL = `${API_BASE_URL}/users`;
@@ -23,8 +23,17 @@ export const IMAGE_DEFAULT_SIZE = "large.jpg";
 export const IMAGE_XLARGE_SIZE = "t500x500.jpg";
 
 //* ====================================
-//*  TRACKLISTS
-//*-------------------------------------
+//* PLAYER
+//*------------------------------------
+export const PLAYER_INITIAL_VOLUME = 10;
+export const PLAYER_MAX_VOLUME = 100;
+export const PLAYER_VOLUME_INCREMENT = 5;
+
+export const PLAYER_STORAGE_KEY = `${APP_NAME}:player`;
+
+//* ====================================
+//* TRACKLISTS
+//*------------------------------------
 export const FEATURED_TRACKLIST_ID = "featured";
 export const FEATURED_TRACKLIST_USER_ID = 3926410;
 

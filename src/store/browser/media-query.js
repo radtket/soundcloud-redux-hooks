@@ -2,7 +2,7 @@ import { combineLatest, fromEventPattern } from "rxjs";
 import { debounceTime, map } from "rxjs/operators";
 import browserActions from "./actions";
 
-export const em = value => {
+const em = value => {
   if (typeof value !== "number") {
     throw new TypeError("ERROR @ em() : expected param `value` to be a number");
   }
@@ -10,7 +10,7 @@ export const em = value => {
   return value === 0 ? value : `${value / 16}em`;
 };
 
-export const getMedia = ({ type, minWidth, maxWidth, orientation }) => {
+const getMedia = ({ type, minWidth, maxWidth, orientation }) => {
   let media = type || "screen";
 
   if (minWidth) {
@@ -28,7 +28,7 @@ export const getMedia = ({ type, minWidth, maxWidth, orientation }) => {
   return media;
 };
 
-export const getMqlObservables = rules => {
+const getMqlObservables = rules => {
   const observables = rules.map(rule => {
     const mediaQueryList = matchMedia(getMedia(rule));
 
@@ -45,14 +45,14 @@ export const getMqlObservables = rules => {
   return observables;
 };
 
-export const getResults = updates => {
+const getResults = updates => {
   return updates.reduce((acc, { rule, mql }) => {
     acc[rule.id] = mql.matches;
     return acc;
   }, {});
 };
 
-export const mediaQuery = {
+const mediaQuery = {
   matches: (rules, callback) => {
     const subscription = combineLatest(...getMqlObservables(rules))
       .pipe(debounceTime(1), map(getResults))
@@ -63,3 +63,5 @@ export const mediaQuery = {
     return () => subscription.unsubscribe();
   },
 };
+
+export default mediaQuery;

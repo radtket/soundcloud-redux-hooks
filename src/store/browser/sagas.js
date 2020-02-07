@@ -1,7 +1,7 @@
 import { eventChannel } from "redux-saga";
 import { call, fork, put, take } from "redux-saga/effects";
 import appActions from "../app/actions";
-import { mediaQuery } from "./media-query";
+import mediaQuery from "./media-query";
 
 export const subscribe = payload =>
   eventChannel(emit => mediaQuery.matches(payload.media, emit));
