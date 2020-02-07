@@ -17,6 +17,12 @@ export const PAGINATION_LIMIT = 60;
 export const PAGINATION_PARAMS = `limit=${PAGINATION_LIMIT}&linked_partitioning=1`;
 
 //* ====================================
+//* IMAGES
+//*------------------------------------
+export const IMAGE_DEFAULT_SIZE = "large.jpg";
+export const IMAGE_XLARGE_SIZE = "t500x500.jpg";
+
+//* ====================================
 //*  TRACKLISTS
 //*-------------------------------------
 export const FEATURED_TRACKLIST_ID = "featured";
@@ -25,3 +31,9 @@ export const FEATURED_TRACKLIST_USER_ID = 3926410;
 export const SESSION_TRACKLIST_ID = "session";
 
 export const TRACKS_PER_PAGE = 12;
+
+//* ====================================
+//* WAVEFORMS
+//*------------------------------------
+export const WAVEFORM_IMAGE_HOST = "w1.sndcdn.com";
+export const WAVEFORM_JSON_HOST = "wis.sndcdn.com";
