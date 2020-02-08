@@ -10,7 +10,9 @@ import {
 const EN_DASH = String.fromCharCode(8211);
 
 export const formatTrackTitle = title => {
-  if (!title) return "";
+  if (!title) {
+    return "";
+  }
   return title.replace(/-/g, EN_DASH);
 };
 

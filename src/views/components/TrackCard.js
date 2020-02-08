@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import StyledTrackCard from "../styles/TrackCard";
-import { formatSongTitle } from "../utils/helpers";
 import { Track } from "../../store/tracks/track";
+import FormattedTrackTitle from "./FormattedTrackTitle";
 
 const TrackCard = ({
   isCompact,
@@ -19,7 +19,9 @@ const TrackCard = ({
         <img alt={track.title} src={track.artworkUrl} />
       </button>
       <figcaption className="ellipsis-one-line">
-        <h6 className="ellipsis-one-line">{formatSongTitle(track)}</h6>
+        <h6 className="ellipsis-one-line">
+          <FormattedTrackTitle title={track.title} />
+        </h6>
         <cite
           album-cover={track.id}
           avatar={track.id}

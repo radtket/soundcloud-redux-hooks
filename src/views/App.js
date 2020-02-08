@@ -5,14 +5,18 @@ import { Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import UserPage from "./pages/UserPage";
+import Player from "./components/Player";
 
 const App = () => {
   return (
-    <main className="main">
-      <Route component={HomePage} exact path="/" />
-      <Route component={SearchPage} path="/search" />
-      <Route component={UserPage} path="/users/:id/:resource" />
-    </main>
+    <>
+      <main className="main">
+        <Route component={HomePage} exact path="/" />
+        <Route component={SearchPage} path="/search" />
+        <Route component={UserPage} path="/users/:id/:resource" />
+      </main>
+      <Player />
+    </>
   );
 };
 
