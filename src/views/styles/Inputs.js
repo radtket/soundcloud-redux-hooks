@@ -1,37 +1,48 @@
 import styled from "styled-components";
 import { size } from "polished";
+import { StyledIconButton } from "./Buttons";
 
-export const StyledRangeSlider = styled.input`
-  ${size("24px", "100%")}
-  -webkit-appearance: none;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  transition: opacity 0.2s;
+const SLIDER_HEIGHT = "24px";
 
-  &:hover {
-    opacity: 1;
-  }
-
-  &::-webkit-slider-thumb {
-    ${size("24px")}
+export const StyledRangeSlider = styled.label`
+  input {
+    ${size(SLIDER_HEIGHT, "100%")}
     -webkit-appearance: none;
-    appearance: none;
-    background: #4caf50;
-    cursor: pointer;
-  }
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
 
-  &::-moz-range-thumb {
-    ${size("24px")}
-    background: #4caf50;
-    cursor: pointer;
+    &:hover {
+      opacity: 1;
+    }
+
+    &::-webkit-slider-thumb {
+      ${size(SLIDER_HEIGHT)}
+      -webkit-appearance: none;
+      appearance: none;
+      background: #4caf50;
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      ${size(SLIDER_HEIGHT)}
+      background: #4caf50;
+      cursor: pointer;
+    }
   }
 `;
 
-export const StyledVolumeControl = styled.label`
-  outline: 0;
+export const StyledVolumeControl = styled.fieldset`
+  padding: 0;
+  margin: 0;
+  border: 0;
 
-  &:hover {
-    cursor: pointer;
+  ${StyledIconButton} {
+    margin-right: 6px;
+  }
+
+  label {
+    height: ${SLIDER_HEIGHT};
   }
 `;
