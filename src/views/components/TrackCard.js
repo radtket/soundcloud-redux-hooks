@@ -16,11 +16,15 @@ const TrackCard = ({
   return (
     <StyledTrackCard>
       <button onClick={isPlaying ? pause : play} type="button">
-        <img alt="" src={track.artworkUrl} />
+        <img alt={track.title} src={track.artworkUrl} />
       </button>
-      <figcaption>
-        <h6>{formatSongTitle(track)}</h6>
-        <cite album-cover="9sz5" avatar="9sz2" className="author">
+      <figcaption className="ellipsis-one-line">
+        <h6 className="ellipsis-one-line">{formatSongTitle(track)}</h6>
+        <cite
+          album-cover={track.id}
+          avatar={track.id}
+          className="author ellipsis-one-line"
+        >
           <Link to={`/users/${track.userId}/tracks`}>{track.username}</Link>
         </cite>
       </figcaption>

@@ -58,6 +58,10 @@ ${styledNormalize}
     padding: 0;
   }
 
+  dd {
+    margin-left: 0;
+  }
+
   a {
     text-decoration: none;
     transition: color 0.2s ease;
@@ -72,6 +76,11 @@ ${styledNormalize}
   picture {
     margin: 0;
     max-width: 100%;
+  }
+
+  img {
+    display: block;
+    height: auto;
   }
 
   button {
@@ -99,4 +108,13 @@ ${styledNormalize}
     max-width: 1200px;
     position: relative;
   }
+
+  .ellipsis-one-line {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 1px;
+    margin-right: -1px;
+  }
+
 `;
