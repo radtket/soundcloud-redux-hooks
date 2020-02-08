@@ -1,4 +1,3 @@
-import { PLAYER_MAX_VOLUME, PLAYER_VOLUME_INCREMENT } from "../constants";
 import playerActions from "./actions";
 
 let audioElement;
@@ -16,7 +15,9 @@ const getTimes = ({ target }) => {
   };
 };
 
-const getVolume = () => Math.floor(audioElement.volume * 100);
+export const getVolume = () => Math.floor(audioElement.volume * 100);
+
+export const getIsMuted = () => audioElement.muted;
 
 export const initAudio = (emit, audio = new Audio()) => {
   audio.addEventListener("ended", () => emit(playerActions.audioEnded()));
@@ -30,22 +31,27 @@ export const initAudio = (emit, audio = new Audio()) => {
   );
 
   audioElement = audio;
+
+  console.log({ audioElement });
   return () => {};
 };
 
 export function setVolume(volume) {
   audioElement.volume = volume / 100;
+  audioElement.muted = volume === 0;
 }
 
 export const audio = {
-  decreaseVolume() {
-    const volume = getVolume() - PLAYER_VOLUME_INCREMENT;
-    if (volume >= 0) setVolume(volume);
+  changeVolume(newVolume) {
+    const volume = getVolume();
+
+    if (volume >= 0) {
+      setVolume(newVolume);
+    }
   },
 
-  increaseVolume() {
-    const volume = getVolume() + PLAYER_VOLUME_INCREMENT;
-    if (volume <= PLAYER_MAX_VOLUME) setVolume(volume);
+  toggleMuted() {
+    audioElement.muted = !audioElement.muted;
   },
 
   load(url) {

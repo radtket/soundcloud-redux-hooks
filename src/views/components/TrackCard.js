@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import StyledTrackCard from "../styles/TrackCard";
 import { Track } from "../../store/tracks/track";
 import FormattedTrackTitle from "./FormattedTrackTitle";
+import { IconPlay, IconPause } from "./Icons";
 
 const TrackCard = ({
   isCompact,
@@ -15,8 +16,18 @@ const TrackCard = ({
 }) => {
   return (
     <StyledTrackCard>
-      <button onClick={isPlaying ? pause : play} type="button">
+      <button
+        className={isSelected ? "is-active" : ""}
+        onClick={isPlaying ? pause : play}
+        type="button"
+      >
         <img alt={track.title} src={track.artworkUrl} />
+        <div className="trackcard--overlay">
+          <div className="trackcard--overlay__bg" />
+          <div className="trackcard--overlay__icon">
+            {isPlaying ? <IconPause /> : <IconPlay />}
+          </div>
+        </div>
       </button>
       <figcaption className="ellipsis-one-line">
         <h6 className="ellipsis-one-line">
