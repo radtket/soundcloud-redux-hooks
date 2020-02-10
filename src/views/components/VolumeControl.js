@@ -16,6 +16,8 @@ const VolumeControl = () => {
     };
   });
 
+  const activeVolume = isMuted ? 0 : volume;
+
   return (
     <StyledVolumeControl>
       <legend className="visuallyhidden">Volume Control</legend>
@@ -28,7 +30,7 @@ const VolumeControl = () => {
         >
           {isMuted ? <IconMute /> : <IconSound />}
         </IconButton>
-        <StyledRangeSlider htmlFor="volume-slider">
+        <StyledRangeSlider {...{ activeVolume }} htmlFor="volume-slider">
           <input
             max={PLAYER_MAX_VOLUME * 100}
             min={0}
@@ -37,7 +39,7 @@ const VolumeControl = () => {
               changeVolume(target.value / 100);
             }}
             type="range"
-            value={isMuted ? 0 : volume * 100}
+            value={activeVolume * 100}
           />
         </StyledRangeSlider>
       </Flex>

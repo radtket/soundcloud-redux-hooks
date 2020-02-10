@@ -20,17 +20,16 @@ const StyledAudioTimeline = styled.div`
   position: relative;
 
   input {
-    ${size(height, "100%")};
+    ${size(trackHeight, "100%")};
     appearance: none;
     background: transparent;
+    border-radius: 10px;
     cursor: pointer;
     display: block;
     margin: 0;
     max-width: ${inputWidth};
-    /* overflow: hidden; */
-    border-radius: 10px;
-    height: 8px;
     position: relative;
+    /* overflow: hidden; */
 
     &::before,
     &::after {

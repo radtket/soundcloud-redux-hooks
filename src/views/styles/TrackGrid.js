@@ -7,7 +7,7 @@ const StyledTrackGrid = styled.div`
 
   > div {
     padding: 0 12px;
-    margin-bottom: 24px;
+    margin-bottom: 30px;
     width: 20%;
   }
 `;
