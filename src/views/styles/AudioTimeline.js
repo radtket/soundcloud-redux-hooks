@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { size, math, position } from "polished";
 
 // excess height to improve interactive area / accessibility
-const height = "36px";
-const thumbHeight = 36;
-const trackHeight = "16px";
+const height = "16px";
+const thumbHeight = 16;
+const trackHeight = "8px";
 const inputWidth = "100%";
 
 // colours
@@ -27,7 +27,9 @@ const StyledAudioTimeline = styled.div`
     display: block;
     margin: 0;
     max-width: ${inputWidth};
-    overflow: hidden;
+    /* overflow: hidden; */
+    border-radius: 10px;
+    height: 8px;
     position: relative;
 
     &::before,
@@ -42,6 +44,9 @@ const StyledAudioTimeline = styled.div`
       background: #753fdc;
       width: ${({ percentCompleted }) => percentCompleted};
       z-index: 98;
+      overflow: hidden;
+      border-radius: 10px;
+      height: 8px;
     }
 
     &::before {
@@ -49,6 +54,9 @@ const StyledAudioTimeline = styled.div`
       transition: width 150ms;
       width: ${({ percentBuffered }) => percentBuffered};
       z-index: 97;
+      overflow: hidden;
+      border-radius: 10px;
+      height: 8px;
     }
 
     &:focus {
@@ -58,6 +66,8 @@ const StyledAudioTimeline = styled.div`
     &::-webkit-slider-runnable-track {
       ${size(height, "100%")};
       background: ${lowerBackground};
+      border-radius: 10px;
+      height: 8px;
     }
 
     &::-webkit-slider-thumb {
@@ -81,6 +91,8 @@ const StyledAudioTimeline = styled.div`
 
     &::-moz-range-progress {
       background: ${lowerBackground};
+      border-radius: 10px;
+      height: 8px;
     }
 
     &::-moz-range-thumb {
@@ -103,6 +115,8 @@ const StyledAudioTimeline = styled.div`
 
     &::-ms-fill-lower {
       background: ${lowerBackground};
+      border-radius: 10px;
+      height: 8px;
     }
 
     &::-ms-fill-upper {

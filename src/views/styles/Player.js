@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { size, padding } from "polished";
+import { StyledFavoriteButton } from "./Buttons";
 
 const StyledPlayer = styled.div`
   @keyframes show-player {
@@ -6,16 +8,17 @@ const StyledPlayer = styled.div`
       bottom: -80px;
     }
     100% {
-      bottom: -10px;
+      bottom: 0;
     }
   }
 
-  background: #2d2e2f;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
-  bottom: -10px;
-  box-shadow: 0 -3px 0 0 rgba(0, 0, 0, 0.1);
-  display: block;
-  height: 71px;
+  ${padding(null, "14px")}
+  background: #3a3a3d;
+  backdrop-filter: blur(10px);
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  height: 86px;
   left: 0;
   position: fixed;
   transform: translateZ(0);
@@ -27,45 +30,93 @@ const StyledPlayer = styled.div`
   animation-timing-function: ease-in-out;
   animation-duration: 300ms;
 
-  svg {
-    height: 12px;
-    fill: #5d5e5f;
-
-    &:active {
-      background: rgba(0, 0, 0, 0.15);
+  .now-playing-bar {
+    &__center {
+      display: flex;
+      flex-direction: column;
+      max-width: 722px;
+      width: 40%;
     }
 
-    &:hover {
-      fill: #78797a;
+    &__left,
+    &__right {
+      min-width: 180px;
+      width: 30%;
+    }
+
+    &__right {
+      display: flex;
+      justify-content: flex-end;
     }
   }
 
-  .player-timeline {
-    height: 4px;
-    background: #3a3b3c;
-    cursor: pointer;
+  .song {
+    display: flex;
+    align-items: center;
+
+    .song-image {
+      ${size("58px")};
+      margin-right: 14px;
+
+      img {
+        display: block;
+      }
+    }
+
+    .song-info {
+      letter-spacing: 0.006em;
+      max-width: 200px;
+
+      dt {
+        font-size: 16px;
+        color: #fff;
+      }
+
+      dd {
+        font-size: 14px;
+        color: #99999f;
+      }
+    }
+
+    ${StyledFavoriteButton} {
+      margin-left: 40px;
+    }
+  }
+
+  button {
+    &:hover {
+      svg {
+        fill: #99999f;
+      }
+    }
+    svg {
+      fill: #fff;
+    }
   }
 
   .player-controls {
     display: flex;
     align-items: center;
-    margin: 0 auto;
-    padding-top: 8px;
-    max-width: 970px;
-    font-size: 13px;
+    justify-content: center;
+    margin-bottom: 6px;
+
+    button {
+      margin-right: 50px;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
   }
 
-  .player-controls__time {
-    padding: 0 10px;
-  }
+  .player-timeline {
+    align-items: center;
+    display: flex;
 
-  .player-controls__title {
-    flex: 1;
-    padding: 0 10px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: normal;
+    > span {
+      font-size: 14px;
+      margin: 0 14px;
+    }
   }
 `;
 

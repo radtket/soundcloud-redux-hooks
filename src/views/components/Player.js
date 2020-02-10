@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { createSelector } from "reselect";
 import playerActions from "../../store/player/actions";
@@ -16,12 +16,14 @@ import FormattedTime from "./FormattedTime";
 import IconButton from "./IconButton";
 
 import StyledPlayer from "../styles/Player";
-import { IconPlay, IconPause, IconNext, IconPrev } from "./Icons";
+import { IconPlay, IconPause, IconNext, IconPrev, IconHeart } from "./Icons";
 import VolumeControl from "./VolumeControl";
+import FormattedTrackTitle from "./FormattedTrackTitle";
+import { StyledFavoriteButton } from "../styles/Buttons";
 
 const Player = () => {
   const dispatch = useDispatch();
-
+  const [isFavorite, setFavorite] = useState(false);
   const {
     isPlaying,
     nextTrack,
@@ -63,12 +65,29 @@ const Player = () => {
 
   return (
     <StyledPlayer className="player">
-      <div className="player-timeline">
-        <AudioTimeline />
+      <div className="song now-playing-bar__left">
+        <figure className="song-image">
+          <img alt={track.title} src={track.artworkUrl} />
+        </figure>
+        <dl className="song-info ellipsis-one-line">
+          <dt className="ellipsis-one-line">
+            <FormattedTrackTitle title={track.title} />
+          </dt>
+          <dd className="ellipsis-one-line">{track.username}</dd>
+        </dl>
+
+        <StyledFavoriteButton
+          className={isFavorite ? "active" : ""}
+          onClick={() => {
+            setFavorite(prev => !prev);
+          }}
+        >
+          <IconHeart />
+        </StyledFavoriteButton>
       </div>
 
-      <div className="player-controls">
-        <div>
+      <div className="now-playing-bar__center">
+        <nav className="player-controls">
           <IconButton
             aria-label="Skip to previous track"
             disabled={!nextTrack}
@@ -92,15 +111,15 @@ const Player = () => {
           >
             <IconNext />
           </IconButton>
-        </div>
-
-        <div className="player-controls__time">
-          <AudioCurrentTime /> /{" "}
+        </nav>
+        <div className="player-timeline">
+          <AudioCurrentTime />
+          <AudioTimeline />
           <FormattedTime unit="ms" value={track.duration} />
         </div>
+      </div>
 
-        <div className="player-controls__title">{track.title}</div>
-
+      <div className="now-playing-bar__right">
         <VolumeControl />
       </div>
     </StyledPlayer>
