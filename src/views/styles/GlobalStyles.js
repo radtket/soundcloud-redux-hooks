@@ -1,10 +1,9 @@
-import styledNormalize from "styled-normalize";
 import { createGlobalStyle } from "styled-components";
-import { size } from "polished";
+import { size, normalize } from "polished";
 
 // color: #F1F1F2;
 export default createGlobalStyle`
-${styledNormalize}
+  ${normalize()}
 
   html {
     background: #141625;
