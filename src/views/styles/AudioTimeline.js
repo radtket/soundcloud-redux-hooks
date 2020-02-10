@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { size, math, position } from "polished";
 
 // excess height to improve interactive area / accessibility
 const height = "36px";
@@ -14,59 +15,40 @@ const thumbHoverColor = "#ccc";
 const upperBackground = `linear-gradient(to bottom, ${upperColor}, ${upperColor}) 100% 50% / 100% ${trackHeight} no-repeat transparent`;
 const lowerBackground = `linear-gradient(to bottom, ${lowerColor}, ${lowerColor}) 100% 50% / 100% ${trackHeight} no-repeat transparent`;
 
-// Webkit cannot style progress so we fake it with a long shadow on the thumb element
-const makeLongShadow = (color, size) => {
-  let i = 18;
-  let shadow = `${i}px 0 0 ${size} ${color}`;
-
-  for (; i < 706; i++) {
-    shadow = `${shadow}, ${i}px 0 0 ${size} ${color}`;
-  }
-
-  return shadow;
-};
-
 const StyledAudioTimeline = styled.div`
-  /* width: 100%; */
   width: ${inputWidth};
   position: relative;
 
   input {
+    ${size(height, "100%")};
     appearance: none;
     background: transparent;
     cursor: pointer;
     display: block;
-    height: ${height};
     margin: 0;
     max-width: ${inputWidth};
     overflow: hidden;
     position: relative;
-    width: 100%;
+
+    &::before,
+    &::after {
+      ${position("absolute", "50%", null, null, 0)};
+      content: "";
+      height: ${trackHeight};
+      margin-top: ${math(`${trackHeight} * -0.5`)};
+    }
 
     &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 50%;
-      height: 16px;
+      background: #753fdc;
       width: ${({ percentCompleted }) => percentCompleted};
-  background: #753fdc;
-      margin-top: -8px;
       z-index: 98;
     }
 
-
     &::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 50%;
-      height: 16px;
-      width: ${({ percentBuffered }) => percentBuffered};
-      background-color: rgba(117, 63, 220, 0.4);
-      margin-top: -8px;
-      z-index: 97;
+      background: rgba(117, 63, 220, 0.4);
       transition: width 150ms;
+      width: ${({ percentBuffered }) => percentBuffered};
+      z-index: 97;
     }
 
     &:focus {
@@ -74,30 +56,26 @@ const StyledAudioTimeline = styled.div`
     }
 
     &::-webkit-slider-runnable-track {
-      width: 100%;
-      height: ${height};
+      ${size(height, "100%")};
       background: ${lowerBackground};
     }
 
     &::-webkit-slider-thumb {
-      position: relative;
+      ${size(thumbHeight)};
       appearance: none;
-      height: ${thumbHeight}px;
-      width: ${thumbHeight}px;
       background: ${thumbColor};
       border-radius: 100%;
       border: 0;
+      position: relative;
       top: 50%;
       transform: translateY(-50%);
-      /* box-shadow: ${makeLongShadow(upperColor, "-10px")}; */
-      transition: background-color 150ms;
+      transition: background 150ms;
       z-index: 100;
     }
 
     &::-moz-range-track,
     &::-moz-range-progress {
-      width: 100%;
-      height: ${height};
+      ${size(height, "100%")};
       background: ${upperBackground};
     }
 
@@ -106,19 +84,17 @@ const StyledAudioTimeline = styled.div`
     }
 
     &::-moz-range-thumb {
+      ${size(thumbHeight)};
       appearance: none;
-      margin: 0;
-      height: ${thumbHeight};
-      width: ${thumbHeight};
       background: ${thumbColor};
       border-radius: 100%;
       border: 0;
-      transition: background-color 150ms;
+      margin: 0;
+      transition: background 150ms;
     }
 
     &::-ms-track {
-      width: 100%;
-      height: ${height};
+      ${size(height, "100%")};
       border: 0;
       /* color needed to hide track marks */
       color: transparent;
@@ -134,13 +110,12 @@ const StyledAudioTimeline = styled.div`
     }
 
     &::-ms-thumb {
+      ${size(thumbHeight)};
       appearance: none;
-      height: ${thumbHeight};
-      width: ${thumbHeight};
       background: ${thumbColor};
       border-radius: 100%;
       border: 0;
-      transition: background-color 150ms;
+      transition: background 150ms;
       /* IE Edge thinks it can support -webkit prefixes */
       top: 0;
       margin: 0;
@@ -152,15 +127,16 @@ const StyledAudioTimeline = styled.div`
       &::-webkit-slider-thumb {
         background-color: ${thumbHoverColor};
       }
+
       &::-moz-range-thumb {
         background-color: ${thumbHoverColor};
       }
+
       &::-ms-thumb {
         background-color: ${thumbHoverColor};
       }
     }
   }
-
 `;
 
 export default StyledAudioTimeline;
