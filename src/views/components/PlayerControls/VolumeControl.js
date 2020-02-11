@@ -1,11 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Flex } from "reflexbox";
-import IconButton from "./IconButton";
-import { PLAYER_MAX_VOLUME } from "../../store/constants";
-import { audio, getVolume, getIsMuted } from "../../store/player/audio-service";
-import { IconSound, IconMute } from "./Icons";
-import { StyledRangeSlider, StyledVolumeControl } from "../styles/Inputs";
+import IconButton from "../IconButton";
+import { PLAYER_MAX_VOLUME } from "../../../store/constants";
+import {
+  audio,
+  getVolume,
+  getIsMuted,
+} from "../../../store/player/audio-service";
+import { IconSound, IconMute } from "../Icons";
+import { StyledRangeSlider, StyledVolumeControl } from "../../styles/Inputs";
 
 const VolumeControl = () => {
   const { changeVolume, toggleMuted, volume, isMuted } = useSelector(() => {

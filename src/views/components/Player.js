@@ -17,10 +17,12 @@ import IconButton from "./IconButton";
 
 import StyledPlayer from "../styles/Player";
 import { IconPlay, IconPause, IconNext, IconPrev, IconHeart } from "./Icons";
-import VolumeControl from "./VolumeControl";
+
 import FormattedTrackTitle from "./FormattedTrackTitle";
 import { StyledFavoriteButton } from "../styles/Buttons";
+
 import RepeatButton from "./PlayerControls/RepeatButton";
+import VolumeControl from "./PlayerControls/VolumeControl";
 
 const Player = () => {
   const dispatch = useDispatch();
