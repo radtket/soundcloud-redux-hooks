@@ -4,6 +4,7 @@ import playerActions from "./actions";
 
 const PlayerState = new Record({
   isPlaying: false,
+  isRepeat: false,
   trackId: null,
   tracklistId: SESSION_TRACKLIST_ID,
   volume: PLAYER_INITIAL_VOLUME,
@@ -20,6 +21,9 @@ export default (state = new PlayerState(), { payload, type }) => {
 
     case playerActions.AUDIO_VOLUME_CHANGED:
       return state.set("volume", payload.volume);
+
+    case playerActions.AUDIO_REPEAT_CHANGED:
+      return state.set("isRepeat", payload.isRepeat);
 
     case playerActions.PLAY_SELECTED_TRACK:
       return state.merge({

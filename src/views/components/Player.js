@@ -20,6 +20,7 @@ import { IconPlay, IconPause, IconNext, IconPrev, IconHeart } from "./Icons";
 import VolumeControl from "./VolumeControl";
 import FormattedTrackTitle from "./FormattedTrackTitle";
 import { StyledFavoriteButton } from "../styles/Buttons";
+import RepeatButton from "./PlayerControls/RepeatButton";
 
 const Player = () => {
   const dispatch = useDispatch();
@@ -88,6 +89,7 @@ const Player = () => {
 
       <div className="now-playing-bar__center">
         <nav className="player-controls">
+          <RepeatButton />
           <IconButton
             aria-label="Skip to previous track"
             disabled={!nextTrack}

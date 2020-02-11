@@ -19,20 +19,23 @@ export const getVolume = () => Math.floor(audioElement.volume * 100);
 
 export const getIsMuted = () => audioElement.muted;
 
-export const initAudio = (emit, audio = new Audio()) => {
-  audio.addEventListener("ended", () => emit(playerActions.audioEnded()));
-  audio.addEventListener("pause", () => emit(playerActions.audioPaused()));
-  audio.addEventListener("playing", () => emit(playerActions.audioPlaying()));
+export const initAudio = (dispatch, audio = new Audio()) => {
+  audio.addEventListener("ended", () => dispatch(playerActions.audioEnded()));
+  audio.addEventListener("pause", () => dispatch(playerActions.audioPaused()));
+  audio.addEventListener("playing", () =>
+    dispatch(playerActions.audioPlaying())
+  );
   audio.addEventListener("timeupdate", event =>
-    emit(playerActions.audioTimeUpdated(getTimes(event)))
+    dispatch(playerActions.audioTimeUpdated(getTimes(event)))
   );
   audio.addEventListener("volumechange", () =>
-    emit(playerActions.audioVolumeChanged(getVolume()))
+    dispatch(playerActions.audioVolumeChanged(getVolume()))
   );
+
+  dispatch(playerActions.audioRepeatChanged(audio.loop));
 
   audioElement = audio;
 
-  console.log({ audioElement });
   return () => {};
 };
 
@@ -50,12 +53,18 @@ export const audio = {
     }
   },
 
+  toggleRepeat() {
+    audioElement.loop = !audioElement.loop;
+  },
+
   toggleMuted() {
     audioElement.muted = !audioElement.muted;
   },
 
   load(url) {
-    if (url) audioElement.src = url;
+    if (url) {
+      audioElement.src = url;
+    }
   },
 
   pause() {
@@ -63,8 +72,9 @@ export const audio = {
   },
 
   play() {
-    const promise = audioElement.play();
-    if (promise && promise.catch) promise.catch(() => {});
+    audioElement.play().catch(e => {
+      console.log({ e });
+    });
   },
 
   seek(time) {
