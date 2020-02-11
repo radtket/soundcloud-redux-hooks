@@ -5,11 +5,15 @@ import { Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import UserPage from "./pages/UserPage";
+
+// Components
 import Player from "./components/Player";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
     <>
+      <Navbar />
       <main className="main">
         <Route component={HomePage} exact path="/" />
         <Route component={SearchPage} path="/search" />
