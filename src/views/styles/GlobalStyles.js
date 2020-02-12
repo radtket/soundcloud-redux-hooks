@@ -1,12 +1,13 @@
 import { createGlobalStyle } from "styled-components";
 import { size, normalize } from "polished";
 
+export const BODY_COLOR = "#141625";
 // color: #F1F1F2;
 export default createGlobalStyle`
   ${normalize()}
 
   html {
-    background: #141625;
+    background: ${BODY_COLOR};
     box-sizing: border-box;
     color: #fff;
     font-family: 'Heebo', sans-serif;

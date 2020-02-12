@@ -1,9 +1,9 @@
 import React from "react";
 import { rgba } from "polished";
 import StyledHero from "../styles/Hero";
+import { BODY_COLOR } from "../styles/GlobalStyles";
 
 const Hero = () => {
-  const BODY_COLOR = "#141625";
   const waveX = 48;
   return (
     <StyledHero {...{ BODY_COLOR, waveX }}>
