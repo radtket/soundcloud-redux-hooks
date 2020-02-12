@@ -6,6 +6,7 @@ export const StyledIconButton = styled.button`
     height: ${({ size }) => {
       return size === "lg" ? "26px" : "18px";
     }};
+    vertical-align: middle;
   }
 `;
 

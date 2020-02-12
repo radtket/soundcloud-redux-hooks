@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { size, normalize } from "polished";
+import { normalize, hideVisually } from "polished";
 
 export const BODY_COLOR = "#141625";
 // color: #F1F1F2;
@@ -41,13 +41,7 @@ export default createGlobalStyle`
   }
 
   .visuallyhidden {
-    ${size("1px")};
-    border: 0;
-    clip: rect(0 0 0 0);
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
+    ${hideVisually()};
   }
 
 

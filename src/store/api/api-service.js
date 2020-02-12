@@ -48,8 +48,31 @@ const api = {
   },
 
   fetchUser(userId) {
-    return dispatch({
-      url: `${API_USERS_URL}/${userId}`,
+    return Promise.all([
+      dispatch({
+        url: `${API_USERS_URL}/${userId}/web-profiles`,
+      }),
+      dispatch({
+        url: `${API_USERS_URL}/${userId}`,
+      }),
+    ]).then(async ([social, user]) => {
+      const bannerUrl = await request
+        .get(`https://cors-anywhere.herokuapp.com/${user.permalink_url}`)
+        .then(res => {
+          const html = res.text.split(`"visual_url":"`);
+          const [image] = html && html[1].split(`"`);
+          return image;
+        })
+        .catch(e => {
+          console.log({ e });
+          return null;
+        });
+
+      return {
+        ...user,
+        social,
+        bannerUrl,
+      };
     });
   },
 

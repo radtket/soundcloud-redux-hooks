@@ -4,9 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { userActions } from "../../store/users/actions";
 import { getCurrentUser } from "../../store/users/selectors";
 
+// Components
+import TrackGrid from "../components/TrackGrid";
 import UserHero from "../components/UserHero";
 import UserNav from "../components/UserNav";
-import TrackGrid from "../components/TrackGrid";
 
 const UserPage = ({ match: { params } }) => {
   const dispatch = useDispatch();
@@ -17,7 +18,6 @@ const UserPage = ({ match: { params } }) => {
   useEffect(() => {
     const load = ({ id, resource }) => {
       dispatch(userActions.loadUser(id));
-
       if (resource === "likes") {
         dispatch(userActions.loadUserLikes(id));
       } else {
