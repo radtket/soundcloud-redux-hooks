@@ -15,20 +15,13 @@ const UserPage = ({ match: { params } }) => {
   }));
 
   useEffect(() => {
-    const loadUserLikes = e => dispatch(userActions.loadUserLikes(e));
-    const loadUserTracks = e => dispatch(userActions.loadUserTracks(e));
-
-    const loadUser = e => {
-      dispatch(userActions.loadUser(e));
-    };
-
     const load = ({ id, resource }) => {
-      loadUser(id);
+      dispatch(userActions.loadUser(id));
 
       if (resource === "likes") {
-        loadUserLikes(id);
+        dispatch(userActions.loadUserLikes(id));
       } else {
-        loadUserTracks(id);
+        dispatch(userActions.loadUserTracks(id));
       }
     };
 

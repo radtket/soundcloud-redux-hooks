@@ -4,6 +4,7 @@ const StyledTrackGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  margin: 32px 0;
 
   > div {
     padding: 0 12px;
