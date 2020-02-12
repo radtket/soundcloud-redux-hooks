@@ -6,7 +6,7 @@ const height = "16px";
 const thumbHeight = 16;
 const trackHeight = "8px";
 const inputWidth = "100%";
-
+const BORDER_RADIUS = "10px";
 // colours
 const upperColor = "#edf5f9";
 const lowerColor = "#d2c0f4";
@@ -23,7 +23,7 @@ const StyledAudioTimeline = styled.div`
     ${size(trackHeight, "100%")};
     appearance: none;
     background: transparent;
-    border-radius: 10px;
+    border-radius: ${BORDER_RADIUS};
     cursor: pointer;
     display: block;
     margin: 0;
@@ -44,7 +44,7 @@ const StyledAudioTimeline = styled.div`
       width: ${({ percentCompleted }) => percentCompleted};
       z-index: 98;
       overflow: hidden;
-      border-radius: 10px;
+      border-radius: ${BORDER_RADIUS};
       height: 8px;
     }
 
@@ -54,7 +54,7 @@ const StyledAudioTimeline = styled.div`
       width: ${({ percentBuffered }) => percentBuffered};
       z-index: 97;
       overflow: hidden;
-      border-radius: 10px;
+      border-radius: ${BORDER_RADIUS};
       height: 8px;
     }
 
@@ -65,7 +65,7 @@ const StyledAudioTimeline = styled.div`
     &::-webkit-slider-runnable-track {
       ${size(height, "100%")};
       background: ${lowerBackground};
-      border-radius: 10px;
+      border-radius: ${BORDER_RADIUS};
       height: 8px;
     }
 
@@ -90,7 +90,7 @@ const StyledAudioTimeline = styled.div`
 
     &::-moz-range-progress {
       background: ${lowerBackground};
-      border-radius: 10px;
+      border-radius: ${BORDER_RADIUS};
       height: 8px;
     }
 
@@ -114,7 +114,7 @@ const StyledAudioTimeline = styled.div`
 
     &::-ms-fill-lower {
       background: ${lowerBackground};
-      border-radius: 10px;
+      border-radius: ${BORDER_RADIUS};
       height: 8px;
     }
 

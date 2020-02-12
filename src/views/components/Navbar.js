@@ -8,7 +8,9 @@ const Navbar = () => {
   return (
     <StyledNavbar>
       <div className="nav-container">
-        <Logo />
+        <Link to="/">
+          <Logo />
+        </Link>
         <nav className="nav-primary">
           <GradientBorderButton to="/">Home</GradientBorderButton>
           <Link to="/">Browse</Link>

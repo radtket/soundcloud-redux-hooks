@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledTrackCard = styled.figure`
-  button {
+  > button {
     padding: 0;
     margin: 0;
     position: relative;

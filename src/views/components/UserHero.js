@@ -17,13 +17,12 @@ const UserHero = ({
               <h1 className="entry-title">{username}</h1>
               <div className="entry-description">{description}</div>
               <div className="entry-meta">
-                <button className="btn-play " data-user-id={2} type="button">
+                <button className="btn-play" type="button">
                   play
                 </button>
                 <button
                   className="btn-follow button-rounded "
                   data-action="follow"
-                  data-id={2}
                   type="button"
                 >
                   <span className="follow">Follow</span>
