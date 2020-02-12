@@ -2,17 +2,20 @@ import styled from "styled-components";
 import { position, padding } from "polished";
 import { BODY_COLOR } from "./GlobalStyles";
 
+const NAV_HEIGHT = "60px";
+// const BORDER_COLOR = "#646e78";
+
 const StyledUserNav = styled.div`
   background-color: ${BODY_COLOR};
   border-bottom: 1px solid rgba(100, 110, 120, 0.15);
   position: sticky;
-  top: 60px;
+  top: ${NAV_HEIGHT};
   z-index: 20;
 
   .nav {
     display: flex;
     flex-wrap: nowrap;
-    height: 60px;
+    height: ${NAV_HEIGHT};
     margin: 0 -1rem;
 
     li {
@@ -39,11 +42,11 @@ const StyledUserNav = styled.div`
           color: #03c1ae;
         }
 
-        small {
+        span {
           color: #888;
           display: inline-block;
           font-size: 85%;
-          font-weight: 400;
+          font-weight: normal;
           margin: 0 0.25rem;
         }
       }
