@@ -1,21 +1,35 @@
+/* eslint-disable camelcase */
 import { List } from "immutable";
 import { TRACKS_PER_PAGE } from "../constants";
+import Tracklist from "./tracklist";
+
+// Actions
 import searchActions from "../search/actions";
 import { userActions } from "../users/actions";
 import { tracklistActions } from "./actions";
-import Tracklist from "./tracklist";
 
-const mergeTrackIds = (trackIds, collection) => {
+const { LOAD_SEARCH_RESULTS } = searchActions;
+const { LOAD_USER_LIKES, LOAD_USER_TRACKS } = userActions;
+const {
+  FETCH_TRACKS_FULFILLED,
+  FETCH_TRACKS_PENDING,
+  LOAD_FEATURED_TRACKS,
+  UPDATE_PAGINATION,
+} = tracklistActions;
+
+const mergeTrackIds = ({ trackIds, collection }) => {
   const ids = trackIds.toJS();
-  const newIds = collection.reduce((list, trackData) => {
-    if (ids.indexOf(trackData.id) === -1) list.push(trackData.id);
+  const newIds = collection.reduce((list, { id }) => {
+    if (ids.indexOf(id) === -1) {
+      list.push(id);
+    }
     return list;
   }, []);
 
   return newIds.length ? new List(ids.concat(newIds)) : trackIds;
 };
 
-const updatePagination = (tracklist, page) => {
+const updatePagination = ({ tracklist, page }) => {
   const pageCount = Math.ceil(tracklist.trackIds.size / TRACKS_PER_PAGE);
   const currentPage = Math.min(page, pageCount);
   const hasNextPageInStore = currentPage < pageCount;
@@ -29,33 +43,44 @@ const updatePagination = (tracklist, page) => {
   };
 };
 
-export default (state = new Tracklist(), { payload, type }) => {
+export default (
+  state = new Tracklist(),
+  { collection, next_href, tracklistId, page, type }
+) => {
   switch (type) {
-    case tracklistActions.FETCH_TRACKS_FULFILLED:
+    case FETCH_TRACKS_FULFILLED:
       return state.withMutations(tracklist => {
         tracklist
           .merge({
             isNew: false,
             isPending: false,
-            nextUrl: payload.next_href || null,
-            trackIds: mergeTrackIds(tracklist.trackIds, payload.collection),
+            nextUrl: next_href || null,
+            trackIds: mergeTrackIds({
+              trackIds: tracklist.trackIds,
+              collection,
+            }),
           })
-          .merge(updatePagination(tracklist, tracklist.currentPage + 1));
+          .merge(
+            updatePagination({
+              tracklist,
+              page: tracklist.currentPage + 1,
+            })
+          );
       });
 
-    case tracklistActions.FETCH_TRACKS_PENDING:
+    case FETCH_TRACKS_PENDING:
       return state.set("isPending", true);
 
-    case tracklistActions.LOAD_FEATURED_TRACKS:
-    case searchActions.LOAD_SEARCH_RESULTS:
-    case userActions.LOAD_USER_LIKES:
-    case userActions.LOAD_USER_TRACKS:
+    case LOAD_FEATURED_TRACKS:
+    case LOAD_SEARCH_RESULTS:
+    case LOAD_USER_LIKES:
+    case LOAD_USER_TRACKS:
       return state.isNew
-        ? state.set("id", payload.tracklistId)
-        : state.merge(updatePagination(state, 1));
+        ? state.set("id", tracklistId)
+        : state.merge(updatePagination({ tracklist: state, page: 1 }));
 
-    case tracklistActions.UPDATE_PAGINATION:
-      return state.merge(updatePagination(state, payload.page));
+    case UPDATE_PAGINATION:
+      return state.merge(updatePagination({ tracklist: state, page }));
 
     default:
       return state;

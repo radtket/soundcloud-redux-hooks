@@ -1,10 +1,22 @@
 import { Map } from "immutable";
 import { SESSION_TRACKLIST_ID } from "../constants";
+import Tracklist from "./tracklist";
+import tracklistReducer from "./tracklist-reducer";
+
+// Actions
 import searchActions from "../search/actions";
 import { userActions } from "../users/actions";
 import { tracklistActions } from "./actions";
-import Tracklist from "./tracklist";
-import tracklistReducer from "./tracklist-reducer";
+
+const { LOAD_SEARCH_RESULTS } = searchActions;
+const { LOAD_USER_LIKES, LOAD_USER_TRACKS } = userActions;
+const {
+  FETCH_TRACKS_FULFILLED,
+  FETCH_TRACKS_PENDING,
+  LOAD_FEATURED_TRACKS,
+  MOUNT_TRACKLIST,
+  UPDATE_PAGINATION,
+} = tracklistActions;
 
 const initialState = new Map({
   currentTracklistId: SESSION_TRACKLIST_ID,
@@ -14,36 +26,42 @@ const initialState = new Map({
   }),
 });
 
-export default (state = initialState, action) => {
-  const { payload, type } = action;
-
+export default (state = initialState, { payload, type }) => {
   switch (type) {
-    case tracklistActions.FETCH_TRACKS_FULFILLED:
-    case tracklistActions.FETCH_TRACKS_PENDING:
+    case FETCH_TRACKS_FULFILLED:
+    case FETCH_TRACKS_PENDING:
       return state.set(
         payload.tracklistId,
-        tracklistReducer(state.get(payload.tracklistId), action)
+        tracklistReducer(state.get(payload.tracklistId), {
+          collection: payload.collection,
+          next_href: payload.next_href,
+          tracklistId: payload.tracklistId,
+          type,
+        })
       );
 
-    case tracklistActions.LOAD_FEATURED_TRACKS:
-    case searchActions.LOAD_SEARCH_RESULTS:
-    case userActions.LOAD_USER_LIKES:
-    case userActions.LOAD_USER_TRACKS:
+    case LOAD_FEATURED_TRACKS:
+    case LOAD_SEARCH_RESULTS:
+    case LOAD_USER_LIKES:
+    case LOAD_USER_TRACKS:
       return state.merge({
         currentTracklistId: payload.tracklistId,
         [payload.tracklistId]: tracklistReducer(
           state.get(payload.tracklistId),
-          action
+          { tracklistId: payload.tracklistId, type }
         ),
       });
 
-    case tracklistActions.MOUNT_TRACKLIST:
+    case MOUNT_TRACKLIST:
       return state.set("currentTracklistId", payload.tracklistId);
 
-    case tracklistActions.UPDATE_PAGINATION:
+    case UPDATE_PAGINATION:
       return state.set(
         state.get("currentTracklistId"),
-        tracklistReducer(state.get(state.get("currentTracklistId")), action)
+        tracklistReducer(state.get(state.get("currentTracklistId")), {
+          page: payload.page,
+          type,
+        })
       );
 
     default:
