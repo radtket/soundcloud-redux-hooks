@@ -14,7 +14,6 @@ const {
   FETCH_TRACKS_FULFILLED,
   FETCH_TRACKS_PENDING,
   LOAD_FEATURED_TRACKS,
-  MOUNT_TRACKLIST,
   UPDATE_PAGINATION,
 } = tracklistActions;
 
@@ -26,7 +25,10 @@ const initialState = new Map({
   }),
 });
 
-export default (state = initialState, { payload, type }) => {
+export default (
+  state = initialState,
+  { page, payload, type, tracklistId, userId }
+) => {
   switch (type) {
     case FETCH_TRACKS_FULFILLED:
     case FETCH_TRACKS_PENDING:
@@ -45,21 +47,18 @@ export default (state = initialState, { payload, type }) => {
     case LOAD_USER_LIKES:
     case LOAD_USER_TRACKS:
       return state.merge({
-        currentTracklistId: payload.tracklistId,
-        [payload.tracklistId]: tracklistReducer(
-          state.get(payload.tracklistId),
-          { tracklistId: payload.tracklistId, type }
-        ),
+        currentTracklistId: tracklistId,
+        [tracklistId]: tracklistReducer(state.get(tracklistId), {
+          tracklistId,
+          type,
+        }),
       });
-
-    case MOUNT_TRACKLIST:
-      return state.set("currentTracklistId", payload.tracklistId);
 
     case UPDATE_PAGINATION:
       return state.set(
         state.get("currentTracklistId"),
         tracklistReducer(state.get(state.get("currentTracklistId")), {
-          page: payload.page,
+          page,
           type,
         })
       );

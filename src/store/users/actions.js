@@ -28,25 +28,19 @@ export const userActions = {
 
   loadUser: userId => ({
     type: userActions.LOAD_USER,
-    payload: {
-      userId: parseInt(userId, 10),
-    },
+    userId: parseInt(userId, 10),
   }),
 
   loadUserLikes: userId => ({
     type: userActions.LOAD_USER_LIKES,
-    payload: {
-      tracklistId: `users/${userId}/likes`,
-      userId: parseInt(userId, 10),
-    },
+    tracklistId: `users/${userId}/likes`,
+    userId: parseInt(userId, 10),
   }),
 
   loadUserTracks: userId => ({
     type: userActions.LOAD_USER_TRACKS,
-    payload: {
-      tracklistId: `users/${userId}/tracks`,
-      userId: parseInt(userId, 10),
-    },
+    tracklistId: `users/${userId}/tracks`,
+    userId: parseInt(userId, 10),
   }),
 };
 

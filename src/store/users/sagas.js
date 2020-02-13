@@ -1,12 +1,16 @@
 import { call, fork, select, takeLatest } from "redux-saga/effects";
 import { fetchUser, fetchUserLikes, fetchUserTracks } from "../api/sagas";
 import { getTracklistById } from "../tracklists/selectors";
-import { tracklistActions } from "../tracklists/actions";
-import { userActions } from "./actions";
 import { getUserById } from "./selectors";
 
-export function* loadUser({ payload }) {
-  const { userId } = payload;
+// Actions
+import { tracklistActions } from "../tracklists/actions";
+import { userActions } from "./actions";
+
+const { LOAD_USER, LOAD_USER_LIKES, LOAD_USER_TRACKS } = userActions;
+const { LOAD_FEATURED_TRACKS } = tracklistActions;
+
+export function* loadUser({ userId }) {
   const user = yield select(getUserById, userId);
 
   if (!user || !user.profile) {
@@ -14,16 +18,14 @@ export function* loadUser({ payload }) {
   }
 }
 
-export function* loadUserLikes({ payload }) {
-  const { tracklistId, userId } = payload;
+export function* loadUserLikes({ tracklistId, userId }) {
   const tracklist = yield select(getTracklistById, tracklistId);
   if (tracklist && tracklist.isNew) {
     yield call(fetchUserLikes, tracklistId, userId);
   }
 }
 
-export function* loadUserTracks({ payload }) {
-  const { tracklistId, userId } = payload;
+export function* loadUserTracks({ tracklistId, userId }) {
   const tracklist = yield select(getTracklistById, tracklistId);
   if (tracklist && tracklist.isNew) {
     yield call(fetchUserTracks, tracklistId, userId);
@@ -35,18 +37,15 @@ export function* loadUserTracks({ payload }) {
 //-------------------------------------
 
 export function* watchLoadUser() {
-  yield takeLatest(userActions.LOAD_USER, loadUser);
+  yield takeLatest(LOAD_USER, loadUser);
 }
 
 export function* watchLoadUserLikes() {
-  yield takeLatest(
-    [userActions.LOAD_USER_LIKES, tracklistActions.LOAD_FEATURED_TRACKS],
-    loadUserLikes
-  );
+  yield takeLatest([LOAD_USER_LIKES, LOAD_FEATURED_TRACKS], loadUserLikes);
 }
 
 export function* watchLoadUserTracks() {
-  yield takeLatest(userActions.LOAD_USER_TRACKS, loadUserTracks);
+  yield takeLatest(LOAD_USER_TRACKS, loadUserTracks);
 }
 
 //= ====================================

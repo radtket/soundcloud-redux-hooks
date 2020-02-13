@@ -10,7 +10,6 @@ export const tracklistActions = {
 
   LOAD_FEATURED_TRACKS: "LOAD_FEATURED_TRACKS",
   LOAD_NEXT_TRACKS: "LOAD_NEXT_TRACKS",
-  MOUNT_TRACKLIST: "MOUNT_TRACKLIST",
   UPDATE_PAGINATION: "UPDATE_PAGINATION",
 
   fetchTracksFailed: error => ({
@@ -35,28 +34,17 @@ export const tracklistActions = {
 
   loadFeaturedTracks: () => ({
     type: tracklistActions.LOAD_FEATURED_TRACKS,
-    payload: {
-      tracklistId: FEATURED_TRACKLIST_ID,
-      userId: FEATURED_TRACKLIST_USER_ID,
-    },
+    tracklistId: FEATURED_TRACKLIST_ID,
+    userId: FEATURED_TRACKLIST_USER_ID,
   }),
 
   loadNextTracks: () => ({
     type: tracklistActions.LOAD_NEXT_TRACKS,
   }),
 
-  mountTracklist: tracklistId => ({
-    type: tracklistActions.MOUNT_TRACKLIST,
-    payload: {
-      tracklistId,
-    },
-  }),
-
   updatePagination: page => ({
     type: tracklistActions.UPDATE_PAGINATION,
-    payload: {
-      page,
-    },
+    page,
   }),
 };
 

@@ -1,13 +1,17 @@
 import { Map } from "immutable";
+import { createUser } from "./user";
+
+// Actions
 import { tracklistActions } from "../tracklists/actions";
 import { userActions } from "./actions";
-import { createUser } from "./user";
+
+const { LOAD_USER } = userActions;
 
 const initialState = new Map({
   currentUserId: null,
 });
 
-export default (state = initialState, { payload, type }) => {
+export default (state = initialState, { payload, type, userId }) => {
   switch (type) {
     case tracklistActions.FETCH_TRACKS_FULFILLED:
       return state.withMutations(users => {
@@ -26,8 +30,8 @@ export default (state = initialState, { payload, type }) => {
         }
       });
 
-    case userActions.LOAD_USER:
-      return state.set("currentUserId", payload.userId);
+    case LOAD_USER:
+      return state.set("currentUserId", userId);
 
     default:
       return state;
