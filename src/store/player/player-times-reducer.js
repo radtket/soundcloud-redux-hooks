@@ -1,5 +1,9 @@
 import { Record } from "immutable";
+
+// Actions
 import playerActions from "./actions";
+
+const { AUDIO_TIME_UPDATED, AUDIO_ENDED, PLAY_SELECTED_TRACK } = playerActions;
 
 const PlayerTimesState = new Record({
   bufferedTime: 0,
@@ -9,14 +13,14 @@ const PlayerTimesState = new Record({
   percentCompleted: "0%",
 });
 
-export default (state = new PlayerTimesState(), { payload, type }) => {
+export default (state = new PlayerTimesState(), { times, type }) => {
   switch (type) {
-    case playerActions.AUDIO_ENDED:
-    case playerActions.PLAY_SELECTED_TRACK:
+    case AUDIO_ENDED:
+    case PLAY_SELECTED_TRACK:
       return new PlayerTimesState();
 
-    case playerActions.AUDIO_TIME_UPDATED:
-      return state.merge(payload);
+    case AUDIO_TIME_UPDATED:
+      return state.merge(times);
 
     default:
       return state;

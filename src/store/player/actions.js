@@ -21,31 +21,25 @@ const playerActions = {
 
   audioTimeUpdated: times => ({
     type: playerActions.AUDIO_TIME_UPDATED,
-    payload: times,
+    times,
   }),
 
   audioVolumeChanged: volume => ({
     type: playerActions.AUDIO_VOLUME_CHANGED,
-    payload: {
-      volume,
-    },
+    volume,
   }),
 
   audioRepeatChanged: isRepeat => {
     return {
       type: playerActions.AUDIO_REPEAT_CHANGED,
-      payload: {
-        isRepeat,
-      },
+      isRepeat,
     };
   },
 
   playSelectedTrack: (trackId, tracklistId) => ({
     type: playerActions.PLAY_SELECTED_TRACK,
-    payload: {
-      trackId,
-      tracklistId,
-    },
+    trackId,
+    tracklistId,
   }),
 };
 

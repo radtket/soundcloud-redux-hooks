@@ -1,4 +1,14 @@
+// Actions
 import playerActions from "./actions";
+
+const {
+  audioEnded,
+  audioPaused,
+  audioPlaying,
+  audioRepeatChanged,
+  audioTimeUpdated,
+  audioVolumeChanged,
+} = playerActions;
 
 let audioElement;
 
@@ -20,19 +30,17 @@ export const getVolume = () => Math.floor(audioElement.volume * 100);
 export const getIsMuted = () => audioElement.muted;
 
 export const initAudio = (dispatch, audio = new Audio()) => {
-  audio.addEventListener("ended", () => dispatch(playerActions.audioEnded()));
-  audio.addEventListener("pause", () => dispatch(playerActions.audioPaused()));
-  audio.addEventListener("playing", () =>
-    dispatch(playerActions.audioPlaying())
-  );
+  audio.addEventListener("ended", () => dispatch(audioEnded()));
+  audio.addEventListener("pause", () => dispatch(audioPaused()));
+  audio.addEventListener("playing", () => dispatch(audioPlaying()));
   audio.addEventListener("timeupdate", event =>
-    dispatch(playerActions.audioTimeUpdated(getTimes(event)))
+    dispatch(audioTimeUpdated(getTimes(event)))
   );
   audio.addEventListener("volumechange", () =>
-    dispatch(playerActions.audioVolumeChanged(getVolume()))
+    dispatch(audioVolumeChanged(getVolume()))
   );
 
-  dispatch(playerActions.audioRepeatChanged(audio.loop));
+  dispatch(audioRepeatChanged(audio.loop));
 
   audioElement = audio;
 

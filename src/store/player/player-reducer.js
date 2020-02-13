@@ -1,6 +1,17 @@
 import { Record } from "immutable";
 import { PLAYER_INITIAL_VOLUME, SESSION_TRACKLIST_ID } from "../constants";
+
+// Actions
 import playerActions from "./actions";
+
+const {
+  AUDIO_ENDED,
+  AUDIO_PAUSED,
+  AUDIO_PLAYING,
+  AUDIO_REPEAT_CHANGED,
+  AUDIO_VOLUME_CHANGED,
+  PLAY_SELECTED_TRACK,
+} = playerActions;
 
 const PlayerState = new Record({
   isPlaying: false,
@@ -10,25 +21,28 @@ const PlayerState = new Record({
   volume: PLAYER_INITIAL_VOLUME,
 });
 
-export default (state = new PlayerState(), { payload, type }) => {
+export default (
+  state = new PlayerState(),
+  { isRepeat, volume, trackId, tracklistId, type }
+) => {
   switch (type) {
-    case playerActions.AUDIO_ENDED:
-    case playerActions.AUDIO_PAUSED:
+    case AUDIO_ENDED:
+    case AUDIO_PAUSED:
       return state.set("isPlaying", false);
 
-    case playerActions.AUDIO_PLAYING:
+    case AUDIO_PLAYING:
       return state.set("isPlaying", true);
 
-    case playerActions.AUDIO_VOLUME_CHANGED:
-      return state.set("volume", payload.volume);
+    case AUDIO_VOLUME_CHANGED:
+      return state.set("volume", volume);
 
-    case playerActions.AUDIO_REPEAT_CHANGED:
-      return state.set("isRepeat", payload.isRepeat);
+    case AUDIO_REPEAT_CHANGED:
+      return state.set("isRepeat", isRepeat);
 
-    case playerActions.PLAY_SELECTED_TRACK:
+    case PLAY_SELECTED_TRACK:
       return state.merge({
-        trackId: payload.trackId,
-        tracklistId: payload.tracklistId || state.get("tracklistId"),
+        trackId,
+        tracklistId: tracklistId || state.get("tracklistId"),
       });
 
     default:

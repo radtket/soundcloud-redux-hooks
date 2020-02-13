@@ -11,17 +11,22 @@ import playerActions from "./actions";
 import appActions from "../app/actions";
 
 const { INIT_APP } = appActions;
+const {
+  PLAY_SELECTED_TRACK,
+  AUDIO_ENDED,
+  AUDIO_VOLUME_CHANGED,
+} = playerActions;
 
 export function* playNextTrack() {
-  const cursor = yield select(getPlayerTracklistCursor);
-  if (cursor.nextTrackId) {
-    yield put(playerActions.playSelectedTrack(cursor.nextTrackId));
+  const { nextTrackId } = yield select(getPlayerTracklistCursor);
+  if (nextTrackId) {
+    yield put(playerActions.playSelectedTrack(nextTrackId));
   }
 }
 
 export function* playSelectedTrack() {
-  const track = yield select(getPlayerTrack);
-  yield call(audio.load, track.streamUrl);
+  const { streamUrl } = yield select(getPlayerTrack);
+  yield call(audio.load, streamUrl);
   yield call(audio.play);
 }
 
@@ -51,15 +56,15 @@ export function* subscribeToAudio() {
 
 export function* watchAudioEnded() {
   while (true) {
-    yield take(playerActions.AUDIO_ENDED);
+    yield take(AUDIO_ENDED);
     yield fork(playNextTrack);
   }
 }
 
 export function* watchAudioVolumeChanged() {
   while (true) {
-    const { payload } = yield take(playerActions.AUDIO_VOLUME_CHANGED);
-    yield fork(saveVolumeToStorage, payload);
+    const { volume } = yield take(AUDIO_VOLUME_CHANGED);
+    yield fork(saveVolumeToStorage, volume);
   }
 }
 
@@ -73,7 +78,7 @@ export function* watchInitApp() {
 
 export function* watchPlaySelectedTrack() {
   while (true) {
-    yield take(playerActions.PLAY_SELECTED_TRACK);
+    yield take(PLAY_SELECTED_TRACK);
     yield fork(playSelectedTrack);
   }
 }
