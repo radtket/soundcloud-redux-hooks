@@ -9,21 +9,17 @@ export const userActions = {
 
   fetchUserFailed: error => ({
     type: userActions.FETCH_USER_FAILED,
-    payload: error,
+    error,
   }),
 
   fetchUserFulfilled: (userId, data) => ({
     type: userActions.FETCH_USER_FULFILLED,
-    payload: {
-      user: data,
-    },
+    user: data,
   }),
 
   fetchUserPending: userId => ({
     type: userActions.FETCH_USER_PENDING,
-    payload: {
-      userId,
-    },
+    userId,
   }),
 
   loadUser: userId => ({

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import {
   FEATURED_TRACKLIST_ID,
   FEATURED_TRACKLIST_USER_ID,
@@ -14,22 +15,22 @@ export const tracklistActions = {
 
   fetchTracksFailed: error => ({
     type: tracklistActions.FETCH_TRACKS_FAILED,
-    payload: error,
+    error,
   }),
 
-  fetchTracksFulfilled: (tracklistId, data) => ({
-    type: tracklistActions.FETCH_TRACKS_FULFILLED,
-    payload: {
+  fetchTracksFulfilled: (tracklistId, { collection, next_href, ...data }) => {
+    return {
+      type: tracklistActions.FETCH_TRACKS_FULFILLED,
       ...data,
+      collection,
+      next_href,
       tracklistId,
-    },
-  }),
+    };
+  },
 
   fetchTracksPending: tracklistId => ({
     type: tracklistActions.FETCH_TRACKS_PENDING,
-    payload: {
-      tracklistId,
-    },
+    tracklistId,
   }),
 
   loadFeaturedTracks: () => ({

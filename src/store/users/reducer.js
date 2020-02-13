@@ -5,26 +5,26 @@ import { createUser } from "./user";
 import { tracklistActions } from "../tracklists/actions";
 import { userActions } from "./actions";
 
-const { LOAD_USER } = userActions;
+const { LOAD_USER, FETCH_USER_FULFILLED } = userActions;
+const { FETCH_TRACKS_FULFILLED } = tracklistActions;
 
 const initialState = new Map({
   currentUserId: null,
 });
 
-export default (state = initialState, { payload, type, userId }) => {
+export default (state = initialState, { collection, type, userId, user }) => {
   switch (type) {
-    case tracklistActions.FETCH_TRACKS_FULFILLED:
+    case FETCH_TRACKS_FULFILLED:
       return state.withMutations(users => {
-        payload.collection.forEach(trackData => {
+        collection.forEach(trackData => {
           if (!users.has(trackData.user.id)) {
             users.set(trackData.user.id, createUser(trackData.user));
           }
         });
       });
 
-    case userActions.FETCH_USER_FULFILLED:
+    case FETCH_USER_FULFILLED:
       return state.withMutations(users => {
-        const { user } = payload;
         if (!users.has(user.id) || !users.get(user.id).profile) {
           users.set(user.id, createUser(user, true));
         }

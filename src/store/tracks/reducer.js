@@ -1,12 +1,16 @@
 import { Map } from "immutable";
-import { tracklistActions } from "../tracklists/actions";
 import { createTrack } from "./track";
 
-export default (state = new Map(), { payload, type }) => {
+// Actions
+import { tracklistActions } from "../tracklists/actions";
+
+const { FETCH_TRACKS_FULFILLED } = tracklistActions;
+
+export default (state = new Map(), { collection, type }) => {
   switch (type) {
-    case tracklistActions.FETCH_TRACKS_FULFILLED:
+    case FETCH_TRACKS_FULFILLED:
       return state.withMutations(tracks => {
-        payload.collection.forEach(trackData => {
+        collection.forEach(trackData => {
           tracks.set(trackData.id, createTrack(trackData));
         });
       });

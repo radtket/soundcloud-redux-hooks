@@ -1,5 +1,9 @@
 import { Record } from "immutable";
+
+// Actions
 import searchActions from "./actions";
+
+const { LOAD_SEARCH_RESULTS, TOGGLE_SEARCH_FIELD } = searchActions;
 
 const SearchState = new Record({
   currentQuery: null,
@@ -8,13 +12,13 @@ const SearchState = new Record({
 
 export default (state = new SearchState(), { type, query }) => {
   switch (type) {
-    case searchActions.LOAD_SEARCH_RESULTS:
+    case LOAD_SEARCH_RESULTS:
       return state.merge({
         open: false,
         currentQuery: query,
       });
 
-    case searchActions.TOGGLE_SEARCH_FIELD:
+    case TOGGLE_SEARCH_FIELD:
       return state.set("open", !state.open);
 
     default:

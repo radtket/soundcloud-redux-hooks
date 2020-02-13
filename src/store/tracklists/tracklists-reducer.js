@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { Map } from "immutable";
 import { SESSION_TRACKLIST_ID } from "../constants";
 import Tracklist from "./tracklist";
@@ -27,17 +28,17 @@ const initialState = new Map({
 
 export default (
   state = initialState,
-  { page, payload, type, tracklistId, userId }
+  { page, type, tracklistId, collection, next_href }
 ) => {
   switch (type) {
     case FETCH_TRACKS_FULFILLED:
     case FETCH_TRACKS_PENDING:
       return state.set(
-        payload.tracklistId,
-        tracklistReducer(state.get(payload.tracklistId), {
-          collection: payload.collection,
-          next_href: payload.next_href,
-          tracklistId: payload.tracklistId,
+        tracklistId,
+        tracklistReducer(state.get(tracklistId), {
+          collection,
+          next_href,
+          tracklistId,
           type,
         })
       );

@@ -1,11 +1,14 @@
 import { call, fork, put, select, takeLatest } from "redux-saga/effects";
 import { fetchNextTracks } from "../api/sagas";
-import { tracklistActions } from "./actions";
 import { getCurrentTracklist } from "./selectors";
+
+// Actions
+import { tracklistActions } from "./actions";
+
+const { LOAD_NEXT_TRACKS } = tracklistActions;
 
 export function* loadNextTracks() {
   const tracklist = yield select(getCurrentTracklist);
-  console.log({ tracklist });
   if (tracklist.hasNextPageInStore) {
     yield put(tracklistActions.updatePagination(tracklist.currentPage + 1));
   } else if (tracklist.nextUrl) {
@@ -18,7 +21,7 @@ export function* loadNextTracks() {
 //-------------------------------------
 
 export function* watchLoadNextTracks() {
-  yield takeLatest(tracklistActions.LOAD_NEXT_TRACKS, loadNextTracks);
+  yield takeLatest(LOAD_NEXT_TRACKS, loadNextTracks);
 }
 
 //= ====================================

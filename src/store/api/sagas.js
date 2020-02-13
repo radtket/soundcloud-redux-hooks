@@ -1,15 +1,19 @@
 import { call, put } from "redux-saga/effects";
-import { tracklistRequestActions } from "../tracklists/actions";
-import { userRequestActions } from "../users/actions";
 import api from "./api-service";
 
+// Actions
+import { tracklistRequestActions } from "../tracklists/actions";
+import { userRequestActions } from "../users/actions";
+
 function* fetchEntities(apiFunction, actions, id, param) {
+  const { pending, fulfilled, failed } = actions;
+
   try {
-    yield put(actions.pending(id));
+    yield put(pending(id));
     const data = yield call(apiFunction, param || id);
-    yield put(actions.fulfilled(id, data));
+    yield put(fulfilled(id, data));
   } catch (error) {
-    yield put(actions.failed(error));
+    yield put(failed(error));
   }
 }
 
@@ -18,23 +22,27 @@ export const fetchNextTracks = fetchEntities.bind(
   api.fetch,
   tracklistRequestActions
 );
+
 export const fetchSearchResults = fetchEntities.bind(
   null,
   api.fetchSearchResults,
   tracklistRequestActions
 );
-export const fetchUser = fetchEntities.bind(
-  null,
-  api.fetchUser,
-  userRequestActions
-);
+
 export const fetchUserLikes = fetchEntities.bind(
   null,
   api.fetchUserLikes,
   tracklistRequestActions
 );
+
 export const fetchUserTracks = fetchEntities.bind(
   null,
   api.fetchUserTracks,
   tracklistRequestActions
+);
+
+export const fetchUser = fetchEntities.bind(
+  null,
+  api.fetchUser,
+  userRequestActions
 );
