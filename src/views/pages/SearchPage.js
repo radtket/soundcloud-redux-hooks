@@ -1,9 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import searchActions from "../../store/search/actions";
 
 // Components
 import TrackGrid from "../components/TrackGrid";
+
+// Actions
+import searchActions from "../../store/search/actions";
+
+const { loadSearchResults } = searchActions;
 
 const SearchPage = () => {
   const dispatch = useDispatch();
@@ -14,7 +18,7 @@ const SearchPage = () => {
   });
 
   useEffect(() => {
-    dispatch(searchActions.loadSearchResults(query));
+    dispatch(loadSearchResults(query));
   }, [dispatch, query]);
 
   return (

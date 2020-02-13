@@ -6,12 +6,12 @@ const SearchState = new Record({
   open: false,
 });
 
-export default (state = new SearchState(), { payload, type }) => {
+export default (state = new SearchState(), { type, query }) => {
   switch (type) {
     case searchActions.LOAD_SEARCH_RESULTS:
       return state.merge({
         open: false,
-        currentQuery: payload.query,
+        currentQuery: query,
       });
 
     case searchActions.TOGGLE_SEARCH_FIELD:

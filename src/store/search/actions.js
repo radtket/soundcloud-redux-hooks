@@ -3,16 +3,16 @@ const searchActions = {
   NAVIGATE_TO_SEARCH: "NAVIGATE_TO_SEARCH",
   TOGGLE_SEARCH_FIELD: "TOGGLE_SEARCH_FIELD",
 
-  loadSearchResults: query => ({
-    type: searchActions.LOAD_SEARCH_RESULTS,
-    payload: {
+  loadSearchResults: query => {
+    return {
+      type: searchActions.LOAD_SEARCH_RESULTS,
       query,
       tracklistId: `search/${query
         .trim()
         .split(/\s+/)
         .join(" ")}`.toLowerCase(),
-    },
-  }),
+    };
+  },
 
   navigateToSearch: query => ({
     type: searchActions.NAVIGATE_TO_SEARCH,

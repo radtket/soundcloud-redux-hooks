@@ -30,6 +30,7 @@ const mergeTrackIds = ({ trackIds, collection }) => {
 };
 
 const updatePagination = ({ tracklist, page }) => {
+  console.log("updatePagination");
   const pageCount = Math.ceil(tracklist.trackIds.size / TRACKS_PER_PAGE);
   const currentPage = Math.min(page, pageCount);
   const hasNextPageInStore = currentPage < pageCount;

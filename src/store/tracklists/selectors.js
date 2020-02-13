@@ -47,7 +47,8 @@ export const getTracksForCurrentTracklist = createSelector(
   getCurrentPage,
   getCurrentTrackIds,
   getTracks,
-  (currentPage, trackIds, tracks) => {
+  (currentPage, trackIds, tracks, ...rest) => {
+    console.log({ currentPage, trackIds, tracks, rest });
     return trackIds
       .slice(0, currentPage * TRACKS_PER_PAGE)
       .map(id => tracks.get(id));

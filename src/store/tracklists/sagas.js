@@ -5,6 +5,7 @@ import { getCurrentTracklist } from "./selectors";
 
 export function* loadNextTracks() {
   const tracklist = yield select(getCurrentTracklist);
+  console.log({ tracklist });
   if (tracklist.hasNextPageInStore) {
     yield put(tracklistActions.updatePagination(tracklist.currentPage + 1));
   } else if (tracklist.nextUrl) {
