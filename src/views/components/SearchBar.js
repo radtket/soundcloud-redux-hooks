@@ -1,9 +1,13 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import searchActions from "../../store/search/actions";
 import StyledSearchBar from "../styles/SearchBar";
 import { IconSearch } from "./Icons";
+
+// Actions
+import searchActions from "../../store/search/actions";
+
+const { navigateToSearch } = searchActions;
 
 const SearchBar = () => {
   const input = useRef(null);
@@ -17,7 +21,7 @@ const SearchBar = () => {
       noValidate
       onSubmit={e => {
         e.preventDefault();
-        dispatch(searchActions.navigateToSearch(value.trim()));
+        dispatch(navigateToSearch(value.trim()));
         setValue("");
       }}
       role="search"

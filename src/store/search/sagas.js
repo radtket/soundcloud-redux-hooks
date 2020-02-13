@@ -25,9 +25,8 @@ export function* watchLoadSearchResults() {
 
 export function* watchNavigateToSearch() {
   while (true) {
-    const { payload, ...rest } = yield take(NAVIGATE_TO_SEARCH);
-    console.log({ payload, rest });
-    yield history.push(payload);
+    const { pathname, search } = yield take(NAVIGATE_TO_SEARCH);
+    yield history.push({ pathname, search });
   }
 }
 
