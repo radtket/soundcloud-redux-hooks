@@ -8,6 +8,7 @@ const StyledSearchBar = styled.form`
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
   background: #898b91;
   transition: all 0.3s ease;
+  margin-right: 30px;
 
   &:focus {
     box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);

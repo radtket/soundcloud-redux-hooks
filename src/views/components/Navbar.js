@@ -4,15 +4,16 @@ import StyledNavbar from "../styles/Navbar";
 import Logo from "./Logo";
 import { GradientBorderButton } from "../styles/Buttons";
 import SearchBar from "./SearchBar";
+import UserAccountButton from "./UserAccountButton";
 
 const Navbar = () => {
   return (
     <StyledNavbar>
       <div className="nav-container">
-        <Link to="/">
-          <Logo />
-        </Link>
         <nav className="nav-primary">
+          <Link className="nav-logo" to="/">
+            <Logo />
+          </Link>
           <GradientBorderButton to="/">Home</GradientBorderButton>
           <Link to="/">Browse</Link>
           <Link to="/">Library</Link>
@@ -25,7 +26,10 @@ const Navbar = () => {
           <Link to="/">Albums</Link>
           <Link to="/">Artists</Link>
         </nav>
-        <SearchBar />
+        <nav className="nav-search">
+          <SearchBar />
+          <UserAccountButton />
+        </nav>
       </div>
     </StyledNavbar>
   );

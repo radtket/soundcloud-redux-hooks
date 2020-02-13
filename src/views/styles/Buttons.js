@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { size } from "polished";
 
 export const StyledIconButton = styled.button`
   svg {
@@ -10,7 +11,41 @@ export const StyledIconButton = styled.button`
   }
 `;
 
-export const StyledButton = styled.button``;
+export const StyledButton = styled.button`
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 700;
+  font-family: inherit;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  border: 2px solid transparent;
+  padding: 10px 32px;
+  font-size: 14px;
+  letter-spacing: 0.08px;
+  font-weight: 700;
+  line-height: 1.2;
+  border-radius: 1.5rem;
+  transition: all 0.15s ease-in-out;
+  -webkit-appearance: button;
+  overflow: visible;
+  text-transform: uppercase;
+
+  /* .btn-primary { */
+  color: #fff;
+  background-color: #f60b0e;
+  border-color: #f60b0e;
+
+  /* .btn-outline-primary { */
+  color: #fff;
+  background-color: transparent;
+  background-image: none;
+  border-color: #f60b0e;
+  /* } */
+`;
 
 export const StyledFavoriteButton = styled(StyledIconButton)`
   svg {
@@ -139,4 +174,30 @@ export const GradientBorderButton = styled(Link)`
       opacity: 0;
     }
   } */
+`;
+
+export const StyledUserAccountButton = styled.button`
+  ${size("36px")};
+  border-radius: 50%;
+  overflow: hidden;
+  background: url("https://biobutterfly.com/wp-content/themes/musicapp/src/images/artist/1sz2.jpg")
+    0px center / cover no-repeat;
+`;
+
+export const StyledAuthLink = styled(Link)`
+  align-items: center;
+  color: #fff;
+  display: flex;
+  padding: 0.5rem 1rem;
+
+  svg {
+    display: inline-block;
+    height: 24px;
+    margin-right: 12px;
+    fill: #fff;
+  }
+
+  span {
+    text-transform: uppercase;
+  }
 `;

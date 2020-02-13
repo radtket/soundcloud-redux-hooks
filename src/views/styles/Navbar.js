@@ -14,19 +14,26 @@ const StyledNavbar = styled.header`
     display: flex;
     height: 84px;
     padding: 0 40px;
-  }
-
-  svg {
-    fill: #fff;
-    display: block;
-    height: 40px;
+    justify-content: space-between;
   }
 
   .nav-primary {
-    margin-left: 20px;
+    display: flex;
     font-size: 20px;
-    /* letter-spacing: 0.06em; */
     letter-spacing: 0.12px;
+
+    .nav-logo {
+      height: 40px;
+      margin-right: 20px;
+      margin: 0 40px 0 0;
+      padding: 0;
+
+      svg {
+        fill: #fff;
+        display: block;
+        height: 40px;
+      }
+    }
 
     a {
       display: inline-block;
@@ -66,6 +73,11 @@ const StyledNavbar = styled.header`
         }
       }
     }
+  }
+
+  .nav-search {
+    align-items: center;
+    display: flex;
   }
 `;
 
