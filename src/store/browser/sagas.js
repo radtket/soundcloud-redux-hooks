@@ -3,11 +3,14 @@ import { call, fork, put, take } from "redux-saga/effects";
 import appActions from "../app/actions";
 import mediaQuery from "./media-query";
 
-export const subscribe = payload =>
-  eventChannel(emit => mediaQuery.matches(payload.media, emit));
+// Actions
+const { INIT_APP } = appActions;
 
-export function* subscribeToMediaQueries(payload) {
-  const channel = yield call(subscribe, payload);
+const subscribe = ({ media }) =>
+  eventChannel(emit => mediaQuery.matches(media, emit));
+
+export function* subscribeToMediaQueries(config) {
+  const channel = yield call(subscribe, config);
   while (true) {
     const action = yield take(channel);
     yield put(action);
@@ -20,8 +23,8 @@ export function* subscribeToMediaQueries(payload) {
 
 export function* watchInitApp() {
   while (true) {
-    const { payload } = yield take(appActions.INIT_APP);
-    yield fork(subscribeToMediaQueries, payload);
+    const { config } = yield take(INIT_APP);
+    yield fork(subscribeToMediaQueries, config);
   }
 }
 

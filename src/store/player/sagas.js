@@ -10,6 +10,8 @@ import playerStorage from "./storage";
 import playerActions from "./actions";
 import appActions from "../app/actions";
 
+const { INIT_APP } = appActions;
+
 export function* playNextTrack() {
   const cursor = yield select(getPlayerTracklistCursor);
   if (cursor.nextTrackId) {
@@ -63,7 +65,7 @@ export function* watchAudioVolumeChanged() {
 
 export function* watchInitApp() {
   while (true) {
-    yield take(appActions.INIT_APP);
+    yield take(INIT_APP);
     yield fork(subscribeToAudio);
     yield fork(setVolumeFromStorage);
   }

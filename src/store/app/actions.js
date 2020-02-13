@@ -11,7 +11,7 @@ const appActions = {
 
   initApp: config => ({
     type: appActions.INIT_APP,
-    payload: config,
+    config,
   }),
 };
 

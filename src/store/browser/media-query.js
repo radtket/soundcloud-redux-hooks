@@ -1,6 +1,10 @@
 import { combineLatest, fromEventPattern } from "rxjs";
 import { debounceTime, map } from "rxjs/operators";
+
+// Actions
 import browserActions from "./actions";
+
+const { mediaQueryChanged } = browserActions;
 
 const em = value => {
   if (typeof value !== "number") {
@@ -56,9 +60,7 @@ const mediaQuery = {
   matches: (rules, callback) => {
     const subscription = combineLatest(...getMqlObservables(rules))
       .pipe(debounceTime(1), map(getResults))
-      .subscribe(results =>
-        callback(browserActions.mediaQueryChanged(results))
-      );
+      .subscribe(results => callback(mediaQueryChanged(results)));
 
     return () => subscription.unsubscribe();
   },

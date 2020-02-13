@@ -3,9 +3,7 @@ const browserActions = {
 
   mediaQueryChanged: results => ({
     type: browserActions.MEDIA_QUERY_CHANGED,
-    payload: {
-      results,
-    },
+    results,
   }),
 };
 
