@@ -5,6 +5,7 @@ import StyledTrackCard from "../styles/TrackCard";
 import { Track } from "../../store/tracks/track";
 import FormattedTrackTitle from "./FormattedTrackTitle";
 import { IconPlay, IconPause } from "./Icons";
+import WaveformTimeline from "./WaveformTimeline";
 
 const TrackCard = ({
   isCompact,
@@ -41,6 +42,12 @@ const TrackCard = ({
           <Link to={`/users/${track.userId}/tracks`}>{track.username}</Link>
         </cite>
       </figcaption>
+      {!isCompact && (
+        <WaveformTimeline
+          displayProgress={isSelected}
+          url={track.waveformUrl}
+        />
+      )}
     </StyledTrackCard>
   );
 };

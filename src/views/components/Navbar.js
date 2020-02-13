@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import StyledNavbar from "../styles/Navbar";
 import Logo from "./Logo";
 import { GradientBorderButton } from "../styles/Buttons";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   return (
@@ -24,6 +25,7 @@ const Navbar = () => {
           <Link to="/">Albums</Link>
           <Link to="/">Artists</Link>
         </nav>
+        <SearchBar />
       </div>
     </StyledNavbar>
   );
