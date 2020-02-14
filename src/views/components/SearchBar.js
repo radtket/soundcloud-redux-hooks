@@ -5,9 +5,7 @@ import StyledSearchBar from "../styles/SearchBar";
 import { IconSearch } from "./Icons";
 
 // Actions
-import searchActions from "../../store/search/actions";
-
-const { navigateToSearch } = searchActions;
+import { navigateToSearch } from "../../store/search/actions";
 
 const SearchBar = () => {
   const input = useRef(null);

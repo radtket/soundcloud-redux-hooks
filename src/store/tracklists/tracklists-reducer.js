@@ -5,18 +5,14 @@ import Tracklist from "./tracklist";
 import tracklistReducer from "./tracklist-reducer";
 
 // Actions
-import searchActions from "../search/actions";
-import { userActions } from "../users/actions";
-import { tracklistActions } from "./actions";
-
-const { LOAD_SEARCH_RESULTS } = searchActions;
-const { LOAD_USER_LIKES, LOAD_USER_TRACKS } = userActions;
-const {
+import { LOAD_SEARCH_RESULTS } from "../search/actions";
+import { LOAD_USER_LIKES, LOAD_USER_TRACKS } from "../users/actions";
+import {
   FETCH_TRACKS_FULFILLED,
   FETCH_TRACKS_PENDING,
   LOAD_FEATURED_TRACKS,
   UPDATE_PAGINATION,
-} = tracklistActions;
+} from "./actions";
 
 const initialState = new Map({
   currentTracklistId: SESSION_TRACKLIST_ID,

@@ -2,9 +2,7 @@ import { combineLatest, fromEventPattern } from "rxjs";
 import { debounceTime, map } from "rxjs/operators";
 
 // Actions
-import browserActions from "./actions";
-
-const { mediaQueryChanged } = browserActions;
+import mediaQueryChanged from "./actions";
 
 const em = value => {
   if (typeof value !== "number") {

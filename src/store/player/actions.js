@@ -1,46 +1,42 @@
-const playerActions = {
-  AUDIO_ENDED: "AUDIO_ENDED",
-  AUDIO_PAUSED: "AUDIO_PAUSED",
-  AUDIO_PLAYING: "AUDIO_PLAYING",
-  AUDIO_REPEAT_CHANGED: "AUDIO_REPEAT_CHANGED",
-  AUDIO_TIME_UPDATED: "AUDIO_TIME_UPDATED",
-  AUDIO_VOLUME_CHANGED: "AUDIO_VOLUME_CHANGED",
-  PLAY_SELECTED_TRACK: "PLAY_SELECTED_TRACK",
+export const AUDIO_ENDED = "AUDIO_ENDED";
+export const AUDIO_PAUSED = "AUDIO_PAUSED";
+export const AUDIO_PLAYING = "AUDIO_PLAYING";
+export const AUDIO_REPEAT_CHANGED = "AUDIO_REPEAT_CHANGED";
+export const AUDIO_TIME_UPDATED = "AUDIO_TIME_UPDATED";
+export const AUDIO_VOLUME_CHANGED = "AUDIO_VOLUME_CHANGED";
+export const PLAY_SELECTED_TRACK = "PLAY_SELECTED_TRACK";
 
-  audioEnded: () => ({
-    type: playerActions.AUDIO_ENDED,
-  }),
+export const audioEnded = () => ({
+  type: AUDIO_ENDED,
+});
 
-  audioPaused: () => ({
-    type: playerActions.AUDIO_PAUSED,
-  }),
+export const audioPaused = () => ({
+  type: AUDIO_PAUSED,
+});
 
-  audioPlaying: () => ({
-    type: playerActions.AUDIO_PLAYING,
-  }),
+export const audioPlaying = () => ({
+  type: AUDIO_PLAYING,
+});
 
-  audioTimeUpdated: times => ({
-    type: playerActions.AUDIO_TIME_UPDATED,
-    times,
-  }),
+export const audioTimeUpdated = times => ({
+  type: AUDIO_TIME_UPDATED,
+  times,
+});
 
-  audioVolumeChanged: volume => ({
-    type: playerActions.AUDIO_VOLUME_CHANGED,
-    volume,
-  }),
+export const audioVolumeChanged = volume => ({
+  type: AUDIO_VOLUME_CHANGED,
+  volume,
+});
 
-  audioRepeatChanged: isRepeat => {
-    return {
-      type: playerActions.AUDIO_REPEAT_CHANGED,
-      isRepeat,
-    };
-  },
-
-  playSelectedTrack: (trackId, tracklistId) => ({
-    type: playerActions.PLAY_SELECTED_TRACK,
-    trackId,
-    tracklistId,
-  }),
+export const audioRepeatChanged = isRepeat => {
+  return {
+    type: AUDIO_REPEAT_CHANGED,
+    isRepeat,
+  };
 };
 
-export default playerActions;
+export const playSelectedTrack = (trackId, tracklistId) => ({
+  type: PLAY_SELECTED_TRACK,
+  trackId,
+  tracklistId,
+});

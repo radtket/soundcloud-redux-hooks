@@ -18,8 +18,12 @@ export const getTracklistCursor = (selectedTrackId, trackIds) => {
   let previousTrackId = null;
 
   if (index !== -1) {
-    if (index < trackIds.size - 1) nextTrackId = trackIds.get(index + 1);
-    if (index > 0) previousTrackId = trackIds.get(index - 1);
+    if (index < trackIds.size - 1) {
+      nextTrackId = trackIds.get(index + 1);
+    }
+    if (index > 0) {
+      previousTrackId = trackIds.get(index - 1);
+    }
   }
 
   return {
@@ -47,8 +51,7 @@ export const getTracksForCurrentTracklist = createSelector(
   getCurrentPage,
   getCurrentTrackIds,
   getTracks,
-  (currentPage, trackIds, tracks, ...rest) => {
-    console.log({ currentPage, trackIds, tracks, rest });
+  (currentPage, trackIds, tracks) => {
     return trackIds
       .slice(0, currentPage * TRACKS_PER_PAGE)
       .map(id => tracks.get(id));

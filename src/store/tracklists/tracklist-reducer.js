@@ -4,18 +4,14 @@ import { TRACKS_PER_PAGE } from "../constants";
 import Tracklist from "./tracklist";
 
 // Actions
-import searchActions from "../search/actions";
-import { userActions } from "../users/actions";
-import { tracklistActions } from "./actions";
-
-const { LOAD_SEARCH_RESULTS } = searchActions;
-const { LOAD_USER_LIKES, LOAD_USER_TRACKS } = userActions;
-const {
+import { LOAD_SEARCH_RESULTS } from "../search/actions";
+import { LOAD_USER_LIKES, LOAD_USER_TRACKS } from "../users/actions";
+import {
   FETCH_TRACKS_FULFILLED,
   FETCH_TRACKS_PENDING,
   LOAD_FEATURED_TRACKS,
   UPDATE_PAGINATION,
-} = tracklistActions;
+} from "./actions";
 
 const mergeTrackIds = ({ trackIds, collection }) => {
   const ids = trackIds.toJS();
@@ -50,13 +46,14 @@ export default (
   switch (type) {
     case FETCH_TRACKS_FULFILLED:
       return state.withMutations(tracklist => {
+        const { trackIds } = tracklist;
         tracklist
           .merge({
             isNew: false,
             isPending: false,
             nextUrl: next_href || null,
             trackIds: mergeTrackIds({
-              trackIds: tracklist.trackIds,
+              trackIds,
               collection,
             }),
           })

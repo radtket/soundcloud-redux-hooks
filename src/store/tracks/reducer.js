@@ -2,9 +2,7 @@ import { Map } from "immutable";
 import { createTrack } from "./track";
 
 // Actions
-import { tracklistActions } from "../tracklists/actions";
-
-const { FETCH_TRACKS_FULFILLED } = tracklistActions;
+import { FETCH_TRACKS_FULFILLED } from "../tracklists/actions";
 
 export default (state = new Map(), { collection, type }) => {
   switch (type) {

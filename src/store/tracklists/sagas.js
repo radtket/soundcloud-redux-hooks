@@ -3,14 +3,12 @@ import { fetchNextTracks } from "../api/sagas";
 import { getCurrentTracklist } from "./selectors";
 
 // Actions
-import { tracklistActions } from "./actions";
+import { LOAD_NEXT_TRACKS, updatePagination } from "./actions";
 
-const { LOAD_NEXT_TRACKS } = tracklistActions;
-
-export function* loadNextTracks() {
+function* loadNextTracks() {
   const tracklist = yield select(getCurrentTracklist);
   if (tracklist.hasNextPageInStore) {
-    yield put(tracklistActions.updatePagination(tracklist.currentPage + 1));
+    yield put(updatePagination(tracklist.currentPage + 1));
   } else if (tracklist.nextUrl) {
     yield call(fetchNextTracks, tracklist.id, tracklist.nextUrl);
   }
@@ -20,7 +18,7 @@ export function* loadNextTracks() {
 //  WATCHERS
 //-------------------------------------
 
-export function* watchLoadNextTracks() {
+function* watchLoadNextTracks() {
   yield takeLatest(LOAD_NEXT_TRACKS, loadNextTracks);
 }
 
@@ -28,4 +26,4 @@ export function* watchLoadNextTracks() {
 //  ROOT
 //-------------------------------------
 
-export const tracklistSagas = [fork(watchLoadNextTracks)];
+export default [fork(watchLoadNextTracks)];

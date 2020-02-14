@@ -1,9 +1,7 @@
 import { Record } from "immutable";
 
 // Actions
-import browserActions from "./actions";
-
-const { MEDIA_QUERY_CHANGED } = browserActions;
+import { MEDIA_QUERY_CHANGED } from "./actions";
 
 const BrowserState = new Record({
   media: {},

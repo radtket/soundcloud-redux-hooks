@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
-import { userActions } from "../../store/users/actions";
+import {
+  loadUser,
+  loadUserLikes,
+  loadUserTracks,
+} from "../../store/users/actions";
 import { getCurrentUser } from "../../store/users/selectors";
 
 // Components
@@ -17,11 +21,11 @@ const UserPage = ({ match: { params } }) => {
 
   useEffect(() => {
     const load = ({ id, resource }) => {
-      dispatch(userActions.loadUser(id));
+      dispatch(loadUser(id));
       if (resource === "likes") {
-        dispatch(userActions.loadUserLikes(id));
+        dispatch(loadUserLikes(id));
       } else {
-        dispatch(userActions.loadUserTracks(id));
+        dispatch(loadUserTracks(id));
       }
     };
 

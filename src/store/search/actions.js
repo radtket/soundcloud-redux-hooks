@@ -1,28 +1,24 @@
-const searchActions = {
-  LOAD_SEARCH_RESULTS: "LOAD_SEARCH_RESULTS",
-  NAVIGATE_TO_SEARCH: "NAVIGATE_TO_SEARCH",
-  TOGGLE_SEARCH_FIELD: "TOGGLE_SEARCH_FIELD",
+export const LOAD_SEARCH_RESULTS = "LOAD_SEARCH_RESULTS";
+export const NAVIGATE_TO_SEARCH = "NAVIGATE_TO_SEARCH";
+export const TOGGLE_SEARCH_FIELD = "TOGGLE_SEARCH_FIELD";
 
-  loadSearchResults: query => {
-    return {
-      type: searchActions.LOAD_SEARCH_RESULTS,
-      query,
-      tracklistId: `search/${query
-        .trim()
-        .split(/\s+/)
-        .join(" ")}`.toLowerCase(),
-    };
-  },
-
-  navigateToSearch: query => ({
-    type: searchActions.NAVIGATE_TO_SEARCH,
-    pathname: `/search`,
-    search: `?q=${query}`,
-  }),
-
-  toggleSearchField: () => ({
-    type: searchActions.TOGGLE_SEARCH_FIELD,
-  }),
+export const loadSearchResults = query => {
+  return {
+    type: LOAD_SEARCH_RESULTS,
+    query,
+    tracklistId: `search/${query
+      .trim()
+      .split(/\s+/)
+      .join(" ")}`.toLowerCase(),
+  };
 };
 
-export default searchActions;
+export const navigateToSearch = query => ({
+  type: NAVIGATE_TO_SEARCH,
+  pathname: `/search`,
+  search: `?q=${query}`,
+});
+
+export const toggleSearchField = () => ({
+  type: TOGGLE_SEARCH_FIELD,
+});

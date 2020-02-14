@@ -13,7 +13,7 @@ export const getPlayerTracklistId = state => state.player.tracklistId;
 
 export const getPlayerTrack = state => {
   const trackId = getPlayerTrackId(state);
-  return getTrackById(state, trackId);
+  return getTrackById({ state, trackId });
 };
 
 export const getPlayerTracklist = state => {
@@ -23,6 +23,6 @@ export const getPlayerTracklist = state => {
 
 export const getPlayerTracklistCursor = state => {
   const trackId = getPlayerTrackId(state);
-  const tracklist = getPlayerTracklist(state);
-  return getTracklistCursor(trackId, tracklist.trackIds);
+  const { trackIds } = getPlayerTracklist(state);
+  return getTracklistCursor(trackId, trackIds);
 };

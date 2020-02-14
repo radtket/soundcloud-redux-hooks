@@ -5,9 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import TrackGrid from "../components/TrackGrid";
 
 // Actions
-import searchActions from "../../store/search/actions";
-
-const { loadSearchResults } = searchActions;
+import { loadSearchResults } from "../../store/search/actions";
 
 const SearchPage = () => {
   const dispatch = useDispatch();

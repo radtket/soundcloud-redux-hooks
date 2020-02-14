@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { createSelector } from "reselect";
-import playerActions from "../../store/player/actions";
+import { playSelectedTrack } from "../../store/player/actions";
 import {
   getPlayer,
   getPlayerTrack,
@@ -41,14 +41,10 @@ const Player = () => {
       getPlayerTracklistCursor,
       (player, track_, { nextTrackId, previousTrackId }) => {
         const getNextTrack = () =>
-          dispatch(
-            playerActions.playSelectedTrack(nextTrackId, player.tracklistId)
-          );
+          dispatch(playSelectedTrack(nextTrackId, player.tracklistId));
 
         const getPreviousTrack = () =>
-          dispatch(
-            playerActions.playSelectedTrack(previousTrackId, player.tracklistId)
-          );
+          dispatch(playSelectedTrack(previousTrackId, player.tracklistId));
 
         return {
           ...audio,

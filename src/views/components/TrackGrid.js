@@ -8,7 +8,7 @@ import getBrowserMedia from "../../store/browser/selectors";
 import infiniteScroll from "../../store/browser/infinite-scroll";
 
 // Player
-import playerActions from "../../store/player/actions";
+import { playSelectedTrack } from "../../store/player/actions";
 import {
   getPlayerIsPlaying,
   getPlayerTrackId,
@@ -20,7 +20,7 @@ import {
   getCurrentTracklist,
   getTracksForCurrentTracklist,
 } from "../../store/tracklists/selectors";
-import { tracklistActions } from "../../store/tracklists/actions";
+import { loadNextTracks } from "../../store/tracklists/actions";
 
 // Components
 import StyledTrackGrid from "../styles/TrackGrid";
@@ -58,7 +58,6 @@ const TrackGrid = ({ compactLayout }) => {
     displayLoadingIndicator,
     isMediaLarge,
     isPlaying,
-    loadNextTracks,
     pause,
     pauseInfiniteScroll,
     play,
@@ -68,12 +67,11 @@ const TrackGrid = ({ compactLayout }) => {
   } = useSelector(state => {
     return {
       ...getTracklistState(state),
-      loadNextTracks: () => dispatch(tracklistActions.loadNextTracks()),
     };
   });
 
   useEffect(() => {
-    infiniteScroll.start(loadNextTracks, pauseInfiniteScroll);
+    infiniteScroll.start(() => dispatch(loadNextTracks()), pauseInfiniteScroll);
     if (pauseInfiniteScroll) {
       infiniteScroll.pause();
     } else {
@@ -82,7 +80,7 @@ const TrackGrid = ({ compactLayout }) => {
     return () => {
       infiniteScroll.end();
     };
-  }, [dispatch, loadNextTracks, pauseInfiniteScroll]);
+  }, [dispatch, pauseInfiniteScroll]);
 
   return (
     <>
@@ -101,9 +99,7 @@ const TrackGrid = ({ compactLayout }) => {
                   play: () => {
                     isSelected
                       ? play()
-                      : dispatch(
-                          playerActions.playSelectedTrack(id, tracklistId)
-                        );
+                      : dispatch(playSelectedTrack(id, tracklistId));
                   },
                   track,
                 }}

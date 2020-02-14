@@ -1,9 +1,7 @@
 import { Record } from "immutable";
 
 // Actions
-import searchActions from "./actions";
-
-const { LOAD_SEARCH_RESULTS, TOGGLE_SEARCH_FIELD } = searchActions;
+import { LOAD_SEARCH_RESULTS, TOGGLE_SEARCH_FIELD } from "./actions";
 
 const SearchState = new Record({
   currentQuery: null,

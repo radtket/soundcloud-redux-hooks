@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { position, size } from "polished";
-import { BODY_COLOR } from "./GlobalStyles";
 
 export const StyledWaveformTimeline = styled.div`
   ${size("70px", "100%")};

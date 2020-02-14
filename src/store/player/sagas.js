@@ -7,33 +7,32 @@ import { getPlayerTrack, getPlayerTracklistCursor } from "./selectors";
 import playerStorage from "./storage";
 
 // * Actions
-import playerActions from "./actions";
-import { INIT_APP } from "../action-types";
-
-const {
+import {
+  playSelectedTrack,
   PLAY_SELECTED_TRACK,
   AUDIO_ENDED,
   AUDIO_VOLUME_CHANGED,
-} = playerActions;
+} from "./actions";
+import { INIT_APP } from "../app/actions";
 
-export function* playNextTrack() {
+function* playNextTrack() {
   const { nextTrackId } = yield select(getPlayerTracklistCursor);
   if (nextTrackId) {
-    yield put(playerActions.playSelectedTrack(nextTrackId));
+    yield put(playSelectedTrack(nextTrackId));
   }
 }
 
-export function* playSelectedTrack() {
+function* playTrackSelected() {
   const { streamUrl } = yield select(getPlayerTrack);
   yield call(audio.load, streamUrl);
   yield call(audio.play);
 }
 
-export function* saveVolumeToStorage({ volume }) {
+function* saveVolumeToStorage({ volume }) {
   yield call(playerStorage.setVolume, volume);
 }
 
-export function* setVolumeFromStorage() {
+function* setVolumeFromStorage() {
   let volume = yield call(playerStorage.getVolume);
   if (typeof volume !== "number") {
     volume = PLAYER_INITIAL_VOLUME;
@@ -41,7 +40,7 @@ export function* setVolumeFromStorage() {
   yield call(setVolume, volume);
 }
 
-export function* subscribeToAudio() {
+function* subscribeToAudio() {
   const channel = yield call(eventChannel, initAudio);
   while (true) {
     const action = yield take(channel);
@@ -53,21 +52,21 @@ export function* subscribeToAudio() {
 //  WATCHERS
 //-------------------------------------
 
-export function* watchAudioEnded() {
+function* watchAudioEnded() {
   while (true) {
     yield take(AUDIO_ENDED);
     yield fork(playNextTrack);
   }
 }
 
-export function* watchAudioVolumeChanged() {
+function* watchAudioVolumeChanged() {
   while (true) {
     const { volume } = yield take(AUDIO_VOLUME_CHANGED);
     yield fork(saveVolumeToStorage, volume);
   }
 }
 
-export function* watchInitApp() {
+function* watchInitApp() {
   while (true) {
     yield take(INIT_APP);
     yield fork(subscribeToAudio);
@@ -75,10 +74,10 @@ export function* watchInitApp() {
   }
 }
 
-export function* watchPlaySelectedTrack() {
+function* watchPlaySelectedTrack() {
   while (true) {
     yield take(PLAY_SELECTED_TRACK);
-    yield fork(playSelectedTrack);
+    yield fork(playTrackSelected);
   }
 }
 
@@ -86,7 +85,7 @@ export function* watchPlaySelectedTrack() {
 //  ROOT
 //-------------------------------------
 
-export const playerSagas = [
+export default [
   fork(watchAudioEnded),
   fork(watchAudioVolumeChanged),
   fork(watchInitApp),

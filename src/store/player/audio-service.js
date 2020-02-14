@@ -1,14 +1,12 @@
 // Actions
-import playerActions from "./actions";
-
-const {
+import {
   audioEnded,
   audioPaused,
   audioPlaying,
   audioRepeatChanged,
   audioTimeUpdated,
   audioVolumeChanged,
-} = playerActions;
+} from "./actions";
 
 let audioElement;
 

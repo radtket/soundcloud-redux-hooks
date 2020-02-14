@@ -1,10 +1,8 @@
-const browserActions = {
-  MEDIA_QUERY_CHANGED: "MEDIA_QUERY_CHANGED",
+export const MEDIA_QUERY_CHANGED = "MEDIA_QUERY_CHANGED";
 
-  mediaQueryChanged: results => ({
-    type: browserActions.MEDIA_QUERY_CHANGED,
-    results,
-  }),
-};
+const mediaQueryChanged = results => ({
+  type: MEDIA_QUERY_CHANGED,
+  results,
+});
 
-export default browserActions;
+export default mediaQueryChanged;

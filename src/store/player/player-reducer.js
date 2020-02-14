@@ -2,16 +2,14 @@ import { Record } from "immutable";
 import { PLAYER_INITIAL_VOLUME, SESSION_TRACKLIST_ID } from "../constants";
 
 // Actions
-import playerActions from "./actions";
-
-const {
+import {
   AUDIO_ENDED,
   AUDIO_PAUSED,
   AUDIO_PLAYING,
   AUDIO_REPEAT_CHANGED,
   AUDIO_VOLUME_CHANGED,
   PLAY_SELECTED_TRACK,
-} = playerActions;
+} from "./actions";
 
 const PlayerState = new Record({
   isPlaying: false,

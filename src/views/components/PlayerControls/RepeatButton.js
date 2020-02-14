@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import IconButton from "../IconButton";
 import { audio } from "../../../store/player/audio-service";
-import playerActions from "../../../store/player/actions";
+import { audioRepeatChanged } from "../../../store/player/actions";
 import { IconRepeat } from "../Icons";
 
 const RepeatButton = () => {
@@ -10,7 +10,7 @@ const RepeatButton = () => {
   const { isRepeat, onClick } = useSelector(({ player }) => {
     return {
       onClick() {
-        dispatch(playerActions.audioRepeatChanged(!player.isRepeat));
+        dispatch(audioRepeatChanged(!player.isRepeat));
         audio.toggleRepeat();
       },
       isRepeat: player.isRepeat,

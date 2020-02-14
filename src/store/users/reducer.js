@@ -2,11 +2,8 @@ import { Map } from "immutable";
 import { createUser } from "./user";
 
 // Actions
-import { tracklistActions } from "../tracklists/actions";
-import { userActions } from "./actions";
-
-const { LOAD_USER, FETCH_USER_FULFILLED } = userActions;
-const { FETCH_TRACKS_FULFILLED } = tracklistActions;
+import { FETCH_TRACKS_FULFILLED } from "../tracklists/actions";
+import { LOAD_USER, FETCH_USER_FULFILLED } from "./actions";
 
 const initialState = new Map({
   currentUserId: null,

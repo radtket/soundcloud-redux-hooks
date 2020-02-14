@@ -1,9 +1,11 @@
 import { Record } from "immutable";
 
 // Actions
-import playerActions from "./actions";
-
-const { AUDIO_TIME_UPDATED, AUDIO_ENDED, PLAY_SELECTED_TRACK } = playerActions;
+import {
+  AUDIO_TIME_UPDATED,
+  AUDIO_ENDED,
+  PLAY_SELECTED_TRACK,
+} from "./actions";
 
 const PlayerTimesState = new Record({
   bufferedTime: 0,
