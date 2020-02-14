@@ -6,7 +6,7 @@ import { ConnectedRouter } from "connected-react-router";
 //* Store
 import history from "./store/history";
 import configureStore from "./store";
-import appActions, { media } from "./store/app/actions";
+import { media, initApp } from "./store/app/actions";
 
 import App from "./views/App";
 
@@ -27,7 +27,7 @@ ReactDOM.render(
 );
 
 store.dispatch(
-  appActions.initApp({
+  initApp({
     media,
   })
 );

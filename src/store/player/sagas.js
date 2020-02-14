@@ -8,9 +8,8 @@ import playerStorage from "./storage";
 
 // * Actions
 import playerActions from "./actions";
-import appActions from "../app/actions";
+import { INIT_APP } from "../action-types";
 
-const { INIT_APP } = appActions;
 const {
   PLAY_SELECTED_TRACK,
   AUDIO_ENDED,

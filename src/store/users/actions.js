@@ -12,10 +12,13 @@ export const userActions = {
     error,
   }),
 
-  fetchUserFulfilled: (userId, data) => ({
-    type: userActions.FETCH_USER_FULFILLED,
-    user: data,
-  }),
+  fetchUserFulfilled: (userId, data) => {
+    console.log({ userId, data });
+    return {
+      type: userActions.FETCH_USER_FULFILLED,
+      user: data,
+    };
+  },
 
   fetchUserPending: userId => ({
     type: userActions.FETCH_USER_PENDING,

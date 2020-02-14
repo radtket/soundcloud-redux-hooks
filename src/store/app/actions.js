@@ -1,4 +1,7 @@
+import { INIT_APP } from "../action-types";
+
 // media-query rules for window.matchMedia()
+
 export const media = [
   {
     id: "large",
@@ -6,13 +9,7 @@ export const media = [
   },
 ];
 
-const appActions = {
-  INIT_APP: "INIT_APP",
-
-  initApp: config => ({
-    type: appActions.INIT_APP,
-    config,
-  }),
-};
-
-export default appActions;
+export const initApp = config => ({
+  type: INIT_APP,
+  config,
+});

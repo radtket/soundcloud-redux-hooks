@@ -3,9 +3,7 @@ import { call, fork, put, take } from "redux-saga/effects";
 import mediaQuery from "./media-query";
 
 // Actions
-import appActions from "../app/actions";
-
-const { INIT_APP } = appActions;
+import { INIT_APP } from "../action-types";
 
 const subscribe = ({ media }) =>
   eventChannel(emit => mediaQuery.matches(media, emit));
