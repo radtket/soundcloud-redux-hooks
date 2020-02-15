@@ -184,7 +184,7 @@ export const StyledUserAccountButton = styled.button`
     0px center / cover no-repeat;
 `;
 
-export const StyledAuthLink = styled(Link)`
+export const StyledAuthLink = styled.button`
   align-items: center;
   color: #fff;
   display: flex;

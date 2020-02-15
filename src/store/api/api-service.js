@@ -1,8 +1,13 @@
+import SC from "soundcloud";
 import request from "superagent";
 import {
+  API_SESSION_FOLLOWINGS_URL,
+  API_SESSION_LIKES_URL,
+  API_SESSION_USER_URL,
   API_TRACKS_URL,
   API_USERS_URL,
   CLIENT_ID_PARAM,
+  CLIENT_ID,
   PAGINATION_PARAMS,
 } from "../constants";
 
@@ -87,6 +92,59 @@ const api = {
     return dispatch({
       paginate: true,
       url: `${API_USERS_URL}/${userId}/tracks`,
+    });
+  },
+
+  loginToSoundCloud: () => {
+    SC.initialize({
+      client_id: CLIENT_ID,
+      redirect_uri: `${window.location.protocol}//${window.location.host}/callback`,
+    });
+
+    return SC.connect()
+      .then(
+        json => json.oauth_token,
+        error => error
+      )
+      .catch(error => error);
+  },
+
+  fetchSessionUser: oauthToken => {
+    return dispatch({
+      url: `${API_SESSION_USER_URL}?oauth_token=${oauthToken}`,
+    });
+  },
+
+  fetchSessionFollowings: oauthToken => {
+    return dispatch({
+      url: `${API_SESSION_FOLLOWINGS_URL}?oauth_token=${oauthToken}`,
+    }).then(item => {
+      return {
+        ...item,
+        followings: item.collection.reduce((all, { id }) => {
+          return {
+            ...all,
+            [id]: true,
+          };
+        }, {}),
+      };
+    });
+  },
+
+  fetchSessionLikes: oauthToken => {
+    return dispatch({
+      url: `${API_SESSION_LIKES_URL}?oauth_token=${oauthToken}`,
+    }).then(item => {
+      return item.reduce((all, { streamable, id }) => {
+        if (streamable) {
+          return {
+            ...all,
+            [id]: true,
+          };
+        }
+
+        return all;
+      }, {});
     });
   },
 };

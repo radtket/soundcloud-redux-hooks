@@ -11,6 +11,13 @@ export const API_TRACKS_URL = `${API_BASE_URL}/tracks`;
 export const API_USERS_URL = `${API_BASE_URL}/users`;
 
 export const CLIENT_ID = process.env.REACT_APP_SOUNDCLOUD_CLIENT_ID;
+
+//*  Session *//
+export const API_SESSION_USER_URL = `${API_BASE_URL}/me`;
+export const API_SESSION_FOLLOWINGS_URL = `${API_SESSION_USER_URL}/followings`;
+export const API_SESSION_LIKES_URL = `${API_SESSION_USER_URL}/favorites`;
+export const API_SESSION_PLAYLISTS_URL = `${API_SESSION_USER_URL}/playlists`;
+
 export const CLIENT_ID_PARAM = `client_id=${CLIENT_ID}`;
 
 export const PAGINATION_LIMIT = 60;
@@ -45,3 +52,9 @@ export const TRACKS_PER_PAGE = 12;
 //*------------------------------------
 export const WAVEFORM_IMAGE_HOST = "w1.sndcdn.com";
 export const WAVEFORM_JSON_HOST = "wis.sndcdn.com";
+
+//* ====================================
+//* SESSION
+//*------------------------------------
+
+export const COOKIE_PATH = "oauthToken";

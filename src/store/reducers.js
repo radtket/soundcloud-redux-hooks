@@ -6,6 +6,7 @@ import browser from "./browser/reducer";
 import player from "./player/player-reducer";
 import playerTimes from "./player/player-times-reducer";
 import search from "./search/reducer";
+import session from "./session/reducer";
 import tracklists from "./tracklists/tracklists-reducer";
 import tracks from "./tracks/reducer";
 import users from "./users/reducer";
@@ -17,6 +18,7 @@ const createRootReducer = history =>
     playerTimes,
     router: connectRouter(history),
     search,
+    session,
     tracklists,
     tracks,
     users,
