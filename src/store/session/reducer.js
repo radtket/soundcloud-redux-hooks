@@ -1,3 +1,4 @@
+import { Record } from "immutable";
 import {
   FETCH_SESSION_FOLLOWINGS_SUCCESS,
   FETCH_SESSION_LIKES_SUCCESS,
@@ -5,7 +6,7 @@ import {
   LOGIN_SUCCESS,
 } from "./actions";
 
-const initialState = {
+const SessionState = new Record({
   avatarUrl: null,
   followings: {},
   id: null,
@@ -13,38 +14,28 @@ const initialState = {
   newStreamSongs: [],
   oauthToken: null,
   username: null,
-};
+});
 
 export default (
-  state = initialState,
+  state = new SessionState(),
   { followings, oauthToken, type, id, likes, avatarUrl, username }
 ) => {
   switch (type) {
     case LOGIN_SUCCESS:
-      return {
-        ...state,
-        oauthToken,
-      };
+      return state.set("oauthToken", oauthToken);
 
     case FETCH_SESSION_USER_SUCCESS:
-      return {
-        ...state,
+      return state.merge({
         avatarUrl,
         id,
         username,
-      };
+      });
 
     case FETCH_SESSION_FOLLOWINGS_SUCCESS:
-      return {
-        ...state,
-        followings,
-      };
+      return state.set("followings", followings);
 
     case FETCH_SESSION_LIKES_SUCCESS:
-      return {
-        ...state,
-        likes,
-      };
+      return state.set("likes", likes);
 
     default:
       return state;

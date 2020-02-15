@@ -7,9 +7,11 @@ import { login } from "../../store/session/actions";
 
 const UserAccountButton = () => {
   const dispatch = useDispatch();
-  const { avatarUrl, username, id } = useSelector(state => {
+  const { avatarUrl, username, id } = useSelector(({ session }) => {
     return {
-      ...state.session,
+      id: session.id,
+      username: session.username,
+      avatarUrl: session.avatarUrl,
     };
   });
 

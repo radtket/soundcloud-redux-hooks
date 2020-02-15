@@ -10,8 +10,7 @@ import {
 
 let audioElement;
 
-const getTimes = ({ target }) => {
-  const { buffered, currentTime, duration } = target;
+const getTimes = ({ buffered, currentTime, duration }) => {
   const bufferedTime = buffered.length ? buffered.end(0) : 0;
 
   return {
@@ -31,8 +30,8 @@ export const initAudio = (dispatch, audio = new Audio()) => {
   audio.addEventListener("ended", () => dispatch(audioEnded()));
   audio.addEventListener("pause", () => dispatch(audioPaused()));
   audio.addEventListener("playing", () => dispatch(audioPlaying()));
-  audio.addEventListener("timeupdate", event =>
-    dispatch(audioTimeUpdated(getTimes(event)))
+  audio.addEventListener("timeupdate", ({ target }) =>
+    dispatch(audioTimeUpdated(getTimes(target)))
   );
   audio.addEventListener("volumechange", () =>
     dispatch(audioVolumeChanged(getVolume()))
