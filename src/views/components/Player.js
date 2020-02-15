@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { createSelector } from "reselect";
 import { playSelectedTrack } from "../../store/player/actions";
@@ -23,12 +23,14 @@ import { StyledFavoriteButton } from "../styles/Buttons";
 
 import RepeatButton from "./PlayerControls/RepeatButton";
 import VolumeControl from "./PlayerControls/VolumeControl";
+import { getLikes } from "../../store/session/selectors";
 
 const Player = () => {
   const dispatch = useDispatch();
-  const [isFavorite, setFavorite] = useState(false);
+
   const {
     isPlaying,
+    liked,
     nextTrack,
     pause,
     play,
@@ -39,7 +41,8 @@ const Player = () => {
       getPlayer,
       getPlayerTrack,
       getPlayerTracklistCursor,
-      (player, track_, { nextTrackId, previousTrackId }) => {
+      getLikes,
+      (player, track_, { nextTrackId, previousTrackId }, likes) => {
         const getNextTrack = () =>
           dispatch(playSelectedTrack(nextTrackId, player.tracklistId));
 
@@ -52,6 +55,7 @@ const Player = () => {
           nextTrack: nextTrackId && getNextTrack,
           previousTrack: previousTrackId && getPreviousTrack,
           track: track_,
+          liked: Boolean(track_ && likes[track_.id]),
         };
       }
     ),
@@ -76,9 +80,9 @@ const Player = () => {
         </dl>
 
         <StyledFavoriteButton
-          className={isFavorite ? "active" : ""}
+          className={liked ? "active" : ""}
           onClick={() => {
-            setFavorite(prev => !prev);
+            console.log({ liked });
           }}
         >
           <IconHeart />

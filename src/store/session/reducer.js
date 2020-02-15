@@ -6,16 +6,18 @@ import {
 } from "./actions";
 
 const initialState = {
+  avatarUrl: null,
   followings: {},
   id: null,
   likes: {},
   newStreamSongs: [],
   oauthToken: null,
+  username: null,
 };
 
 export default (
   state = initialState,
-  { followings, oauthToken, type, id, likes }
+  { followings, oauthToken, type, id, likes, avatarUrl, username }
 ) => {
   switch (type) {
     case LOGIN_SUCCESS:
@@ -27,7 +29,9 @@ export default (
     case FETCH_SESSION_USER_SUCCESS:
       return {
         ...state,
+        avatarUrl,
         id,
+        username,
       };
 
     case FETCH_SESSION_FOLLOWINGS_SUCCESS:

@@ -20,8 +20,8 @@ function* login() {
 }
 
 function* fetchSessionData({ oauthToken }) {
-  const { id } = yield call(api.fetchSessionUser, oauthToken);
-  yield put(fetchSessionUserSuccess(id));
+  const user = yield call(api.fetchSessionUser, oauthToken);
+  yield put(fetchSessionUserSuccess(user));
 
   const { followings } = yield call(api.fetchSessionFollowings, oauthToken);
   yield put(fetchSessionFollowingsSuccess({ followings }));

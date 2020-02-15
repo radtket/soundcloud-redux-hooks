@@ -180,8 +180,9 @@ export const StyledUserAccountButton = styled.button`
   ${size("36px")};
   border-radius: 50%;
   overflow: hidden;
-  background: url("https://biobutterfly.com/wp-content/themes/musicapp/src/images/artist/1sz2.jpg")
-    0px center / cover no-repeat;
+  background: ${({ avatarUrl }) => `url(${avatarUrl ||
+    "https://biobutterfly.com/wp-content/themes/musicapp/src/images/artist/1sz2.jpg"})
+    0px center / cover no-repeat`};
 `;
 
 export const StyledAuthLink = styled.button`

@@ -7,7 +7,6 @@ import {
   API_TRACKS_URL,
   API_USERS_URL,
   CLIENT_ID_PARAM,
-  CLIENT_ID,
   PAGINATION_PARAMS,
 } from "../constants";
 
@@ -97,7 +96,7 @@ const api = {
 
   loginToSoundCloud: () => {
     SC.initialize({
-      client_id: CLIENT_ID,
+      client_id: process.env.REACT_APP_AUTH_CLIENT_ID,
       redirect_uri: `${window.location.protocol}//${window.location.host}/callback`,
     });
 

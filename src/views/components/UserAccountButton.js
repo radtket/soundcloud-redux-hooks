@@ -1,13 +1,19 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { StyledUserAccountButton, StyledAuthLink } from "../styles/Buttons";
 import { IconUser } from "./Icons";
 import { login } from "../../store/session/actions";
 
-const UserAccountButton = ({ isAuthenticated, avatarUrl }) => {
+const UserAccountButton = () => {
   const dispatch = useDispatch();
-  if (!isAuthenticated) {
+  const { avatarUrl, username, id } = useSelector(state => {
+    return {
+      ...state.session,
+    };
+  });
+
+  if (!id) {
     return (
       <StyledAuthLink onClick={() => dispatch(login())}>
         <IconUser /> <span>Sign In</span>
@@ -17,7 +23,7 @@ const UserAccountButton = ({ isAuthenticated, avatarUrl }) => {
 
   return (
     <StyledUserAccountButton {...{ avatarUrl }}>
-      <span className="visuallyhidden">User Account</span>
+      <span className="visuallyhidden">{username}</span>
     </StyledUserAccountButton>
   );
 };
