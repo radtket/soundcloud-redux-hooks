@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import { Map } from "immutable";
-import { SESSION_TRACKLIST_ID } from "../constants";
+import Cookies from "js-cookie";
+import { SESSION_TRACKLIST_ID, COOKIE_PATH } from "../constants";
 import Tracklist from "./tracklist";
 import tracklistReducer from "./tracklist-reducer";
 
@@ -14,12 +15,14 @@ import {
   UPDATE_PAGINATION,
 } from "./actions";
 import { LOAD_GENRE_TRACKS } from "../genre/actions";
+import { LOAD_SESSION_TRACKS } from "../session/actions";
 
 const initialState = new Map({
   currentTracklistId: SESSION_TRACKLIST_ID,
   [SESSION_TRACKLIST_ID]: new Tracklist({
     id: SESSION_TRACKLIST_ID,
-    isNew: false,
+    isNew: true,
+    oauth: Cookies.get(COOKIE_PATH),
   }),
 });
 
@@ -41,6 +44,7 @@ export default (
       );
 
     case LOAD_GENRE_TRACKS:
+    case LOAD_SESSION_TRACKS:
     case LOAD_FEATURED_TRACKS:
     case LOAD_SEARCH_RESULTS:
     case LOAD_USER_LIKES:

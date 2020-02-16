@@ -10,6 +10,7 @@ const Tracklist = new Record({
   nextUrl: null,
   pageCount: 0,
   trackIds: new List(),
+  oauth: null,
 });
 
 export default Tracklist;

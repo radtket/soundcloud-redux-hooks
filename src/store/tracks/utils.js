@@ -22,7 +22,8 @@ export const trackImageUrl = (
   { artwork_url, user },
   size = IMAGE_XLARGE_SIZE
 ) => {
-  return (artwork_url || user.avatar_url).replace(IMAGE_DEFAULT_SIZE, size);
+  const image = artwork_url || user.avatar_url;
+  return image ? image.replace(IMAGE_DEFAULT_SIZE, size) : "";
 };
 
 export const waveformUrl = url => {

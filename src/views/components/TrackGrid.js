@@ -7,7 +7,6 @@ import infiniteScroll from "../../store/browser/infinite-scroll";
 
 // Player
 import { playSelectedTrack } from "../../store/player/actions";
-import { audio } from "../../store/player/audio-service";
 
 // Tracklist
 import { getTracklistState } from "../../store/tracklists/selectors";
@@ -30,11 +29,7 @@ const TrackGrid = ({ compactLayout }) => {
     selectedTrackId,
     tracklistId,
     tracks,
-  } = useSelector(state => {
-    return {
-      ...getTracklistState(state),
-    };
-  });
+  } = useSelector(getTracklistState);
 
   useEffect(() => {
     infiniteScroll.start(() => dispatch(loadNextTracks()), pauseInfiniteScroll);

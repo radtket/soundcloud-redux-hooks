@@ -5,17 +5,27 @@ import api from "./api-service";
 import { tracklistRequestActions } from "../tracklists/actions";
 import { userRequestActions } from "../users/actions";
 
-function* fetchEntities(apiFunction, actions, id, param) {
-  const { pending, fulfilled, failed } = actions;
-
+function* fetchEntities(
+  apiFunction,
+  { pending, fulfilled, failed },
+  id,
+  param,
+  oauthToken
+) {
   try {
     yield put(pending(id));
-    const data = yield call(apiFunction, param || id);
+    const data = yield call(apiFunction, param || id, oauthToken);
     yield put(fulfilled(id, data));
   } catch (error) {
     yield put(failed(error));
   }
 }
+
+export const fetchSessionStreamTracks = fetchEntities.bind(
+  null,
+  api.fetchSessionStreamTracks,
+  tracklistRequestActions
+);
 
 export const fetchGenreResults = fetchEntities.bind(
   null,

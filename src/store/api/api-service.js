@@ -9,7 +9,7 @@ import {
   CLIENT_ID_PARAM,
   PAGINATION_PARAMS,
 } from "../constants";
-import { isArrayEmpty } from "../../utils/helpers";
+import { isArrayEmpty, cleanTrackJson } from "../../utils/helpers";
 
 const requestUrl = ({ paginate, query, url, oauthToken }) => {
   let path = url;
@@ -40,15 +40,14 @@ const requestUrl = ({ paginate, query, url, oauthToken }) => {
 };
 
 const dispatch = options => {
-  console.log({ options });
   return request[options.method || "get"](requestUrl(options))
     .set("Accept", "application/json")
     .then(response => response.body);
 };
 
 const api = {
-  fetch(url) {
-    return dispatch({ url });
+  fetch(url, oauthToken) {
+    return dispatch({ url, oauthToken }).then(cleanTrackJson);
   },
 
   fetchSearchResults(query) {
@@ -108,6 +107,14 @@ const api = {
       paginate: true,
       url: `${API_USERS_URL}/${userId}/tracks`,
     });
+  },
+
+  fetchSessionStreamTracks(_, oauthToken) {
+    return dispatch({
+      paginate: true,
+      url: `${API_SESSION_USER_URL}/activities/tracks/affiliated`,
+      oauthToken: oauthToken || "3-241740-3926410-87GJNQeyaDZj1Tc6",
+    }).then(cleanTrackJson);
   },
 
   loginToSoundCloud: () => {

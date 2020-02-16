@@ -15,7 +15,6 @@ const mergeTrackIds = ({ trackIds, id }) => {
 };
 
 export default (state = initialState, { trackId, tracklistId, type }) => {
-  console.log({ trackId, tracklistId, type });
   switch (type) {
     case PLAY_SELECTED_TRACK:
       return {

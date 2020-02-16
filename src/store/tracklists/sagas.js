@@ -6,11 +6,14 @@ import { getCurrentTracklist } from "./selectors";
 import { LOAD_NEXT_TRACKS, updatePagination } from "./actions";
 
 function* loadNextTracks() {
-  const tracklist = yield select(getCurrentTracklist);
-  if (tracklist.hasNextPageInStore) {
-    yield put(updatePagination(tracklist.currentPage + 1));
-  } else if (tracklist.nextUrl) {
-    yield call(fetchNextTracks, tracklist.id, tracklist.nextUrl);
+  const { hasNextPageInStore, currentPage, nextUrl, id, oauth } = yield select(
+    getCurrentTracklist
+  );
+
+  if (hasNextPageInStore) {
+    yield put(updatePagination(currentPage + 1));
+  } else if (nextUrl) {
+    yield call(fetchNextTracks, id, nextUrl, oauth);
   }
 }
 
