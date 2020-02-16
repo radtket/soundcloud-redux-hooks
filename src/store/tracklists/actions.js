@@ -8,7 +8,6 @@ export const FETCH_TRACKS_FAILED = "FETCH_TRACKS_FAILED";
 export const FETCH_TRACKS_FULFILLED = "FETCH_TRACKS_FULFILLED";
 export const FETCH_TRACKS_PENDING = "FETCH_TRACKS_PENDING";
 
-export const LOAD_GENRE_TRACKS = "LOAD_GENRE_TRACKS";
 export const LOAD_FEATURED_TRACKS = "LOAD_FEATURED_TRACKS";
 export const LOAD_NEXT_TRACKS = "LOAD_NEXT_TRACKS";
 export const UPDATE_PAGINATION = "UPDATE_PAGINATION";
@@ -41,13 +40,6 @@ export const loadFeaturedTracks = () => ({
   tracklistId: FEATURED_TRACKLIST_ID,
   userId: FEATURED_TRACKLIST_USER_ID,
 });
-
-export const loadGenreTracks = tracklistId => {
-  return {
-    type: LOAD_GENRE_TRACKS,
-    tracklistId,
-  };
-};
 
 export const loadNextTracks = () => ({
   type: LOAD_NEXT_TRACKS,

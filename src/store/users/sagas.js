@@ -9,8 +9,9 @@ import { getTracklistById } from "../tracklists/selectors";
 import { getUserById } from "./selectors";
 
 // Actions
-import { LOAD_FEATURED_TRACKS, LOAD_GENRE_TRACKS } from "../tracklists/actions";
+import { LOAD_FEATURED_TRACKS } from "../tracklists/actions";
 import { LOAD_USER, LOAD_USER_LIKES, LOAD_USER_TRACKS } from "./actions";
+import { LOAD_GENRE_TRACKS } from "../genre/actions";
 
 function* loadUser({ userId }) {
   const user = yield select(getUserById, userId);

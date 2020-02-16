@@ -11,8 +11,8 @@ import {
   FETCH_TRACKS_PENDING,
   LOAD_FEATURED_TRACKS,
   UPDATE_PAGINATION,
-  LOAD_GENRE_TRACKS,
 } from "./actions";
+import { LOAD_GENRE_TRACKS } from "../genre/actions";
 
 const mergeTrackIds = ({ trackIds, collection }) => {
   const ids = trackIds.toJS();

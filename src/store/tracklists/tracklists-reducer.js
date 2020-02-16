@@ -12,8 +12,8 @@ import {
   FETCH_TRACKS_PENDING,
   LOAD_FEATURED_TRACKS,
   UPDATE_PAGINATION,
-  LOAD_GENRE_TRACKS,
 } from "./actions";
+import { LOAD_GENRE_TRACKS } from "../genre/actions";
 
 const initialState = new Map({
   currentTracklistId: SESSION_TRACKLIST_ID,
