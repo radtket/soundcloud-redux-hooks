@@ -17,6 +17,12 @@ function* fetchEntities(apiFunction, actions, id, param) {
   }
 }
 
+export const fetchGenreResults = fetchEntities.bind(
+  null,
+  api.fetchGenreResults,
+  tracklistRequestActions
+);
+
 export const fetchNextTracks = fetchEntities.bind(
   null,
   api.fetch,

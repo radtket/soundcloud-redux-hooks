@@ -4,7 +4,7 @@ import { Record } from "immutable";
 import { LOAD_SEARCH_RESULTS, TOGGLE_SEARCH_FIELD } from "./actions";
 
 const SearchState = new Record({
-  currentQuery: null,
+  query: null,
   open: false,
 });
 
@@ -13,7 +13,7 @@ export default (state = new SearchState(), { type, query }) => {
     case LOAD_SEARCH_RESULTS:
       return state.merge({
         open: false,
-        currentQuery: query,
+        query,
       });
 
     case TOGGLE_SEARCH_FIELD:

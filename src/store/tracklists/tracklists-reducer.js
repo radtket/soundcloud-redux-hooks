@@ -12,6 +12,7 @@ import {
   FETCH_TRACKS_PENDING,
   LOAD_FEATURED_TRACKS,
   UPDATE_PAGINATION,
+  LOAD_GENRE_TRACKS,
 } from "./actions";
 
 const initialState = new Map({
@@ -39,6 +40,7 @@ export default (
         })
       );
 
+    case LOAD_GENRE_TRACKS:
     case LOAD_FEATURED_TRACKS:
     case LOAD_SEARCH_RESULTS:
     case LOAD_USER_LIKES:

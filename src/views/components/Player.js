@@ -23,7 +23,8 @@ import { StyledFavoriteButton } from "../styles/Buttons";
 
 import RepeatButton from "./PlayerControls/RepeatButton";
 import VolumeControl from "./PlayerControls/VolumeControl";
-import { getLikes } from "../../store/session/selectors";
+import { getLikes, getOauthToken } from "../../store/session/selectors";
+import { toggleLikeRequest } from "../../store/session/actions";
 
 const Player = () => {
   const dispatch = useDispatch();
@@ -36,13 +37,15 @@ const Player = () => {
     play,
     previousTrack,
     track,
+    oauthToken,
   } = useSelector(
     createSelector(
       getPlayer,
       getPlayerTrack,
       getPlayerTracklistCursor,
       getLikes,
-      (player, track_, { nextTrackId, previousTrackId }, likes) => {
+      getOauthToken,
+      (player, track_, { nextTrackId, previousTrackId }, likes, token) => {
         const getNextTrack = () =>
           dispatch(playSelectedTrack(nextTrackId, player.tracklistId));
 
@@ -56,6 +59,7 @@ const Player = () => {
           previousTrack: previousTrackId && getPreviousTrack,
           track: track_,
           liked: Boolean(track_ && likes[track_.id]),
+          oauthToken: token,
         };
       }
     ),
@@ -82,7 +86,7 @@ const Player = () => {
         <StyledFavoriteButton
           className={liked ? "active" : ""}
           onClick={() => {
-            console.log({ liked });
+            dispatch(toggleLikeRequest(track.id, liked, oauthToken));
           }}
         >
           <IconHeart />

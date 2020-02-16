@@ -12,12 +12,12 @@ import Callback from "./pages/Callback";
 // Components
 import Navbar from "./components/Navbar";
 import Player from "./components/Player";
+import Genres from "./pages/Genres";
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log({ dispatch });
     initAuth(dispatch);
   }, [dispatch]);
 
@@ -26,6 +26,7 @@ const App = () => {
       <Navbar />
       <main className="main">
         <Route component={HomePage} exact path="/" />
+        <Route component={Genres} exact path="/genres/:id" />
         <Route component={SearchPage} path="/search" />
         <Route component={UserPage} path="/users/:id/:resource" />
         <Route path="/callback">

@@ -58,3 +58,20 @@ export const WAVEFORM_JSON_HOST = "wis.sndcdn.com";
 //*------------------------------------
 
 export const COOKIE_PATH = "oauthToken";
+
+export const GENRES = {
+  chill: "chill house",
+  deep: "deep house",
+  dubstep: "dubstep",
+  house: "house",
+  progressive: "progressive house",
+  tech: "tech house",
+  trance: "trance",
+  tropical: "tropical house",
+};
+
+export const TIMES = [
+  { key: "7", label: "7 days" },
+  { key: "30", label: "30 days" },
+  { key: "90", label: "90 days" },
+];

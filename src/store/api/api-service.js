@@ -17,9 +17,11 @@ const requestUrl = ({ paginate, query, url }) => {
   if (!path.includes(CLIENT_ID_PARAM)) {
     params.push(CLIENT_ID_PARAM);
   }
+
   if (paginate) {
     params.push(PAGINATION_PARAMS);
   }
+
   if (query) {
     params.push(query);
   }
@@ -33,6 +35,7 @@ const requestUrl = ({ paginate, query, url }) => {
 };
 
 const dispatch = options => {
+  console.log({ options });
   return request[options.method || "get"](requestUrl(options))
     .set("Accept", "application/json")
     .then(response => response.body);
@@ -47,6 +50,14 @@ const api = {
     return dispatch({
       paginate: true,
       query: `q=${query}`,
+      url: API_TRACKS_URL,
+    });
+  },
+
+  fetchGenreResults(tags) {
+    return dispatch({
+      paginate: true,
+      query: `tags=${tags}`,
       url: API_TRACKS_URL,
     });
   },
@@ -144,6 +155,13 @@ const api = {
 
         return all;
       }, {});
+    });
+  },
+
+  toggleLike(id, liked, oauthToken) {
+    return dispatch({
+      method: !liked ? "put" : "delete",
+      url: `${API_SESSION_LIKES_URL}/${id}?oauth_token=${oauthToken}`,
     });
   },
 };

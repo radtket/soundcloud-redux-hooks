@@ -9,6 +9,8 @@ export const FETCH_SESSION_USER_SUCCESS = "FETCH_SESSION_USER_SUCCESS";
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 
+export const TOGGLE_LIKE = "TOGGLE_LIKE";
+
 export const login = () => {
   return {
     type: FETCH_OAUTH_TOKEN,
@@ -22,10 +24,12 @@ export const loginSuccess = oauthToken => {
   };
 };
 
-export const fetchSessionUserSuccess = (id, entities) => ({
+// eslint-disable-next-line camelcase
+export const fetchSessionUserSuccess = ({ id, avatar_url, username }) => ({
   type: FETCH_SESSION_USER_SUCCESS,
   id,
-  entities,
+  avatarUrl: avatar_url,
+  username,
 });
 
 export const fetchSessionFollowingsSuccess = ({ followings, entities }) => ({
@@ -47,4 +51,14 @@ export const initAuth = dispatch => {
       oauthToken,
     });
   }
+};
+
+export const toggleLikeRequest = (id, liked) => {
+  const oauthToken = Cookies.get(COOKIE_PATH);
+  return {
+    type: TOGGLE_LIKE,
+    id,
+    liked,
+    oauthToken,
+  };
 };

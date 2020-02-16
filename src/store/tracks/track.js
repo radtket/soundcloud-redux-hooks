@@ -23,8 +23,8 @@ export const Track = new Record({
   waveformUrl: null,
 });
 
-export const createTrack = data =>
-  new Track({
+export const createTrack = data => {
+  return new Track({
     artworkUrl: trackImageUrl(data),
     duration: data.duration,
     id: data.id,
@@ -40,3 +40,4 @@ export const createTrack = data =>
     userPermalinkUrl: data.user.permalink_url,
     waveformUrl: waveformUrl(data.waveform_url),
   });
+};
