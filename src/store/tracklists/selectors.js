@@ -1,6 +1,8 @@
 import { createSelector } from "reselect";
 import { TRACKS_PER_PAGE } from "../constants";
 import { getTracks } from "../tracks/selectors";
+import getBrowserMedia from "../browser/selectors";
+import { audio } from "../player/audio-service";
 
 export const getTracklists = state => state.tracklists;
 
@@ -10,27 +12,6 @@ export const getTracklistById = (state, tracklistId) =>
 export const getCurrentTracklist = state => {
   const tracklists = getTracklists(state);
   return tracklists.get(tracklists.get("currentTracklistId"));
-};
-
-export const getTracklistCursor = (selectedTrackId, trackIds) => {
-  const index = trackIds.indexOf(selectedTrackId);
-  let nextTrackId = null;
-  let previousTrackId = null;
-
-  if (index !== -1) {
-    if (index < trackIds.size - 1) {
-      nextTrackId = trackIds.get(index + 1);
-    }
-    if (index > 0) {
-      previousTrackId = trackIds.get(index - 1);
-    }
-  }
-
-  return {
-    nextTrackId,
-    previousTrackId,
-    selectedTrackId,
-  };
 };
 
 //= ====================================
@@ -56,4 +37,29 @@ export const getTracksForCurrentTracklist = createSelector(
       .slice(0, currentPage * TRACKS_PER_PAGE)
       .map(id => tracks.get(id));
   }
+);
+
+export const getTracklistState = createSelector(
+  getBrowserMedia,
+  state => state.player.isPlaying,
+  state => state.player.trackId,
+  getCurrentTracklist,
+  getTracksForCurrentTracklist,
+  (
+    media,
+    isPlaying,
+    playerTrackId,
+    { isPending, hasNextPage, id },
+    tracks
+  ) => ({
+    displayLoadingIndicator: isPending || hasNextPage,
+    isMediaLarge: !!media.large,
+    isPlaying,
+    pause: audio.pause,
+    pauseInfiniteScroll: isPending || !hasNextPage,
+    play: audio.play,
+    selectedTrackId: playerTrackId,
+    tracklistId: id,
+    tracks,
+  })
 );

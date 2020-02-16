@@ -9,6 +9,7 @@ import {
   CLIENT_ID_PARAM,
   PAGINATION_PARAMS,
 } from "../constants";
+import { isArrayEmpty } from "../../utils/helpers";
 
 const requestUrl = ({ paginate, query, url, oauthToken }) => {
   let path = url;
@@ -30,7 +31,7 @@ const requestUrl = ({ paginate, query, url, oauthToken }) => {
     params.push(`oauth_token=${oauthToken}`);
   }
 
-  if (params.length) {
+  if (!isArrayEmpty(params)) {
     path += path.indexOf("?") === -1 ? "?" : "&";
     path += params.join("&");
   }

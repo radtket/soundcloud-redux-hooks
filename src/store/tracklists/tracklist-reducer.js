@@ -13,6 +13,7 @@ import {
   UPDATE_PAGINATION,
 } from "./actions";
 import { LOAD_GENRE_TRACKS } from "../genre/actions";
+import { isArrayEmpty } from "../../utils/helpers";
 
 const mergeTrackIds = ({ trackIds, collection }) => {
   const ids = trackIds.toJS();
@@ -23,7 +24,7 @@ const mergeTrackIds = ({ trackIds, collection }) => {
     return list;
   }, []);
 
-  return newIds.length ? new List(ids.concat(newIds)) : trackIds;
+  return isArrayEmpty(newIds) ? trackIds : new List(ids.concat(newIds));
 };
 
 const updatePagination = ({ tracklist, page }) => {
@@ -47,14 +48,13 @@ export default (
   switch (type) {
     case FETCH_TRACKS_FULFILLED:
       return state.withMutations(tracklist => {
-        const { trackIds } = tracklist;
         tracklist
           .merge({
             isNew: false,
             isPending: false,
             nextUrl: next_href || null,
             trackIds: mergeTrackIds({
-              trackIds,
+              trackIds: tracklist.trackIds,
               collection,
             }),
           })

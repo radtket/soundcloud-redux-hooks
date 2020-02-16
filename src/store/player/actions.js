@@ -35,8 +35,10 @@ export const audioRepeatChanged = isRepeat => {
   };
 };
 
-export const playSelectedTrack = (trackId, tracklistId) => ({
-  type: PLAY_SELECTED_TRACK,
-  trackId,
-  tracklistId,
-});
+export const playSelectedTrack = ({ trackId, tracklistId }) => {
+  return {
+    type: PLAY_SELECTED_TRACK,
+    trackId,
+    tracklistId,
+  };
+};

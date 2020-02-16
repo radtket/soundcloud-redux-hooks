@@ -1,5 +1,25 @@
-import { getTracklistById, getTracklistCursor } from "../tracklists/selectors";
 import { getTrackById } from "../tracks/selectors";
+
+const getTracklistCursor = (selectedTrackId, trackIds) => {
+  const index = trackIds.indexOf(selectedTrackId);
+  let nextTrackId = null;
+  let previousTrackId = null;
+
+  if (index !== -1) {
+    if (index < trackIds.size - 1) {
+      nextTrackId = trackIds.get(index + 1);
+    }
+    if (index > 0) {
+      previousTrackId = trackIds.get(index - 1);
+    }
+  }
+
+  return {
+    nextTrackId,
+    previousTrackId,
+    selectedTrackId,
+  };
+};
 
 export const getPlayer = state => state.player;
 
@@ -18,7 +38,7 @@ export const getPlayerTrack = state => {
 
 export const getPlayerTracklist = state => {
   const tracklistId = getPlayerTracklistId(state);
-  return getTracklistById(state, tracklistId);
+  return state.tracklists.get(tracklistId);
 };
 
 export const getPlayerTracklistCursor = state => {

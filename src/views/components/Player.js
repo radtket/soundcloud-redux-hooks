@@ -47,10 +47,20 @@ const Player = () => {
       getOauthToken,
       (player, track_, { nextTrackId, previousTrackId }, likes, token) => {
         const getNextTrack = () =>
-          dispatch(playSelectedTrack(nextTrackId, player.tracklistId));
+          dispatch(
+            playSelectedTrack({
+              trackId: nextTrackId,
+              tracklistId: player.tracklistId,
+            })
+          );
 
         const getPreviousTrack = () =>
-          dispatch(playSelectedTrack(previousTrackId, player.tracklistId));
+          dispatch(
+            playSelectedTrack({
+              trackId: previousTrackId,
+              tracklistId: player.tracklistId,
+            })
+          );
 
         return {
           ...audio,
