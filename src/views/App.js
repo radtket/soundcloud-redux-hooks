@@ -7,12 +7,16 @@ import { initAuth } from "../store/session/actions";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import UserPage from "./pages/UserPage";
+import GenresPage from "./pages/GenresPage";
 import Callback from "./pages/Callback";
+
+// Session
+import LikesPage from "./pages/Session/LikesPage";
+import StreamPage from "./pages/Session/StreamPage";
 
 // Components
 import Navbar from "./components/Navbar";
 import Player from "./components/Player";
-import Genres from "./pages/Genres";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -26,9 +30,13 @@ const App = () => {
       <Navbar />
       <main className="main">
         <Route component={HomePage} exact path="/" />
-        <Route component={Genres} path={["/genres/:id", "/genres"]} />
+        <Route component={GenresPage} path={["/genres/:id", "/genres"]} />
         <Route component={SearchPage} path="/search" />
         <Route component={UserPage} path="/users/:id/:resource" />
+
+        {/* Session */}
+        <Route component={LikesPage} path="/me/likes" />
+        <Route component={StreamPage} path="/me/stream" />
         <Route path="/callback">
           <Callback />
         </Route>

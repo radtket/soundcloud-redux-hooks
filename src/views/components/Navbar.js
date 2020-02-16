@@ -25,10 +25,8 @@ const Navbar = () => {
         </nav>
 
         <nav className="nav-secondary">
-          <Link className="active" to="/">
-            Stream
-          </Link>
-          <Link to="/">Likes</Link>
+          <NavLink to="/me/stream">Stream</NavLink>
+          <NavLink to="/me/likes">Likes</NavLink>
         </nav>
         <nav className="nav-search">
           <SearchBar />

@@ -5,7 +5,7 @@ import TrackGrid from "../components/TrackGrid";
 import SongsNav from "../components/SongsNav";
 import { loadGenreTracks } from "../../store/genre/actions";
 
-const Genres = () => {
+const GenresPage = () => {
   const { id } = useParams();
   const genre = id || "house";
   const dispatch = useDispatch();
@@ -25,4 +25,4 @@ const Genres = () => {
   );
 };
 
-export default Genres;
+export default GenresPage;
