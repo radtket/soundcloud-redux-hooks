@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import StyledNavbar from "../styles/Navbar";
 import Logo from "./Logo";
-import { GradientBorderButton } from "../styles/Buttons";
 import SearchBar from "./SearchBar";
 import UserAccountButton from "./UserAccountButton";
 
@@ -14,17 +13,22 @@ const Navbar = () => {
           <Link className="nav-logo" to="/">
             <Logo />
           </Link>
-          <GradientBorderButton to="/">Home</GradientBorderButton>
-          <Link to="/">Browse</Link>
-          <Link to="/">Library</Link>
+          <NavLink className="nav-item" exact to="/">
+            Home
+          </NavLink>
+          <NavLink className="nav-item" to="/genres">
+            Genres
+          </NavLink>
+          <NavLink className="nav-item" to="library">
+            Library
+          </NavLink>
         </nav>
 
         <nav className="nav-secondary">
           <Link className="active" to="/">
-            Playlists
+            Stream
           </Link>
-          <Link to="/">Albums</Link>
-          <Link to="/">Artists</Link>
+          <Link to="/">Likes</Link>
         </nav>
         <nav className="nav-search">
           <SearchBar />

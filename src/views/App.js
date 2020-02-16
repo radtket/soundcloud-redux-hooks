@@ -26,7 +26,7 @@ const App = () => {
       <Navbar />
       <main className="main">
         <Route component={HomePage} exact path="/" />
-        <Route component={Genres} exact path="/genres/:id" />
+        <Route component={Genres} path={["/genres/:id", "/genres"]} />
         <Route component={SearchPage} path="/search" />
         <Route component={UserPage} path="/users/:id/:resource" />
         <Route path="/callback">
