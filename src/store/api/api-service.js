@@ -10,7 +10,7 @@ import {
   PAGINATION_PARAMS,
 } from "../constants";
 
-const requestUrl = ({ paginate, query, url }) => {
+const requestUrl = ({ paginate, query, url, oauthToken }) => {
   let path = url;
   const params = [];
 
@@ -24,6 +24,10 @@ const requestUrl = ({ paginate, query, url }) => {
 
   if (query) {
     params.push(query);
+  }
+
+  if (oauthToken) {
+    params.push(`oauth_token=${oauthToken}`);
   }
 
   if (params.length) {
@@ -55,6 +59,7 @@ const api = {
   },
 
   fetchGenreResults(tags) {
+    console.log({ tags });
     return dispatch({
       paginate: true,
       query: `tags=${tags}`,
@@ -121,13 +126,15 @@ const api = {
 
   fetchSessionUser: oauthToken => {
     return dispatch({
-      url: `${API_SESSION_USER_URL}?oauth_token=${oauthToken}`,
+      url: `${API_SESSION_USER_URL}`,
+      oauthToken,
     });
   },
 
   fetchSessionFollowings: oauthToken => {
     return dispatch({
-      url: `${API_SESSION_FOLLOWINGS_URL}?oauth_token=${oauthToken}`,
+      url: `${API_SESSION_FOLLOWINGS_URL}`,
+      oauthToken,
     }).then(item => {
       return {
         ...item,
@@ -143,7 +150,8 @@ const api = {
 
   fetchSessionLikes: oauthToken => {
     return dispatch({
-      url: `${API_SESSION_LIKES_URL}?oauth_token=${oauthToken}`,
+      url: `${API_SESSION_LIKES_URL}`,
+      oauthToken,
     }).then(item => {
       return item.reduce((all, { streamable, id }) => {
         if (streamable) {
@@ -158,10 +166,11 @@ const api = {
     });
   },
 
-  toggleLike(id, liked, oauthToken) {
+  toggleLike({ id, liked, oauthToken }) {
     return dispatch({
       method: !liked ? "put" : "delete",
-      url: `${API_SESSION_LIKES_URL}/${id}?oauth_token=${oauthToken}`,
+      url: `${API_SESSION_LIKES_URL}/${id}`,
+      oauthToken,
     });
   },
 };

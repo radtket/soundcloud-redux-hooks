@@ -86,7 +86,7 @@ const Player = () => {
         <StyledFavoriteButton
           className={liked ? "active" : ""}
           onClick={() => {
-            dispatch(toggleLikeRequest(track.id, liked, oauthToken));
+            dispatch(toggleLikeRequest({ id: track.id, liked, oauthToken }));
           }}
         >
           <IconHeart />

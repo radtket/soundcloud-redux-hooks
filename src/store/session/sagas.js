@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { fork, put, call, takeLatest, select } from "redux-saga/effects";
+import { fork, put, call, takeLatest } from "redux-saga/effects";
 import { COOKIE_PATH } from "../constants";
 import {
   fetchSessionFollowingsSuccess,
@@ -11,7 +11,6 @@ import {
   TOGGLE_LIKE,
 } from "./actions";
 import api from "../api/api-service";
-import { getOauthToken } from "./selectors";
 
 function* login() {
   const oauthToken = yield call(api.loginToSoundCloud);
@@ -33,9 +32,8 @@ function* fetchSessionData({ oauthToken }) {
 }
 
 function* toggleLike({ id, liked, oauthToken }) {
-  console.log({ id, liked, oauthToken });
-  const dude = yield call(api.toggleLike, id, liked, oauthToken);
-  console.log({ dude });
+  const { error } = yield call(api.toggleLike, { id, liked, oauthToken });
+  console.log({ error });
 }
 
 //= ====================================

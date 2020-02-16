@@ -53,8 +53,8 @@ export const initAuth = dispatch => {
   }
 };
 
-export const toggleLikeRequest = (id, liked) => {
-  const oauthToken = Cookies.get(COOKIE_PATH);
+export const toggleLikeRequest = ({ id, liked, oauthToken }) => {
+  // const oauth = Cookies.get(COOKIE_PATH);
   return {
     type: TOGGLE_LIKE,
     id,
