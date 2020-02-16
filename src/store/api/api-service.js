@@ -58,11 +58,10 @@ const api = {
     });
   },
 
-  fetchGenreResults(tags) {
-    console.log({ tags });
+  fetchGenreResults(query) {
     return dispatch({
       paginate: true,
-      query: `tags=${tags}`,
+      query: `tags=${query}`,
       url: API_TRACKS_URL,
     });
   },
