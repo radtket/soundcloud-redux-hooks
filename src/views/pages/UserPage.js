@@ -9,20 +9,20 @@ import TrackGrid from "../components/TrackGrid";
 import UserHero from "../components/UserHero";
 import UserNav from "../components/UserNav";
 
-const UserPage = ({ match: { params } }) => {
+const UserPage = ({
+  match: {
+    params: { id, resource },
+  },
+}) => {
   const dispatch = useDispatch();
   const { user } = useSelector(state => ({
     user: getCurrentUser(state),
   }));
 
   useEffect(() => {
-    const load = ({ id, resource }) => {
-      dispatch(loadUser(id));
-      dispatch(loadUserTracks(id, resource));
-    };
-
-    load(params);
-  }, [dispatch, params]);
+    dispatch(loadUser(id));
+    dispatch(loadUserTracks(id, resource));
+  }, [dispatch, id, resource]);
 
   if (!user) {
     return null;
