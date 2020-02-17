@@ -1,13 +1,26 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
+import { createSelector } from "reselect";
 import StyledUserHero from "../styles/UserHero";
 import { User } from "../../store/users/user";
 import SocialMediaIcon from "./SocialMediaIcon";
 import renderHTML from "../../utils/render-html";
+import { getFollowings } from "../../store/session/selectors";
+import { StyledButton } from "../styles/Buttons";
+import UserHeroPlayButton from "./UserHeroPlayButton";
 
 const UserHero = ({
-  user: { avatarUrl, bannerUrl, description, social, username },
+  user: { avatarUrl, bannerUrl, description, social, username, id },
 }) => {
+  const { isFollowing } = useSelector(
+    createSelector(getFollowings, followings => {
+      return {
+        isFollowing: Boolean(followings[id]),
+      };
+    })
+  );
+
   return (
     <StyledUserHero {...{ visual: bannerUrl }}>
       <div className="container">
@@ -20,17 +33,10 @@ const UserHero = ({
                 {description && renderHTML(description)}
               </div>
               <div className="entry-meta">
-                <button className="btn-play" type="button">
-                  play
-                </button>
-                <button
-                  className="btn-follow button-rounded "
-                  data-action="follow"
-                  type="button"
-                >
-                  <span className="follow">Follow</span>
-                  <span className="following">Following</span>
-                </button>
+                <UserHeroPlayButton />
+                <StyledButton type="button">
+                  {isFollowing ? "Following" : "Follow"}
+                </StyledButton>
                 <div className="user-links">
                   {social.map(item => {
                     const { id: key, service, title, url } = item;

@@ -202,3 +202,22 @@ export const StyledAuthLink = styled.button`
     text-transform: uppercase;
   }
 `;
+
+export const StyledUserHeroPlayButton = styled.button`
+  ${size("40px")};
+  display: inline-block;
+  position: relative;
+  outline: 0;
+  vertical-align: middle;
+  transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  background: #fff;
+  border-radius: 50%;
+
+  svg {
+    height: 40px;
+    display: inline-block;
+    width: 12px;
+  }
+`;

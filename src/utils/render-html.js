@@ -46,7 +46,6 @@ const renderHTML = html => {
   }
 
   const result = htmlAST.childNodes.map(renderNode);
-  console.log({ result });
   return result.length === 1 ? result[0] : result;
 };
 
