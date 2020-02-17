@@ -1,4 +1,4 @@
-import { Set, List } from "immutable";
+import { List } from "immutable";
 
 import { TOGGLE_SHOW_HISTORY } from "./actions";
 import { PLAY_SELECTED_TRACK } from "../player/actions";
@@ -14,7 +14,7 @@ const mergeTrackIds = ({ trackIds, id }) => {
   return ids.includes(id) ? trackIds : new List(ids.concat(id));
 };
 
-export default (state = initialState, { trackId, tracklistId, type }) => {
+export default (state = initialState, { trackId, type }) => {
   switch (type) {
     case PLAY_SELECTED_TRACK:
       return {

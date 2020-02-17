@@ -6,7 +6,6 @@ import {
   takeLatest,
   select,
   takeEvery,
-  take,
 } from "redux-saga/effects";
 import { COOKIE_PATH } from "../constants";
 import {

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import StyledUserHero from "../styles/UserHero";
 import { User } from "../../store/users/user";
 import SocialMediaIcon from "./SocialMediaIcon";
+import renderHTML from "../../utils/render-html";
 
 const UserHero = ({
   user: { avatarUrl, bannerUrl, description, social, username },
@@ -15,7 +16,9 @@ const UserHero = ({
             <img alt={username} src={avatarUrl.replace("large", "t300x300")} />
             <figcaption>
               <h1 className="entry-title">{username}</h1>
-              <div className="entry-description">{description}</div>
+              <div className="entry-description">
+                {description && renderHTML(description)}
+              </div>
               <div className="entry-meta">
                 <button className="btn-play" type="button">
                   play
