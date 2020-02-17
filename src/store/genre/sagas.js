@@ -6,7 +6,7 @@ import { LOAD_GENRE_TRACKS } from "./actions";
 function* loadGenreTracks({ tracklistId, query }) {
   const tracklist = yield select(getTracklistById, tracklistId);
   if (tracklist && tracklist.isNew) {
-    yield call(fetchGenreResults, tracklistId, query);
+    yield call(fetchGenreResults, { id: tracklistId, query });
   }
 }
 

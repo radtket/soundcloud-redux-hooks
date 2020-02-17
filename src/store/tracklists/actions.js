@@ -6,21 +6,23 @@ export const FETCH_TRACKS_PENDING = "FETCH_TRACKS_PENDING";
 export const LOAD_NEXT_TRACKS = "LOAD_NEXT_TRACKS";
 export const UPDATE_TRACKS_PAGINATION = "UPDATE_TRACKS_PAGINATION";
 
-export const fetchTracksPending = tracklistId => ({
-  type: FETCH_TRACKS_PENDING,
-  tracklistId,
-});
+export const fetchTracksPending = ({ id }) => {
+  return {
+    type: FETCH_TRACKS_PENDING,
+    tracklistId: id,
+  };
+};
 
-export const fetchTracksFulfilled = (
-  tracklistId,
-  { collection, next_href, ...data }
-) => {
+export const fetchTracksFulfilled = ({
+  id,
+  data: { collection, next_href, ...rest },
+}) => {
   return {
     type: FETCH_TRACKS_FULFILLED,
-    ...data,
+    ...rest,
     collection,
     next_href,
-    tracklistId,
+    tracklistId: id,
   };
 };
 

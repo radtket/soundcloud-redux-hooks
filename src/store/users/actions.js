@@ -5,12 +5,12 @@ export const FETCH_USER_PENDING = "FETCH_USER_PENDING";
 export const LOAD_USER = "LOAD_USER";
 export const LOAD_USER_TRACKS = "LOAD_USER_TRACKS";
 
-export const fetchUserPending = userId => ({
+export const fetchUserPending = ({ id }) => ({
   type: FETCH_USER_PENDING,
-  userId,
+  userId: id,
 });
 
-export const fetchUserFulfilled = (userId, data) => {
+export const fetchUserFulfilled = ({ data }) => {
   return {
     type: FETCH_USER_FULFILLED,
     user: data,

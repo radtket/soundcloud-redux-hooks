@@ -9,7 +9,7 @@ import { NAVIGATE_TO_SEARCH, LOAD_SEARCH_RESULTS } from "./actions";
 function* loadSearchResults({ query, tracklistId }) {
   const tracklist = yield select(getTracklistById, tracklistId);
   if (tracklist && tracklist.isNew) {
-    yield call(fetchSearchResults, tracklistId, query);
+    yield call(fetchSearchResults, { id: tracklistId, query });
   }
 }
 

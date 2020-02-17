@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  loadUser,
-  loadUserLikes,
-  loadUserTracks,
-} from "../../store/users/actions";
+import { loadUser, loadUserTracks } from "../../store/users/actions";
 import { getCurrentUser } from "../../store/users/selectors";
 
 // Components

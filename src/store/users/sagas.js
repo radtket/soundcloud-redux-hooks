@@ -10,14 +10,19 @@ function* loadUser({ userId }) {
   const user = yield select(getUserById, userId);
 
   if (!user || !user.profile) {
-    yield call(fetchUser, userId);
+    yield call(fetchUser, { id: userId });
   }
 }
 
 function* loadUserTracks({ tracklistId, userId }) {
   const tracklist = yield select(getTracklistById, tracklistId);
+  console.log({ tracklistId, userId });
   if (tracklist && tracklist.isNew) {
-    yield call(fetchUserTracks, tracklistId, userId, tracklistId);
+    yield call(fetchUserTracks, {
+      id: tracklistId,
+      userId,
+      resource: tracklistId,
+    });
   }
 }
 

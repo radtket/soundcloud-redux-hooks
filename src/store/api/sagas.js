@@ -8,14 +8,18 @@ import { userRequestActions } from "../users/actions";
 function* fetchEntities(
   apiFunction,
   { pending, fulfilled, failed },
-  id,
-  param,
-  oauthToken
+  { id, oauthToken, query, url, resource }
 ) {
   try {
-    yield put(pending(id));
-    const data = yield call(apiFunction, param || id, oauthToken);
-    yield put(fulfilled(id, data));
+    yield put(pending({ id }));
+    const data = yield call(apiFunction, {
+      id,
+      oauthToken,
+      query,
+      resource,
+      url,
+    });
+    yield put(fulfilled({ id, data }));
   } catch (error) {
     yield put(failed(error));
   }

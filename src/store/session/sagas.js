@@ -49,7 +49,7 @@ function* toggleLike({ id, liked, oauthToken }) {
 function* loadSessionTracks({ tracklistId, oauthToken }) {
   const tracklist = yield select(getTracklistById, tracklistId);
   if (tracklist && tracklist.isNew) {
-    yield call(fetchSessionStreamTracks, tracklistId, null, oauthToken);
+    yield call(fetchSessionStreamTracks, { id: tracklistId, oauthToken });
   }
 }
 

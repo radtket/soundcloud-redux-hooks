@@ -47,11 +47,11 @@ const dispatch = options => {
 };
 
 const api = {
-  fetch(url, oauthToken) {
+  fetch({ url, oauthToken }) {
     return dispatch({ url, oauthToken }).then(cleanTrackJson);
   },
 
-  fetchSearchResults(query) {
+  fetchSearchResults({ query }) {
     return dispatch({
       paginate: true,
       query: `q=${query}`,
@@ -59,7 +59,7 @@ const api = {
     });
   },
 
-  fetchGenreResults(query) {
+  fetchGenreResults({ query }) {
     return dispatch({
       paginate: true,
       query: `tags=${query}`,
@@ -67,13 +67,13 @@ const api = {
     });
   },
 
-  fetchUser(userId) {
+  fetchUser({ id }) {
     return Promise.all([
       dispatch({
-        url: `${API_USERS_URL}/${userId}/web-profiles`,
+        url: `${API_USERS_URL}/${id}/web-profiles`,
       }),
       dispatch({
-        url: `${API_USERS_URL}/${userId}`,
+        url: `${API_USERS_URL}/${id}`,
       }),
     ]).then(async ([social, user]) => {
       const bannerUrl = await request
@@ -96,14 +96,14 @@ const api = {
     });
   },
 
-  fetchUserTracks(userId, resource) {
+  fetchUserTracks({ resource }) {
     return dispatch({
       paginate: true,
       url: `${API_BASE_URL}/${resource}`,
     });
   },
 
-  fetchSessionStreamTracks(_, oauthToken) {
+  fetchSessionStreamTracks({ oauthToken }) {
     return dispatch({
       paginate: true,
       url: `${API_SESSION_USER_URL}/activities/tracks/affiliated`,

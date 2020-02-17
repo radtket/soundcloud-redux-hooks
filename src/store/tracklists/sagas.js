@@ -13,7 +13,7 @@ function* loadNextTracks() {
   if (hasNextPageInStore) {
     yield put(updateTracksPagination(currentPage + 1));
   } else if (nextUrl) {
-    yield call(fetchNextTracks, id, nextUrl, oauth);
+    yield call(fetchNextTracks, { id, url: nextUrl, oauthToken: oauth });
   }
 }
 
