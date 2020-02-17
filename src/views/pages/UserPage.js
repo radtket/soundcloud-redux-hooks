@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loadUser, loadUserTracks } from "../../store/users/actions";
 import { getCurrentUser } from "../../store/users/selectors";
@@ -9,11 +9,9 @@ import TrackGrid from "../components/TrackGrid";
 import UserHero from "../components/UserHero";
 import UserNav from "../components/UserNav";
 
-const UserPage = ({
-  match: {
-    params: { id, resource },
-  },
-}) => {
+const UserPage = () => {
+  const { id, resource } = useParams();
+
   const dispatch = useDispatch();
   const { user } = useSelector(state => ({
     user: getCurrentUser(state),
@@ -37,15 +35,6 @@ const UserPage = ({
       </section>
     </>
   );
-};
-
-UserPage.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      resource: PropTypes.string.isRequired,
-    }),
-  }).isRequired,
 };
 
 export default UserPage;
