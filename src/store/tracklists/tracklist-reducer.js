@@ -5,11 +5,10 @@ import Tracklist from "./tracklist";
 
 // Actions
 import { LOAD_SEARCH_RESULTS } from "../search/actions";
-import { LOAD_USER_LIKES, LOAD_USER_TRACKS } from "../users/actions";
+import { LOAD_USER_TRACKS } from "../users/actions";
 import {
   FETCH_TRACKS_FULFILLED,
   FETCH_TRACKS_PENDING,
-  LOAD_FEATURED_TRACKS,
   UPDATE_TRACKS_PAGINATION,
 } from "./actions";
 import { LOAD_GENRE_TRACKS } from "../genre/actions";
@@ -69,9 +68,7 @@ export default (
     case FETCH_TRACKS_PENDING:
       return state.set("isPending", true);
     case LOAD_GENRE_TRACKS:
-    case LOAD_FEATURED_TRACKS:
     case LOAD_SEARCH_RESULTS:
-    case LOAD_USER_LIKES:
     case LOAD_USER_TRACKS:
       return state.isNew
         ? state.set("id", tracklistId)

@@ -22,11 +22,7 @@ const UserPage = ({ match: { params } }) => {
   useEffect(() => {
     const load = ({ id, resource }) => {
       dispatch(loadUser(id));
-      if (resource === "likes") {
-        dispatch(loadUserLikes(id));
-      } else {
-        dispatch(loadUserTracks(id));
-      }
+      dispatch(loadUserTracks(id, resource));
     };
 
     load(params);

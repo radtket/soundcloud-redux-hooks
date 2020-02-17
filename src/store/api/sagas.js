@@ -45,12 +45,6 @@ export const fetchSearchResults = fetchEntities.bind(
   tracklistRequestActions
 );
 
-export const fetchUserLikes = fetchEntities.bind(
-  null,
-  api.fetchUserLikes,
-  tracklistRequestActions
-);
-
 export const fetchUserTracks = fetchEntities.bind(
   null,
   api.fetchUserTracks,

@@ -40,8 +40,8 @@ export const PLAYER_STORAGE_KEY = `${APP_NAME}:player`;
 //* ====================================
 //* TRACKLISTS
 //*------------------------------------
-export const FEATURED_TRACKLIST_ID = "featured";
 export const FEATURED_TRACKLIST_USER_ID = 3926410;
+export const FEATURED_TRACKLIST_ID = "featured";
 
 export const SESSION_TRACKLIST_ID = "session";
 

@@ -8,6 +8,7 @@ import {
   API_USERS_URL,
   CLIENT_ID_PARAM,
   PAGINATION_PARAMS,
+  API_BASE_URL,
 } from "../constants";
 import { isArrayEmpty, cleanTrackJson } from "../../utils/helpers";
 
@@ -95,17 +96,10 @@ const api = {
     });
   },
 
-  fetchUserLikes(userId) {
+  fetchUserTracks(userId, resource) {
     return dispatch({
       paginate: true,
-      url: `${API_USERS_URL}/${userId}/favorites`,
-    });
-  },
-
-  fetchUserTracks(userId) {
-    return dispatch({
-      paginate: true,
-      url: `${API_USERS_URL}/${userId}/tracks`,
+      url: `${API_BASE_URL}/${resource}`,
     });
   },
 

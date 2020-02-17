@@ -19,7 +19,7 @@ const UserNav = ({
               </NavLink>
             </li>
             <li>
-              <NavLink to={`/users/${id}/likes`}>
+              <NavLink to={`/users/${id}/favorites`}>
                 Likes <FormattedInteger value={likesCount} />
               </NavLink>
             </li>

@@ -1,11 +1,10 @@
 import { call, fork, select, takeLatest } from "redux-saga/effects";
-import { fetchUser, fetchUserLikes, fetchUserTracks } from "../api/sagas";
+import { fetchUser, fetchUserTracks } from "../api/sagas";
 import { getTracklistById } from "../tracklists/selectors";
 import { getUserById } from "./selectors";
 
 // Actions
-import { LOAD_FEATURED_TRACKS } from "../tracklists/actions";
-import { LOAD_USER, LOAD_USER_LIKES, LOAD_USER_TRACKS } from "./actions";
+import { LOAD_USER, LOAD_USER_TRACKS } from "./actions";
 
 function* loadUser({ userId }) {
   const user = yield select(getUserById, userId);
@@ -15,17 +14,10 @@ function* loadUser({ userId }) {
   }
 }
 
-function* loadUserLikes({ tracklistId, userId }) {
-  const tracklist = yield select(getTracklistById, tracklistId);
-  if (tracklist && tracklist.isNew) {
-    yield call(fetchUserLikes, tracklistId, userId);
-  }
-}
-
 function* loadUserTracks({ tracklistId, userId }) {
   const tracklist = yield select(getTracklistById, tracklistId);
   if (tracklist && tracklist.isNew) {
-    yield call(fetchUserTracks, tracklistId, userId);
+    yield call(fetchUserTracks, tracklistId, userId, tracklistId);
   }
 }
 
@@ -37,10 +29,6 @@ function* watchLoadUser() {
   yield takeLatest(LOAD_USER, loadUser);
 }
 
-function* watchLoadUserLikes() {
-  yield takeLatest([LOAD_USER_LIKES, LOAD_FEATURED_TRACKS], loadUserLikes);
-}
-
 function* watchLoadUserTracks() {
   yield takeLatest(LOAD_USER_TRACKS, loadUserTracks);
 }
@@ -49,8 +37,4 @@ function* watchLoadUserTracks() {
 //  ROOT
 //-------------------------------------
 
-export default [
-  fork(watchLoadUser),
-  fork(watchLoadUserLikes),
-  fork(watchLoadUserTracks),
-];
+export default [fork(watchLoadUser), fork(watchLoadUserTracks)];
