@@ -10,7 +10,7 @@ export const FETCH_TRACKS_PENDING = "FETCH_TRACKS_PENDING";
 
 export const LOAD_FEATURED_TRACKS = "LOAD_FEATURED_TRACKS";
 export const LOAD_NEXT_TRACKS = "LOAD_NEXT_TRACKS";
-export const UPDATE_PAGINATION = "UPDATE_PAGINATION";
+export const UPDATE_TRACKS_PAGINATION = "UPDATE_TRACKS_PAGINATION";
 
 export const fetchTracksFailed = error => ({
   type: FETCH_TRACKS_FAILED,
@@ -45,8 +45,8 @@ export const loadNextTracks = () => ({
   type: LOAD_NEXT_TRACKS,
 });
 
-export const updatePagination = page => ({
-  type: UPDATE_PAGINATION,
+export const updateTracksPagination = page => ({
+  type: UPDATE_TRACKS_PAGINATION,
   page,
 });
 

@@ -3,7 +3,7 @@ import { fetchNextTracks } from "../api/sagas";
 import { getCurrentTracklist } from "./selectors";
 
 // Actions
-import { LOAD_NEXT_TRACKS, updatePagination } from "./actions";
+import { LOAD_NEXT_TRACKS, updateTracksPagination } from "./actions";
 
 function* loadNextTracks() {
   const { hasNextPageInStore, currentPage, nextUrl, id, oauth } = yield select(
@@ -11,7 +11,7 @@ function* loadNextTracks() {
   );
 
   if (hasNextPageInStore) {
-    yield put(updatePagination(currentPage + 1));
+    yield put(updateTracksPagination(currentPage + 1));
   } else if (nextUrl) {
     yield call(fetchNextTracks, id, nextUrl, oauth);
   }

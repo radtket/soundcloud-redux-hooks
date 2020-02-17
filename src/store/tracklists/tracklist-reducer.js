@@ -10,7 +10,7 @@ import {
   FETCH_TRACKS_FULFILLED,
   FETCH_TRACKS_PENDING,
   LOAD_FEATURED_TRACKS,
-  UPDATE_PAGINATION,
+  UPDATE_TRACKS_PAGINATION,
 } from "./actions";
 import { LOAD_GENRE_TRACKS } from "../genre/actions";
 import { isArrayEmpty } from "../../utils/helpers";
@@ -27,7 +27,7 @@ const mergeTrackIds = ({ trackIds, collection }) => {
   return isArrayEmpty(newIds) ? trackIds : new List(ids.concat(newIds));
 };
 
-const updatePagination = ({ tracklist, page }) => {
+const updateTracksPagination = ({ tracklist, page }) => {
   const pageCount = Math.ceil(tracklist.trackIds.size / TRACKS_PER_PAGE);
   const currentPage = Math.min(page, pageCount);
   const hasNextPageInStore = currentPage < pageCount;
@@ -59,7 +59,7 @@ export default (
             }),
           })
           .merge(
-            updatePagination({
+            updateTracksPagination({
               tracklist,
               page: tracklist.currentPage + 1,
             })
@@ -75,10 +75,10 @@ export default (
     case LOAD_USER_TRACKS:
       return state.isNew
         ? state.set("id", tracklistId)
-        : state.merge(updatePagination({ tracklist: state, page: 1 }));
+        : state.merge(updateTracksPagination({ tracklist: state, page: 1 }));
 
-    case UPDATE_PAGINATION:
-      return state.merge(updatePagination({ tracklist: state, page }));
+    case UPDATE_TRACKS_PAGINATION:
+      return state.merge(updateTracksPagination({ tracklist: state, page }));
 
     default:
       return state;

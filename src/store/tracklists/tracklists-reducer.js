@@ -12,7 +12,7 @@ import {
   FETCH_TRACKS_FULFILLED,
   FETCH_TRACKS_PENDING,
   LOAD_FEATURED_TRACKS,
-  UPDATE_PAGINATION,
+  UPDATE_TRACKS_PAGINATION,
 } from "./actions";
 import { LOAD_GENRE_TRACKS } from "../genre/actions";
 import { LOAD_SESSION_TRACKS } from "../session/actions";
@@ -57,7 +57,7 @@ export default (
         }),
       });
 
-    case UPDATE_PAGINATION:
+    case UPDATE_TRACKS_PAGINATION:
       return state.set(
         state.get("currentTracklistId"),
         tracklistReducer(state.get(state.get("currentTracklistId")), {
