@@ -21,7 +21,7 @@ const initialState = new Map({
   [SESSION_TRACKLIST_ID]: new Tracklist({
     id: SESSION_TRACKLIST_ID,
     isNew: true,
-    oauth: Cookies.get(COOKIE_PATH),
+    oauthToken: Cookies.get(COOKIE_PATH),
   }),
 });
 

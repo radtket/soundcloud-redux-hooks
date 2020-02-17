@@ -46,11 +46,12 @@ const TrackGrid = ({ compactLayout }) => {
   return (
     <>
       <StyledTrackGrid>
-        {tracks.map(track => {
+        {tracks.map((track, idx) => {
           const { id } = track;
           const isSelected = id === selectedTrackId;
+
           return (
-            <div key={id}>
+            <div {...{ key: id + idx }}>
               <TrackCard
                 {...{
                   isCompact: compactLayout || !isMediaLarge,
