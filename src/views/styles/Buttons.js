@@ -205,15 +205,15 @@ export const StyledAuthLink = styled.button`
 
 export const StyledUserHeroPlayButton = styled.button`
   ${size("40px")};
-  display: inline-block;
-  position: relative;
-  outline: 0;
-  vertical-align: middle;
-  transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-    transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   background: #fff;
   border-radius: 50%;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  display: inline-block;
+  outline: 0;
+  position: relative;
+  transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  vertical-align: middle;
 
   svg {
     height: 40px;

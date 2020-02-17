@@ -1,50 +1,21 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createSelector } from "reselect";
-import { audio } from "../../store/player/audio-service";
-import {
-  getCurrentTrackIds,
-  getCurrentTracklist,
-} from "../../store/tracklists/selectors";
-import {
-  getPlayerTrackId,
-  getPlayerIsPlaying,
-} from "../../store/player/selectors";
 import { playSelectedTrack } from "../../store/player/actions";
 import { IconPlay, IconPause } from "./Icons";
 import { StyledUserHeroPlayButton } from "../styles/Buttons";
+import { getCurrentUserHeroPlay } from "../../store/users/selectors";
 
 const UserHeroPlayButton = () => {
   const dispatch = useDispatch();
   const {
     activeTrackID,
-    playingSongIsOwnedByArtist,
     firstTrack,
-    tracklistId,
-    play,
-    pause,
     isPlaying,
-  } = useSelector(
-    createSelector(
-      getCurrentTrackIds,
-      getPlayerTrackId,
-      getCurrentTracklist,
-      getPlayerIsPlaying,
-      (currentTrackIds, currentPlayingTrackID, tracklist, isPlayerPlaying) => {
-        return {
-          ...audio,
-          activeTrackID: currentPlayingTrackID,
-          playingSongIsOwnedByArtist: currentTrackIds.includes(
-            currentPlayingTrackID
-          ),
-          firstTrack: currentTrackIds.first(),
-          tracklistId: tracklist.id,
-          isPlaying: isPlayerPlaying,
-          // isPlaying: selected && player.isPlaying,
-        };
-      }
-    )
-  );
+    pause,
+    play,
+    playingSongIsOwnedByArtist,
+    tracklistId,
+  } = useSelector(getCurrentUserHeroPlay);
 
   if (!firstTrack) {
     return null;
