@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TrackGrid from "../../components/TrackGrid";
-import { SESSION_TRACKLIST_ID } from "../../../store/constants";
+import {
+  SESSION_TRACKLIST_ID,
+  API_SESSION_LIKES_URL,
+} from "../../../store/constants";
 import { loadUserTracks } from "../../../store/users/actions";
 
 const LikesPage = () => {
@@ -15,7 +18,7 @@ const LikesPage = () => {
         loadUserTracks({
           id: SESSION_TRACKLIST_ID,
           resource: "likes",
-          url: `me/favorites`,
+          url: API_SESSION_LIKES_URL,
           oauthToken,
         })
       );

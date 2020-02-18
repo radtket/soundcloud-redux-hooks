@@ -17,6 +17,7 @@ export const API_SESSION_USER_URL = `${API_BASE_URL}/me`;
 export const API_SESSION_FOLLOWINGS_URL = `${API_SESSION_USER_URL}/followings`;
 export const API_SESSION_LIKES_URL = `${API_SESSION_USER_URL}/favorites`;
 export const API_SESSION_PLAYLISTS_URL = `${API_SESSION_USER_URL}/playlists`;
+export const API_SESSION_STREAM_URL = `${API_SESSION_USER_URL}/activities/tracks/affiliated`;
 
 export const CLIENT_ID_PARAM = `client_id=${CLIENT_ID}`;
 
@@ -41,7 +42,7 @@ export const PLAYER_STORAGE_KEY = `${APP_NAME}:player`;
 //* TRACKLISTS
 //*------------------------------------
 export const FEATURED_TRACKLIST_USER_ID = 3926410;
-export const FEATURED_TRACKLIST_ID = "featured";
+export const FEATURED_TRACKLIST_ID = `${FEATURED_TRACKLIST_USER_ID}/featured`;
 
 export const SESSION_TRACKLIST_ID = "session";
 

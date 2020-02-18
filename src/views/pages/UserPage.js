@@ -8,6 +8,7 @@ import { getCurrentUser } from "../../store/users/selectors";
 import TrackGrid from "../components/TrackGrid";
 import UserHero from "../components/UserHero";
 import UserNav from "../components/UserNav";
+import { API_USERS_URL } from "../../store/constants";
 
 const UserPage = () => {
   const { id, resource } = useParams();
@@ -23,7 +24,7 @@ const UserPage = () => {
       loadUserTracks({
         id,
         resource,
-        url: `users/${id}/${resource}`,
+        url: `${API_USERS_URL}/${id}/${resource}`,
       })
     );
   }, [dispatch, id, resource]);
