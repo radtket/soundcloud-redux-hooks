@@ -1,40 +1,35 @@
-import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
-
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import StyledSearchBar from "../styles/SearchBar";
 import { IconSearch } from "./Icons";
 
-// Actions
-import { navigateToSearch } from "../../store/search/actions";
-
 const SearchBar = () => {
-  const input = useRef(null);
-  const searchBar = useRef(null);
-  const [value, setValue] = useState("");
-  const dispatch = useDispatch();
+  const { push } = useHistory();
+  const [query, setQuery] = useState("");
 
   return (
     <StyledSearchBar
-      ref={searchBar}
       noValidate
       onSubmit={e => {
         e.preventDefault();
-        dispatch(navigateToSearch(value.trim()));
-        setValue("");
+        push({
+          pathname: `/search`,
+          search: `?q=${query && query.trim()}`,
+        });
+        setQuery("");
       }}
       role="search"
     >
       <input
-        ref={input}
         autoComplete="off"
         className="search-input"
         maxLength="60"
         onChange={({ target }) => {
-          setValue(target.value);
+          setQuery(target.value);
         }}
         placeholder="Search"
-        {...{ value }}
         type="text"
+        value={query}
       />
       <button className="search-button" type="submit">
         <IconSearch />

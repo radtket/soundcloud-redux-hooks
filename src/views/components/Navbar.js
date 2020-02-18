@@ -19,7 +19,7 @@ const Navbar = () => {
           <NavLink className="nav-item" to="/genres">
             Genres
           </NavLink>
-          <NavLink className="nav-item" to="library">
+          <NavLink className="nav-item" to="/library">
             Library
           </NavLink>
         </nav>
