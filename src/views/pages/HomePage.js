@@ -9,7 +9,13 @@ const HomePage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadUserTracks(FEATURED_TRACKLIST_USER_ID, "favorites"));
+    dispatch(
+      loadUserTracks({
+        id: FEATURED_TRACKLIST_USER_ID,
+        resource: "favorites",
+        url: `users/${FEATURED_TRACKLIST_USER_ID}/favorites`,
+      })
+    );
   }, [dispatch]);
 
   return (

@@ -14,14 +14,12 @@ function* loadUser({ userId }) {
   }
 }
 
-function* loadUserTracks({ tracklistId, userId }) {
+function* loadUserTracks({ tracklistId, url }) {
   const tracklist = yield select(getTracklistById, tracklistId);
-  console.log({ tracklistId, userId });
   if (tracklist && tracklist.isNew) {
     yield call(fetchUserTracks, {
       id: tracklistId,
-      userId,
-      resource: tracklistId,
+      url,
     });
   }
 }

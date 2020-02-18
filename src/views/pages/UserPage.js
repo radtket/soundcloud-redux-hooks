@@ -19,7 +19,13 @@ const UserPage = () => {
 
   useEffect(() => {
     dispatch(loadUser(id));
-    dispatch(loadUserTracks(id, resource));
+    dispatch(
+      loadUserTracks({
+        id,
+        resource,
+        url: `users/${id}/${resource}`,
+      })
+    );
   }, [dispatch, id, resource]);
 
   if (!user) {

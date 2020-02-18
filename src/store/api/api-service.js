@@ -96,10 +96,10 @@ const api = {
     });
   },
 
-  fetchUserTracks({ resource }) {
+  fetchUserTracks({ url }) {
     return dispatch({
       paginate: true,
-      url: `${API_BASE_URL}/${resource}`,
+      url: `${API_BASE_URL}/${url}`,
     });
   },
 
