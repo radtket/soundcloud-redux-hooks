@@ -1,12 +1,5 @@
 import Cookies from "js-cookie";
-import {
-  fork,
-  put,
-  call,
-  takeLatest,
-  select,
-  takeEvery,
-} from "redux-saga/effects";
+import { fork, put, call, takeLatest } from "redux-saga/effects";
 import { COOKIE_PATH } from "../constants";
 import {
   fetchSessionFollowingsSuccess,
@@ -16,11 +9,8 @@ import {
   FETCH_OAUTH_TOKEN,
   LOGIN_SUCCESS,
   TOGGLE_LIKE,
-  LOAD_SESSION_TRACKS,
 } from "./actions";
 import api from "../api/api-service";
-import { fetchSessionStreamTracks } from "../api/sagas";
-import { getTracklistById } from "../tracklists/selectors";
 
 function* login() {
   const oauthToken = yield call(api.loginToSoundCloud);
@@ -46,13 +36,6 @@ function* toggleLike({ id, liked, oauthToken }) {
   console.log({ error });
 }
 
-function* loadSessionTracks({ tracklistId, oauthToken }) {
-  const tracklist = yield select(getTracklistById, tracklistId);
-  if (tracklist && tracklist.isNew) {
-    yield call(fetchSessionStreamTracks, { id: tracklistId, oauthToken });
-  }
-}
-
 //= ====================================
 //  WATCHERS
 //-------------------------------------
@@ -69,13 +52,8 @@ function* watchToggleLike() {
   yield takeLatest(TOGGLE_LIKE, toggleLike);
 }
 
-function* watchLoadSessionTracks() {
-  yield takeEvery(LOAD_SESSION_TRACKS, loadSessionTracks);
-}
-
 export default [
   fork(watchLoadOAuthToken),
   fork(watchLogin),
   fork(watchToggleLike),
-  fork(watchLoadSessionTracks),
 ];

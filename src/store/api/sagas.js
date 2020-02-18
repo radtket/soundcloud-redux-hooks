@@ -25,12 +25,6 @@ function* fetchEntities(
   }
 }
 
-export const fetchSessionStreamTracks = fetchEntities.bind(
-  null,
-  api.fetchSessionStreamTracks,
-  tracklistRequestActions
-);
-
 export const fetchGenreResults = fetchEntities.bind(
   null,
   api.fetchGenreResults,

@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { COOKIE_PATH, SESSION_TRACKLIST_ID } from "../constants";
+import { COOKIE_PATH } from "../constants";
 
 export const FETCH_OAUTH_TOKEN = "FETCH_OAUTH_TOKEN";
 export const FETCH_SESSION_FOLLOWINGS_SUCCESS =
@@ -10,16 +10,6 @@ export const FETCH_SESSION_USER_SUCCESS = "FETCH_SESSION_USER_SUCCESS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 
 export const TOGGLE_LIKE = "TOGGLE_LIKE";
-
-export const LOAD_SESSION_TRACKS = "LOAD_SESSION_TRACKS";
-
-export const loadSessionTracks = ({ oauthToken }) => {
-  return {
-    type: LOAD_SESSION_TRACKS,
-    oauthToken,
-    tracklistId: SESSION_TRACKLIST_ID,
-  };
-};
 
 export const login = () => {
   return {

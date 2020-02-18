@@ -48,7 +48,10 @@ const dispatch = options => {
 
 const api = {
   fetch({ url, oauthToken }) {
-    return dispatch({ url, oauthToken }).then(cleanTrackJson);
+    return dispatch({
+      url,
+      oauthToken: oauthToken || "3-241740-3926410-87GJNQeyaDZj1Tc6",
+    }).then(cleanTrackJson);
   },
 
   fetchSearchResults({ query }) {
@@ -96,17 +99,10 @@ const api = {
     });
   },
 
-  fetchUserTracks({ url }) {
+  fetchUserTracks({ url, oauthToken }) {
     return dispatch({
       paginate: true,
       url: `${API_BASE_URL}/${url}`,
-    });
-  },
-
-  fetchSessionStreamTracks({ oauthToken }) {
-    return dispatch({
-      paginate: true,
-      url: `${API_SESSION_USER_URL}/activities/tracks/affiliated`,
       oauthToken: oauthToken || "3-241740-3926410-87GJNQeyaDZj1Tc6",
     }).then(cleanTrackJson);
   },

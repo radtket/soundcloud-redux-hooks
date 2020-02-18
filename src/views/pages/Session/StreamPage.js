@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadSessionTracks } from "../../../store/session/actions";
 import TrackGrid from "../../components/TrackGrid";
+import { SESSION_TRACKLIST_ID } from "../../../store/constants";
+import { loadUserTracks } from "../../../store/users/actions";
 
 const StreamPage = () => {
   const dispatch = useDispatch();
@@ -9,7 +10,15 @@ const StreamPage = () => {
   const oauthToken = useSelector(state => state.session.oauthToken);
 
   useEffect(() => {
-    oauthToken && dispatch(loadSessionTracks({ oauthToken }));
+    oauthToken &&
+      dispatch(
+        loadUserTracks({
+          id: SESSION_TRACKLIST_ID,
+          resource: "stream",
+          url: `me/activities/tracks/affiliated`,
+          oauthToken,
+        })
+      );
   }, [dispatch, oauthToken]);
 
   return (

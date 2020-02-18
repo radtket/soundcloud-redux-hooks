@@ -14,12 +14,13 @@ function* loadUser({ userId }) {
   }
 }
 
-function* loadUserTracks({ tracklistId, url }) {
+function* loadUserTracks({ tracklistId, url, oauthToken }) {
   const tracklist = yield select(getTracklistById, tracklistId);
   if (tracklist && tracklist.isNew) {
     yield call(fetchUserTracks, {
       id: tracklistId,
       url,
+      oauthToken,
     });
   }
 }
