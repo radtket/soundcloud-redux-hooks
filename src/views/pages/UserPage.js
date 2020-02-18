@@ -22,8 +22,7 @@ const UserPage = () => {
     dispatch(loadUser(id));
     dispatch(
       loadUserTracks({
-        id,
-        resource,
+        id: `${id}/${resource}`,
         url: `${API_USERS_URL}/${id}/${resource}`,
       })
     );

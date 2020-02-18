@@ -2,10 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import TrackGrid from "../components/TrackGrid";
 import Hero from "../components/Hero";
-import {
-  FEATURED_TRACKLIST_USER_ID,
-  API_USERS_URL,
-} from "../../store/constants";
+import { API_USERS_URL, FEATURED_TRACKLIST_ID } from "../../store/constants";
 import { loadUserTracks } from "../../store/users/actions";
 
 const HomePage = () => {
@@ -14,9 +11,8 @@ const HomePage = () => {
   useEffect(() => {
     dispatch(
       loadUserTracks({
-        id: FEATURED_TRACKLIST_USER_ID,
-        resource: "favorites",
-        url: `${API_USERS_URL}/${FEATURED_TRACKLIST_USER_ID}/favorites`,
+        id: FEATURED_TRACKLIST_ID,
+        url: `${API_USERS_URL}/${FEATURED_TRACKLIST_ID}`,
       })
     );
   }, [dispatch]);

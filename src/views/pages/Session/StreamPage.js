@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TrackGrid from "../../components/TrackGrid";
 import {
-  SESSION_TRACKLIST_ID,
   API_SESSION_STREAM_URL,
+  SESSION_STREAM_TRACKLIST_ID,
 } from "../../../store/constants";
 import { loadUserTracks } from "../../../store/users/actions";
 
@@ -16,8 +16,7 @@ const StreamPage = () => {
     oauthToken &&
       dispatch(
         loadUserTracks({
-          id: SESSION_TRACKLIST_ID,
-          resource: "stream",
+          id: SESSION_STREAM_TRACKLIST_ID,
           url: API_SESSION_STREAM_URL,
           oauthToken,
         })

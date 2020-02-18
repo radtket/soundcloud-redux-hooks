@@ -27,10 +27,10 @@ export const loadUser = userId => ({
   userId: parseInt(userId, 10),
 });
 
-export const loadUserTracks = ({ id, resource, url, oauthToken }) => {
+export const loadUserTracks = ({ id, url, oauthToken }) => {
   return {
     type: LOAD_USER_TRACKS,
-    tracklistId: `${id}/${resource}`,
+    tracklistId: id,
     url,
     oauthToken,
   };
