@@ -12,6 +12,8 @@ export const API_USERS_URL = `${API_BASE_URL}/users`;
 
 export const CLIENT_ID = process.env.REACT_APP_SOUNDCLOUD_CLIENT_ID;
 
+export const FEATURED_USER_ID = 3926410;
+
 //*  Session *//
 export const API_SESSION_USER_URL = `${API_BASE_URL}/me`;
 export const API_SESSION_FOLLOWINGS_URL = `${API_SESSION_USER_URL}/followings`;
@@ -41,8 +43,7 @@ export const PLAYER_STORAGE_KEY = `${APP_NAME}:player`;
 //* ====================================
 //* TRACKLISTS
 //*------------------------------------
-export const FEATURED_TRACKLIST_USER_ID = 3926410;
-export const FEATURED_TRACKLIST_ID = `${FEATURED_TRACKLIST_USER_ID}/favorites`;
+export const FEATURED_TRACKLIST_ID = `${FEATURED_USER_ID}/favorites`;
 
 export const SESSION_TRACKLIST_ID = "session";
 export const SESSION_STREAM_TRACKLIST_ID = `${SESSION_TRACKLIST_ID}/stream`;
@@ -78,3 +79,10 @@ export const TIMES = [
   { key: "30", label: "30 days" },
   { key: "90", label: "90 days" },
 ];
+
+//* ====================================
+//* PAGINATION
+//*------------------------------------
+
+export const FOLLOWINGS_PER_PAGE = 15;
+export const FEATURED_FOLLOWINGLIST_ID = `${FEATURED_USER_ID}/followings`;

@@ -7,6 +7,7 @@ import searchSagas from "./search/sagas";
 import sessionSagas from "./session/sagas";
 import tracklistSagas from "./tracklists/sagas";
 import userSagas from "./users/sagas";
+import followingsSagas from "./followings/sagas";
 
 export default function* sagas() {
   yield all([
@@ -17,5 +18,6 @@ export default function* sagas() {
     ...sessionSagas,
     ...tracklistSagas,
     ...userSagas,
+    ...followingsSagas,
   ]);
 }

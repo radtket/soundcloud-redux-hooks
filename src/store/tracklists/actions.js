@@ -14,11 +14,10 @@ export const fetchTracksPending = ({ id }) => {
 
 export const fetchTracksFulfilled = ({
   id,
-  data: { collection, nextHref, ...rest },
+  data: { collection, nextHref },
 }) => {
   return {
     type: FETCH_TRACKS_FULFILLED,
-    ...rest,
     collection,
     nextHref,
     tracklistId: id,

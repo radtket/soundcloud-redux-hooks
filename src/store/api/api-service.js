@@ -106,6 +106,15 @@ const api = {
     }).then(cleanTrackJson);
   },
 
+  fetchUserFollowings({ url, oauthToken }) {
+    console.log({ url });
+    return dispatch({
+      paginate: true,
+      url,
+      oauthToken: oauthToken || "3-241740-3926410-87GJNQeyaDZj1Tc6",
+    });
+  },
+
   loginToSoundCloud: () => {
     SC.initialize({
       client_id: process.env.REACT_APP_AUTH_CLIENT_ID,

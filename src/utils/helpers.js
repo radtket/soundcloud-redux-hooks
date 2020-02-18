@@ -13,7 +13,6 @@ export const cleanTrackJson = json => {
     collection: (json.collection || json)
       .map(song => song.origin || song)
       .filter(({ kind, streamable }) => kind === "track" && streamable),
-    futureHref: json.futureHref || null,
     nextHref: json.nextHref || null,
   };
 };
