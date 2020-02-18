@@ -19,28 +19,47 @@ export const User = new Record({
   username: null,
 });
 
-export const createUser = (data, profile = false) => {
+export const createUser = (
+  {
+    avatarUrl,
+    bannerUrl,
+    city,
+    country,
+    description,
+    followersCount,
+    followingsCount,
+    fullName,
+    id,
+    permalinkUrl,
+    playlistCount,
+    publicFavoritesCount,
+    social,
+    trackCount,
+    username,
+  },
+  profile = false
+) => {
   let attrs = {
-    avatarUrl: data.avatar_url,
-    id: data.id,
-    permalinkUrl: data.permalink_url,
-    username: data.username,
+    avatarUrl,
+    id,
+    permalinkUrl,
+    username,
   };
 
   if (profile) {
     attrs = Object.assign(attrs, {
-      bannerUrl: data.bannerUrl,
-      city: data.city,
-      country: data.country,
-      description: data.description,
-      followersCount: data.followers_count,
-      followingsCount: data.followings_count,
-      fullName: data.full_name,
-      likesCount: data.public_favorites_count,
-      playlistCount: data.playlist_count,
+      bannerUrl,
+      city,
+      country,
+      description,
+      followersCount,
+      followingsCount,
+      fullName,
+      likesCount: publicFavoritesCount,
+      playlistCount,
       profile: true,
-      social: data.social,
-      trackCount: data.track_count,
+      social,
+      trackCount,
     });
   }
 

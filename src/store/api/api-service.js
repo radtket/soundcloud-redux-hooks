@@ -1,4 +1,5 @@
 import SC from "soundcloud";
+import camelize from "camelize";
 import request from "superagent";
 import {
   API_SESSION_FOLLOWINGS_URL,
@@ -42,7 +43,7 @@ const requestUrl = ({ paginate, query, url, oauthToken }) => {
 const dispatch = options => {
   return request[options.method || "get"](requestUrl(options))
     .set("Accept", "application/json")
-    .then(response => response.body);
+    .then(response => camelize(response.body));
 };
 
 const api = {
@@ -79,21 +80,20 @@ const api = {
       }),
     ]).then(async ([social, user]) => {
       const bannerUrl = await request
-        .get(`https://cors-anywhere.herokuapp.com/${user.permalink_url}`)
-        .then(res => {
-          const html = res.text.split(`"visual_url":"`);
+        .get(`https://cors-anywhere.herokuapp.com/${user.permalinkUrl}`)
+        .then(({ text }) => {
+          const html = text.split(`"visual_url":"`);
           const [image] = html && html[1].split(`"`);
           return image;
         })
         .catch(e => {
-          console.log({ e });
           return null;
         });
 
       return {
         ...user,
-        social,
-        bannerUrl,
+        social: social || [],
+        bannerUrl: bannerUrl || null,
       };
     });
   },

@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { List } from "immutable";
 import { TRACKS_PER_PAGE } from "../constants";
 import Tracklist from "./tracklist";
@@ -42,7 +41,7 @@ const updateTracksPagination = ({ tracklist, page }) => {
 
 export default (
   state = new Tracklist(),
-  { collection, next_href, tracklistId, page, type }
+  { collection, nextHref, tracklistId, page, type }
 ) => {
   switch (type) {
     case FETCH_TRACKS_FULFILLED:
@@ -51,7 +50,7 @@ export default (
           .merge({
             isNew: false,
             isPending: false,
-            nextUrl: next_href || null,
+            nextUrl: nextHref || null,
             trackIds: mergeTrackIds({
               trackIds: tracklist.trackIds,
               collection,

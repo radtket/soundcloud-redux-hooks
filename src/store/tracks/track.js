@@ -1,9 +1,9 @@
 import { Record } from "immutable";
 import {
   formatTrackTitle,
-  streamUrl,
+  formatStreamUrl,
   trackImageUrl,
-  waveformUrl,
+  formatWaveformUrl,
 } from "./utils";
 
 export const Track = new Record({
@@ -23,21 +23,36 @@ export const Track = new Record({
   waveformUrl: null,
 });
 
-export const createTrack = data => {
+export const createTrack = ({
+  artworkUrl,
+  duration,
+  favoritingsCount,
+  id,
+  likesCount,
+  permalinkUrl,
+  playbackCount,
+  streamable,
+  streamUrl,
+  title,
+  user,
+  userFavorite,
+  userId,
+  waveformUrl,
+}) => {
   return new Track({
-    artworkUrl: trackImageUrl(data),
-    duration: data.duration,
-    id: data.id,
-    liked: !!data.user_favorite,
-    likesCount: data.favoritings_count || data.likes_count || 0,
-    permalinkUrl: data.permalink_url,
-    playbackCount: data.playback_count || 0,
-    streamable: data.streamable,
-    streamUrl: data.streamable ? streamUrl(data.stream_url) : null,
-    title: formatTrackTitle(data.title),
-    userId: data.user.id,
-    username: data.user.username,
-    userPermalinkUrl: data.user.permalink_url,
-    waveformUrl: waveformUrl(data.waveform_url),
+    artworkUrl: trackImageUrl({ artworkUrl, user }),
+    duration,
+    id,
+    liked: !!userFavorite,
+    likesCount: favoritingsCount || likesCount || 0,
+    permalinkUrl,
+    playbackCount: playbackCount || 0,
+    streamable,
+    streamUrl: streamable ? formatStreamUrl(streamUrl) : null,
+    title: formatTrackTitle(title),
+    userId: userId || user.id,
+    username: user.username,
+    userPermalinkUrl: user.permalinkUrl,
+    waveformUrl: formatWaveformUrl(waveformUrl),
   });
 };

@@ -18,6 +18,7 @@ function* fetchEntities(
       query,
       url,
     });
+
     yield put(fulfilled({ id, data }));
   } catch (error) {
     yield put(failed(error));

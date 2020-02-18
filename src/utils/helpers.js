@@ -1,3 +1,4 @@
+import camelize from "camelize";
 import { HTML_ELEMENTS } from "./constants";
 
 export const isArrayEmpty = arrayArg => {
@@ -12,35 +13,13 @@ export const cleanTrackJson = json => {
     collection: (json.collection || json)
       .map(song => song.origin || song)
       .filter(({ kind, streamable }) => kind === "track" && streamable),
-    future_href: json.future_href || null,
-    next_href: json.next_href || null,
+    futureHref: json.futureHref || null,
+    nextHref: json.nextHref || null,
   };
 };
 
-const hyphenToCamelcase = str => {
-  let result = "";
-  let upper = false;
-  for (let i = 0; i < str.length; i += 1) {
-    let c = str[i];
-
-    if (c === "-") {
-      upper = true;
-      // continue;
-    }
-
-    if (upper) {
-      c = c.toUpperCase();
-      upper = false;
-    }
-
-    result += c;
-  }
-
-  return result;
-};
-
 const convertKey = key => {
-  let res = hyphenToCamelcase(key);
+  let res = camelize(key);
 
   if (key.indexOf("-ms-") === 0) {
     res = res[0].toLowerCase() + res.slice(1);

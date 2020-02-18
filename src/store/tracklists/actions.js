@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 export const FETCH_TRACKS_FAILED = "FETCH_TRACKS_FAILED";
 export const FETCH_TRACKS_FULFILLED = "FETCH_TRACKS_FULFILLED";
 export const FETCH_TRACKS_PENDING = "FETCH_TRACKS_PENDING";
@@ -15,13 +14,13 @@ export const fetchTracksPending = ({ id }) => {
 
 export const fetchTracksFulfilled = ({
   id,
-  data: { collection, next_href, ...rest },
+  data: { collection, nextHref, ...rest },
 }) => {
   return {
     type: FETCH_TRACKS_FULFILLED,
     ...rest,
     collection,
-    next_href,
+    nextHref,
     tracklistId: id,
   };
 };

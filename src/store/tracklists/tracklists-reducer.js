@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { Map } from "immutable";
 import Cookies from "js-cookie";
 import { FEATURED_TRACKLIST_ID, COOKIE_PATH } from "../constants";
@@ -26,7 +25,7 @@ const initialState = new Map({
 
 export default (
   state = initialState,
-  { page, type, tracklistId, collection, next_href }
+  { page, type, tracklistId, collection, nextHref }
 ) => {
   switch (type) {
     case FETCH_TRACKS_FULFILLED:
@@ -35,7 +34,7 @@ export default (
         tracklistId,
         tracklistReducer(state.get(tracklistId), {
           collection,
-          next_href,
+          nextHref,
           tracklistId,
           type,
         })

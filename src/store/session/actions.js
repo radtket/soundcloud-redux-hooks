@@ -24,11 +24,10 @@ export const loginSuccess = oauthToken => {
   };
 };
 
-// eslint-disable-next-line camelcase
-export const fetchSessionUserSuccess = ({ id, avatar_url, username }) => ({
+export const fetchSessionUserSuccess = ({ id, avatarUrl, username }) => ({
   type: FETCH_SESSION_USER_SUCCESS,
   id,
-  avatarUrl: avatar_url,
+  avatarUrl,
   username,
 });
 

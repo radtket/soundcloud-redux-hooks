@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import {
   CLIENT_ID_PARAM,
   IMAGE_DEFAULT_SIZE,
@@ -16,17 +15,17 @@ export const formatTrackTitle = title => {
   return title.replace(/-/g, EN_DASH);
 };
 
-export const streamUrl = url => `${url}?${CLIENT_ID_PARAM}`;
+export const formatStreamUrl = url => `${url}?${CLIENT_ID_PARAM}`;
 
 export const trackImageUrl = (
-  { artwork_url, user },
+  { artworkUrl, user },
   size = IMAGE_XLARGE_SIZE
 ) => {
-  const image = artwork_url || user.avatar_url;
+  const image = artworkUrl || user.avatarUrl;
   return image ? image.replace(IMAGE_DEFAULT_SIZE, size) : "";
 };
 
-export const waveformUrl = url => {
+export const formatWaveformUrl = url => {
   if (url.includes(".json")) {
     return url;
   }
