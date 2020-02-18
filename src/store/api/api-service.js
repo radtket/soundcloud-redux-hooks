@@ -8,7 +8,6 @@ import {
   API_USERS_URL,
   CLIENT_ID_PARAM,
   PAGINATION_PARAMS,
-  API_BASE_URL,
 } from "../constants";
 import { isArrayEmpty, cleanTrackJson } from "../../utils/helpers";
 

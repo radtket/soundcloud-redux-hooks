@@ -8,7 +8,7 @@ import { userRequestActions } from "../users/actions";
 function* fetchEntities(
   apiFunction,
   { pending, fulfilled, failed },
-  { id, oauthToken, query, url, resource }
+  { id, oauthToken, query, url }
 ) {
   try {
     yield put(pending({ id }));
@@ -16,7 +16,6 @@ function* fetchEntities(
       id,
       oauthToken,
       query,
-      resource,
       url,
     });
     yield put(fulfilled({ id, data }));
