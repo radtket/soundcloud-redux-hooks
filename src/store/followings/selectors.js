@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
-import { getFollowings } from "../following/selectors";
 import getBrowserMedia from "../browser/selectors";
 import { FOLLOWINGS_PER_PAGE } from "../constants";
+import { getUsers } from "../users/selectors";
 
 export const getFollowingslist = state => state.followings;
 
@@ -30,12 +30,11 @@ export const getCurrentTrackIds = createSelector(
 export const getTracksForCurrentTracklist = createSelector(
   getCurrentPage,
   getCurrentTrackIds,
-  getFollowings,
-  (currentPage, followingsIds, tracks) => {
-    console.log({ currentPage, followingsIds, tracks });
+  getUsers,
+  (currentPage, followingsIds, users) => {
     return followingsIds
       .slice(0, currentPage * FOLLOWINGS_PER_PAGE)
-      .map(id => tracks.get(id));
+      .map(id => users.get(id));
   }
 );
 

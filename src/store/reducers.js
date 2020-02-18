@@ -12,7 +12,6 @@ import tracklists from "./tracklists/tracklists-reducer";
 import tracks from "./tracks/reducer";
 import users from "./users/reducer";
 import followings from "./followings/followings-reducer";
-import following from "./following/reducer";
 
 const createRootReducer = hist =>
   combineReducers({
@@ -27,7 +26,6 @@ const createRootReducer = hist =>
     tracks,
     users,
     followings,
-    following,
   });
 
 export default createRootReducer;

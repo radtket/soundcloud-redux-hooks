@@ -4,6 +4,7 @@ import { createUser } from "./user";
 // Actions
 import { FETCH_TRACKS_FULFILLED } from "../tracklists/actions";
 import { LOAD_USER, FETCH_USER_FULFILLED } from "./actions";
+import { FETCH_FOLLOWINGS_FULFILLED } from "../followings/actions";
 
 const initialState = new Map({
   currentUserId: null,
@@ -11,6 +12,13 @@ const initialState = new Map({
 
 export default (state = initialState, { collection, type, userId, user }) => {
   switch (type) {
+    case FETCH_FOLLOWINGS_FULFILLED:
+      return state.withMutations(users => {
+        collection.forEach(userData => {
+          users.set(userData.id, createUser(userData));
+        });
+      });
+
     case FETCH_TRACKS_FULFILLED:
       return state.withMutations(users => {
         collection.forEach(trackData => {

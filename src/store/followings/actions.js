@@ -8,7 +8,6 @@ export const LOAD_NEXT_FOLLOWINGS = "LOAD_NEXT_FOLLOWINGS";
 export const UPDATE_FOLLOWINGS_PAGINATION = "UPDATE_FOLLOWINGS_PAGINATION";
 
 export const fetchFollowingsPending = ({ id }) => {
-  console.log({ id });
   return {
     type: FETCH_FOLLOWINGS_PENDING,
     followingsListId: id,
