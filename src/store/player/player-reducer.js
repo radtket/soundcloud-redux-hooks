@@ -1,5 +1,5 @@
 import { Record } from "immutable";
-import { PLAYER_INITIAL_VOLUME, SESSION_TRACKLIST_ID } from "../constants";
+import { PLAYER_INITIAL_VOLUME, FEATURED_TRACKLIST_ID } from "../constants";
 
 // Actions
 import {
@@ -15,7 +15,7 @@ const PlayerState = new Record({
   isPlaying: false,
   isRepeat: false,
   trackId: null,
-  tracklistId: SESSION_TRACKLIST_ID,
+  tracklistId: FEATURED_TRACKLIST_ID,
   volume: PLAYER_INITIAL_VOLUME,
 });
 

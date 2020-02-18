@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { Map } from "immutable";
 import Cookies from "js-cookie";
-import { SESSION_TRACKLIST_ID, COOKIE_PATH } from "../constants";
+import { FEATURED_TRACKLIST_ID, COOKIE_PATH } from "../constants";
 import Tracklist from "./tracklist";
 import tracklistReducer from "./tracklist-reducer";
 
@@ -16,9 +16,9 @@ import {
 import { LOAD_GENRE_TRACKS } from "../genre/actions";
 
 const initialState = new Map({
-  currentTracklistId: SESSION_TRACKLIST_ID,
-  [SESSION_TRACKLIST_ID]: new Tracklist({
-    id: SESSION_TRACKLIST_ID,
+  currentTracklistId: FEATURED_TRACKLIST_ID,
+  [FEATURED_TRACKLIST_ID]: new Tracklist({
+    id: FEATURED_TRACKLIST_ID,
     isNew: true,
     oauthToken: Cookies.get(COOKIE_PATH),
   }),
