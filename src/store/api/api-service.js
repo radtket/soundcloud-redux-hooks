@@ -86,7 +86,8 @@ const api = {
           const [image] = html && html[1].split(`"`);
           return image;
         })
-        .catch(e => {
+        .catch(error => {
+          console.log({ error });
           return null;
         });
 

@@ -4,10 +4,7 @@ import { getPlayerTimes } from "../../store/player/selectors";
 import FormattedTime from "./FormattedTime";
 
 const AudioCurrentTime = () => {
-  const { currentTime } = useSelector(state => {
-    return getPlayerTimes(state);
-  });
-
+  const { currentTime } = useSelector(getPlayerTimes);
   return <FormattedTime value={currentTime} />;
 };
 

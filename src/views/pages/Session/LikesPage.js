@@ -6,11 +6,11 @@ import {
   SESSION_LIKES_TRACKLIST_ID,
 } from "../../../store/constants";
 import { loadUserTracks } from "../../../store/users/actions";
+import { getOauthToken } from "../../../store/session/selectors";
 
 const LikesPage = () => {
   const dispatch = useDispatch();
-
-  const oauthToken = useSelector(state => state.session.oauthToken);
+  const oauthToken = useSelector(getOauthToken);
 
   useEffect(() => {
     oauthToken &&

@@ -3,6 +3,7 @@ import { TRACKS_PER_PAGE } from "../constants";
 import { getTracks } from "../tracks/selectors";
 import getBrowserMedia from "../browser/selectors";
 import { audio } from "../player/audio-service";
+import { getPlayerIsPlaying, getPlayerTrackId } from "../player/selectors";
 
 export const getTracklists = state => state.tracklists;
 
@@ -41,8 +42,8 @@ export const getTracksForCurrentTracklist = createSelector(
 
 export const getTracklistState = createSelector(
   getBrowserMedia,
-  state => state.player.isPlaying,
-  state => state.player.trackId,
+  getPlayerIsPlaying,
+  getPlayerTrackId,
   getCurrentTracklist,
   getTracksForCurrentTracklist,
   (

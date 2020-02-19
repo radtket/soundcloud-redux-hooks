@@ -4,16 +4,11 @@ import PropTypes from "prop-types";
 import { StyledUserAccountButton, StyledAuthLink } from "../styles/Buttons";
 import { IconUser } from "./Icons";
 import { login } from "../../store/session/actions";
+import { getSession } from "../../store/session/selectors";
 
 const UserAccountButton = () => {
   const dispatch = useDispatch();
-  const { avatarUrl, username, id } = useSelector(({ session }) => {
-    return {
-      id: session.id,
-      username: session.username,
-      avatarUrl: session.avatarUrl,
-    };
-  });
+  const { avatarUrl, username, id } = useSelector(getSession);
 
   if (!id) {
     return (

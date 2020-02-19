@@ -6,11 +6,11 @@ import {
   SESSION_STREAM_TRACKLIST_ID,
 } from "../../../store/constants";
 import { loadUserTracks } from "../../../store/users/actions";
+import { getOauthToken } from "../../../store/session/selectors";
 
 const StreamPage = () => {
   const dispatch = useDispatch();
-
-  const oauthToken = useSelector(state => state.session.oauthToken);
+  const oauthToken = useSelector(getOauthToken);
 
   useEffect(() => {
     oauthToken &&
