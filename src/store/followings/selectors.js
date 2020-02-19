@@ -32,9 +32,8 @@ export const getTracksForCurrentTracklist = createSelector(
   getCurrentTrackIds,
   getUsers,
   (currentPage, followingsIds, users) => {
-    return followingsIds
-      .slice(0, currentPage * FOLLOWINGS_PER_PAGE)
-      .map(id => users.get(id));
+    const followingsOnPage = currentPage * FOLLOWINGS_PER_PAGE;
+    return followingsIds.slice(0, followingsOnPage).map(id => users.get(id));
   }
 );
 

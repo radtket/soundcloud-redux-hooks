@@ -91,7 +91,7 @@ const StyledTrackCard = styled.figure`
   }
 
   figcaption {
-    margin: 12px 0;
+    padding: 12px 0;
 
     h6 {
       font-size: 16px;

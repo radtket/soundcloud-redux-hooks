@@ -1,4 +1,4 @@
-import { List, Record, Map } from "immutable";
+import { List, Record } from "immutable";
 import Cookies from "js-cookie";
 
 import { COOKIE_PATH } from "../constants";

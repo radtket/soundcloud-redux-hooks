@@ -1,4 +1,5 @@
 import { Record } from "immutable";
+import { trackImageUrl } from "../tracks/utils";
 
 export const User = new Record({
   avatarUrl: null,
@@ -40,7 +41,8 @@ export const createUser = (
   profile = false
 ) => {
   let attrs = {
-    avatarUrl,
+    avatarUrl: trackImageUrl({ avatarUrl }),
+    followersCount,
     id,
     permalinkUrl,
     username,
@@ -52,7 +54,6 @@ export const createUser = (
       city,
       country,
       description,
-      followersCount,
       followingsCount,
       fullName,
       likesCount: publicFavoritesCount,

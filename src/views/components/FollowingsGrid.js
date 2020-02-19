@@ -9,9 +9,11 @@ import StyledTrackGrid from "../styles/TrackGrid";
 import LoadingIndicator from "./LoadingIndicator";
 import { getFollowingListState } from "../../store/followings/selectors";
 import { loadNextFollowings } from "../../store/followings/actions";
+import ArtistCard from "./ArtistCard";
 
 const FollowingsGrid = () => {
   const dispatch = useDispatch();
+
   const { displayLoadingIndicator, pauseInfiniteScroll, tracks } = useSelector(
     getFollowingListState
   );
@@ -34,10 +36,14 @@ const FollowingsGrid = () => {
   return (
     <>
       <StyledTrackGrid>
-        {tracks.map((track, key) => {
+        {tracks.map(user => {
           return (
-            <div {...{ key: track.username }}>
-              <h1>{track.username}</h1>
+            <div key={user.id}>
+              <ArtistCard
+                {...{
+                  user,
+                }}
+              />
             </div>
           );
         })}

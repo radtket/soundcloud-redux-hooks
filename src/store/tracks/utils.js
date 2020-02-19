@@ -18,10 +18,10 @@ export const formatTrackTitle = title => {
 export const formatStreamUrl = url => `${url}?${CLIENT_ID_PARAM}`;
 
 export const trackImageUrl = (
-  { artworkUrl, user },
+  { artworkUrl, avatarUrl, user },
   size = IMAGE_XLARGE_SIZE
 ) => {
-  const image = artworkUrl || user.avatarUrl;
+  const image = artworkUrl || avatarUrl || user.avatarUrl;
   return image ? image.replace(IMAGE_DEFAULT_SIZE, size) : "";
 };
 

@@ -83,7 +83,6 @@ export default createGlobalStyle`
     border: 0;
     cursor: pointer;
     display: inline-block;
-    font-family: 'Maisonneue Book';
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     font-weight: 400;
