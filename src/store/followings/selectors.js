@@ -43,7 +43,6 @@ export const getFollowingListState = createSelector(
   getCurrenttFollowingslist,
   getTracksForCurrentTracklist,
   (media, { isPending, hasNextPage, id }, tracks) => {
-    console.log({ tracks });
     return {
       displayLoadingIndicator: isPending || hasNextPage,
       isMediaLarge: !!media.large,

@@ -51,7 +51,7 @@ const api = {
     return dispatch({
       url,
       oauthToken: oauthToken || "3-241740-3926410-87GJNQeyaDZj1Tc6",
-    }).then(cleanTrackJson);
+    });
   },
 
   fetchSearchResults({ query }) {

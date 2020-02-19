@@ -26,7 +26,6 @@ function* loadNextFollowings() {
 }
 
 function* loadUserTracks({ followingsListId, url, oauthToken }) {
-  console.log({ followingsListId, url, oauthToken });
   const tracklist = yield select(gettFollowingslistById, followingsListId);
   if (tracklist && tracklist.isNew) {
     yield call(fetchUserFollowings, {

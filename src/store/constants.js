@@ -23,8 +23,8 @@ export const API_SESSION_STREAM_URL = `${API_SESSION_USER_URL}/activities/tracks
 
 export const CLIENT_ID_PARAM = `client_id=${CLIENT_ID}`;
 
-export const PAGINATION_LIMIT = 60;
-export const PAGINATION_PARAMS = `limit=${PAGINATION_LIMIT}&linked_partitioning=1`;
+export const PAGINATION_LIMIT = 50;
+export const PAGINATION_PARAMS = `linked_partitioning=1&limit=${PAGINATION_LIMIT}`;
 
 //* ====================================
 //* IMAGES

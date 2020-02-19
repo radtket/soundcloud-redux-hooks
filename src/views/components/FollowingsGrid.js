@@ -1,13 +1,8 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 
 // Browser
 import infiniteScroll from "../../store/browser/infinite-scroll";
-
-// Tracklist
-import { getTracklistState } from "../../store/tracklists/selectors";
-import { loadNextTracks } from "../../store/tracklists/actions";
 
 // Components
 import StyledTrackGrid from "../styles/TrackGrid";
@@ -17,13 +12,9 @@ import { loadNextFollowings } from "../../store/followings/actions";
 
 const FollowingsGrid = () => {
   const dispatch = useDispatch();
-  const {
-    displayLoadingIndicator,
-    isMediaLarge,
-    pauseInfiniteScroll,
-    followingsListId,
-    tracks,
-  } = useSelector(getFollowingListState);
+  const { displayLoadingIndicator, pauseInfiniteScroll, tracks } = useSelector(
+    getFollowingListState
+  );
 
   useEffect(() => {
     infiniteScroll.start(
@@ -43,10 +34,7 @@ const FollowingsGrid = () => {
   return (
     <>
       <StyledTrackGrid>
-        <h1>Hi</h1>
         {tracks.map((track, key) => {
-          console.log({ track });
-
           return (
             <div {...{ key: track.username }}>
               <h1>{track.username}</h1>

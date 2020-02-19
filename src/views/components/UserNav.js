@@ -29,7 +29,7 @@ const UserNav = ({
               </NavLink>
             </li>
             <li>
-              <NavLink to={`/users/${id}/following`}>
+              <NavLink to={`/users/${id}/followings`}>
                 Following
                 <FormattedInteger value={followingsCount} />
               </NavLink>
