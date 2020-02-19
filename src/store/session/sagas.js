@@ -24,8 +24,9 @@ function* fetchSessionData({ oauthToken }) {
   const user = yield call(api.fetchSessionUser, oauthToken);
   yield put(fetchSessionUserSuccess(user));
 
-  const { followings } = yield call(api.fetchSessionFollowings, oauthToken);
-  yield put(fetchSessionFollowingsSuccess({ followings }));
+  const followings = yield call(api.fetchSessionFollowings, oauthToken);
+
+  yield put(fetchSessionFollowingsSuccess(followings));
 
   const likes = yield call(api.fetchSessionLikes, oauthToken);
   yield put(fetchSessionLikesSuccess(likes));

@@ -5,6 +5,10 @@ import { createUser } from "./user";
 import { FETCH_TRACKS_FULFILLED } from "../tracklists/actions";
 import { LOAD_USER, FETCH_USER_FULFILLED } from "./actions";
 import { FETCH_FOLLOWINGS_FULFILLED } from "../followings/actions";
+import {
+  FETCH_SESSION_FOLLOWINGS_SUCCESS,
+  FETCH_SESSION_LIKES_SUCCESS,
+} from "../session/actions";
 
 const initialState = new Map({
   currentUserId: null,
@@ -12,10 +16,14 @@ const initialState = new Map({
 
 export default (state = initialState, { collection, type, userId, user }) => {
   switch (type) {
+    case FETCH_SESSION_FOLLOWINGS_SUCCESS:
+    case FETCH_SESSION_LIKES_SUCCESS:
     case FETCH_FOLLOWINGS_FULFILLED:
       return state.withMutations(users => {
         collection.forEach(userData => {
-          users.set(userData.id, createUser(userData));
+          if (!users.has(userData.id)) {
+            users.set(userData.id, createUser(userData));
+          }
         });
       });
 

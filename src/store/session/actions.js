@@ -31,15 +31,17 @@ export const fetchSessionUserSuccess = ({ id, avatarUrl, username }) => ({
   username,
 });
 
-export const fetchSessionFollowingsSuccess = ({ followings, entities }) => ({
+export const fetchSessionFollowingsSuccess = ({ followings, collection }) => ({
   type: FETCH_SESSION_FOLLOWINGS_SUCCESS,
   followings,
-  entities,
+  collection,
 });
 
-export const fetchSessionLikesSuccess = likes => ({
+export const fetchSessionLikesSuccess = ({ likes, collection, trackData }) => ({
   type: FETCH_SESSION_LIKES_SUCCESS,
   likes,
+  trackData,
+  collection,
 });
 
 export const initAuth = dispatch => {

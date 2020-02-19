@@ -140,10 +140,10 @@ const api = {
     return dispatch({
       url: `${API_SESSION_FOLLOWINGS_URL}`,
       oauthToken,
-    }).then(item => {
+    }).then(({ collection }) => {
       return {
-        ...item,
-        followings: item.collection.reduce((all, { id }) => {
+        collection,
+        followings: collection.reduce((all, { id }) => {
           return {
             ...all,
             [id]: true,
@@ -157,17 +157,21 @@ const api = {
     return dispatch({
       url: `${API_SESSION_LIKES_URL}`,
       oauthToken,
-    }).then(item => {
-      return item.reduce((all, { streamable, id }) => {
-        if (streamable) {
-          return {
-            ...all,
-            [id]: true,
-          };
-        }
+    }).then(trackData => {
+      return {
+        trackData,
+        collection: trackData.map(track => track.user),
+        likes: trackData.reduce((all, { streamable, id }) => {
+          if (streamable) {
+            return {
+              ...all,
+              [id]: true,
+            };
+          }
 
-        return all;
-      }, {});
+          return all;
+        }, {}),
+      };
     });
   },
 
