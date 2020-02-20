@@ -32,7 +32,6 @@ export const fetchFollowingsFailed = error => ({
 });
 
 export const loadUserFollowings = ({ id, url, oauthToken }) => {
-  console.log({ id });
   return {
     type: LOAD_USER_FOLLOWINGS,
     followingsListId: id,

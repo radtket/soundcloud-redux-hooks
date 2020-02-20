@@ -12,7 +12,6 @@ import {
   FETCH_TRACKS_PENDING,
   UPDATE_TRACKS_PAGINATION,
 } from "./actions";
-import { LOAD_GENRE_TRACKS } from "../genre/actions";
 
 const initialState = new Map({
   currentTracklistId: FEATURED_TRACKLIST_ID,
@@ -40,7 +39,6 @@ export default (
         })
       );
 
-    case LOAD_GENRE_TRACKS:
     case LOAD_SEARCH_RESULTS:
     case LOAD_USER_TRACKS:
       return state.merge({

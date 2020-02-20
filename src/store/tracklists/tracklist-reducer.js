@@ -10,7 +10,6 @@ import {
   FETCH_TRACKS_PENDING,
   UPDATE_TRACKS_PAGINATION,
 } from "./actions";
-import { LOAD_GENRE_TRACKS } from "../genre/actions";
 import { isArrayEmpty } from "../../utils/helpers";
 
 const mergeTrackIds = ({ trackIds, collection }) => {
@@ -66,7 +65,6 @@ export default (
 
     case FETCH_TRACKS_PENDING:
       return state.set("isPending", true);
-    case LOAD_GENRE_TRACKS:
     case LOAD_SEARCH_RESULTS:
     case LOAD_USER_TRACKS:
       return state.isNew
