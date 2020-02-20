@@ -45,9 +45,9 @@ export const PLAYER_STORAGE_KEY = `${APP_NAME}:player`;
 //*------------------------------------
 export const FEATURED_TRACKLIST_ID = `${FEATURED_USER_ID}/favorites`;
 
-export const SESSION_TRACKLIST_ID = "session";
-export const SESSION_STREAM_TRACKLIST_ID = `${SESSION_TRACKLIST_ID}/stream`;
-export const SESSION_LIKES_TRACKLIST_ID = `${SESSION_TRACKLIST_ID}/likes`;
+export const HISTORY_TRACKLIST_ID = "history";
+export const SESSION_STREAM_TRACKLIST_ID = `session/stream`;
+export const SESSION_LIKES_TRACKLIST_ID = `session/likes`;
 
 export const TRACKS_PER_PAGE = 15;
 

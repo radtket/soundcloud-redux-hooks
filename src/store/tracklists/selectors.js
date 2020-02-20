@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { TRACKS_PER_PAGE } from "../constants";
+import { TRACKS_PER_PAGE, HISTORY_TRACKLIST_ID } from "../constants";
 import { getTracks } from "../tracks/selectors";
 import getBrowserMedia from "../browser/selectors";
 import { audio } from "../player/audio-service";
@@ -61,6 +61,25 @@ export const getTracklistState = createSelector(
     play: audio.play,
     selectedTrackId: playerTrackId,
     tracklistId: id,
+    tracks,
+  })
+);
+
+export const getTracksForHistoryTracklist = createSelector(
+  state => getTracklists(state).get(HISTORY_TRACKLIST_ID).trackIds,
+  getTracks,
+  (trackIds, tracks) => trackIds.map(id => tracks.get(id))
+);
+
+export const getHistorySidebarState = createSelector(
+  getPlayerIsPlaying,
+  getPlayerTrackId,
+  getTracksForHistoryTracklist,
+  (isPlaying, selectedTrackId, tracks) => ({
+    isPlaying,
+    pause: audio.pause,
+    play: audio.play,
+    selectedTrackId,
     tracks,
   })
 );

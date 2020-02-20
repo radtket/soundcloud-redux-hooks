@@ -17,6 +17,7 @@ import StreamPage from "./pages/Session/StreamPage";
 // Components
 import Navbar from "./components/Navbar";
 import Player from "./components/Player";
+import HistorySidebar from "./components/HistorySidebar";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ const App = () => {
         </Route>
       </main>
       <Player />
+      <HistorySidebar />
     </>
   );
 };
