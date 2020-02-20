@@ -31,16 +31,15 @@ export const fetchSessionUserSuccess = ({ id, avatarUrl, username }) => ({
   username,
 });
 
-export const fetchSessionFollowingsSuccess = ({ followings, collection }) => ({
-  type: FETCH_SESSION_FOLLOWINGS_SUCCESS,
-  followings,
-  collection,
-});
+export const fetchSessionFollowingsSuccess = ({ collection }) => {
+  return {
+    type: FETCH_SESSION_FOLLOWINGS_SUCCESS,
+    collection,
+  };
+};
 
-export const fetchSessionLikesSuccess = ({ likes, collection, trackData }) => ({
+export const fetchSessionLikesSuccess = collection => ({
   type: FETCH_SESSION_LIKES_SUCCESS,
-  likes,
-  trackData,
   collection,
 });
 

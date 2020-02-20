@@ -1,11 +1,11 @@
 export const LOAD_SEARCH_RESULTS = "LOAD_SEARCH_RESULTS";
 export const NAVIGATE_TO_SEARCH = "NAVIGATE_TO_SEARCH";
 
-export const loadSearchResults = query => {
+export const loadSearchResults = ({ query, tracklistId }) => {
   return {
     type: LOAD_SEARCH_RESULTS,
     query,
-    tracklistId: `search/${query
+    tracklistId: `${tracklistId}/${query
       .trim()
       .split(/\s+/)
       .join(" ")}`.toLowerCase(),

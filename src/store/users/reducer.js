@@ -17,7 +17,6 @@ const initialState = new Map({
 export default (state = initialState, { collection, type, userId, user }) => {
   switch (type) {
     case FETCH_SESSION_FOLLOWINGS_SUCCESS:
-    case FETCH_SESSION_LIKES_SUCCESS:
     case FETCH_FOLLOWINGS_FULFILLED:
       return state.withMutations(users => {
         collection.forEach(userData => {
@@ -27,11 +26,12 @@ export default (state = initialState, { collection, type, userId, user }) => {
         });
       });
 
+    case FETCH_SESSION_LIKES_SUCCESS:
     case FETCH_TRACKS_FULFILLED:
       return state.withMutations(users => {
-        collection.forEach(trackData => {
-          if (!users.has(trackData.user.id)) {
-            users.set(trackData.user.id, createUser(trackData.user));
+        collection.forEach(track => {
+          if (!users.has(track.user.id)) {
+            users.set(track.user.id, createUser(track.user));
           }
         });
       });

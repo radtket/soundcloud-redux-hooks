@@ -9,9 +9,8 @@ import { loadSearchResults } from "../../store/search/actions";
 const GenresPage = () => {
   const { id = "house" } = useParams();
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(loadSearchResults(id));
+    dispatch(loadSearchResults({ query: id, tracklistId: "genre" }));
   }, [dispatch, id]);
 
   return (

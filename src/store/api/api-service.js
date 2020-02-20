@@ -108,7 +108,6 @@ const api = {
   },
 
   fetchUserFollowings({ url, oauthToken }) {
-    console.log({ url });
     return dispatch({
       paginate: true,
       url,
@@ -141,16 +140,7 @@ const api = {
     return dispatch({
       url: `${API_SESSION_FOLLOWINGS_URL}`,
       oauthToken,
-    }).then(({ collection }) => {
-      return {
-        collection,
-        followings: collection.reduce((all, { id }) => {
-          return {
-            ...all,
-            [id]: true,
-          };
-        }, {}),
-      };
+      paginate: true,
     });
   },
 
@@ -158,21 +148,6 @@ const api = {
     return dispatch({
       url: `${API_SESSION_LIKES_URL}`,
       oauthToken,
-    }).then(trackData => {
-      return {
-        trackData,
-        collection: trackData.map(track => track.user),
-        likes: trackData.reduce((all, { streamable, id }) => {
-          if (streamable) {
-            return {
-              ...all,
-              [id]: true,
-            };
-          }
-
-          return all;
-        }, {}),
-      };
     });
   },
 

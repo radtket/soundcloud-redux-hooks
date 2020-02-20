@@ -5,11 +5,11 @@ import { createTrack } from "./track";
 import { FETCH_TRACKS_FULFILLED } from "../tracklists/actions";
 import { FETCH_SESSION_LIKES_SUCCESS } from "../session/actions";
 
-export default (state = new Map(), { collection, type, trackData }) => {
+export default (state = new Map(), { collection, type }) => {
   switch (type) {
     case FETCH_SESSION_LIKES_SUCCESS:
       return state.withMutations(tracks => {
-        trackData.forEach(track => {
+        collection.forEach(track => {
           if (!tracks.has(track.id)) {
             tracks.set(track.id, createTrack(track));
           }

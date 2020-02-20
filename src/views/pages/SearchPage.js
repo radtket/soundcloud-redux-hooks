@@ -14,7 +14,7 @@ const SearchPage = () => {
   );
 
   useEffect(() => {
-    dispatch(loadSearchResults(query));
+    dispatch(loadSearchResults({ query, tracklistId: "search" }));
   }, [dispatch, query]);
 
   return (

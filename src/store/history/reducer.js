@@ -10,7 +10,6 @@ const initialState = {
 
 const mergeTrackIds = ({ trackIds, id }) => {
   const ids = trackIds.toJS();
-
   return ids.includes(id) ? trackIds : new List(ids.concat(id));
 };
 

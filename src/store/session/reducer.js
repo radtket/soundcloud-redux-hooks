@@ -19,7 +19,7 @@ const SessionState = new Record({
 
 export default (
   state = new SessionState(),
-  { followings, oauthToken, type, id, likes, avatarUrl, username, liked }
+  { oauthToken, type, id, avatarUrl, username, liked, collection }
 ) => {
   switch (type) {
     case LOGIN_SUCCESS:
@@ -33,10 +33,30 @@ export default (
       });
 
     case FETCH_SESSION_FOLLOWINGS_SUCCESS:
-      return state.set("followings", followings);
+      return state.set(
+        "followings",
+        collection.reduce((all, one) => {
+          return {
+            ...all,
+            [one.id]: true,
+          };
+        }, {})
+      );
 
     case FETCH_SESSION_LIKES_SUCCESS:
-      return state.set("likes", likes);
+      return state.set(
+        "likes",
+        collection.reduce((all, one) => {
+          if (one.streamable) {
+            return {
+              ...all,
+              [one.id]: true,
+            };
+          }
+
+          return all;
+        }, {})
+      );
 
     case TOGGLE_LIKE:
       return state.set("likes", {
