@@ -6,7 +6,14 @@ import StyledUserNav from "../styles/UserNav";
 import FormattedInteger from "./FormattedInteger";
 
 const UserNav = ({
-  user: { id, trackCount, likesCount, followersCount, followingsCount },
+  user: {
+    id,
+    trackCount,
+    likesCount,
+    followersCount,
+    followingsCount,
+    playlistCount,
+  },
 }) => {
   return (
     <StyledUserNav className="page-header">
@@ -32,6 +39,12 @@ const UserNav = ({
               <NavLink to={`/users/${id}/followings`}>
                 Following
                 <FormattedInteger value={followingsCount} />
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={`/users/${id}/playlists`}>
+                Playlists
+                <FormattedInteger value={playlistCount} />
               </NavLink>
             </li>
           </ul>

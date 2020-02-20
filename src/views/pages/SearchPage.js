@@ -9,11 +9,9 @@ import { loadSearchResults } from "../../store/search/actions";
 
 const SearchPage = () => {
   const dispatch = useDispatch();
-  const { query } = useSelector(({ router }) => {
-    return {
-      query: new URLSearchParams(router.location.search).get("q"),
-    };
-  });
+  const query = useSelector(({ router }) =>
+    new URLSearchParams(router.location.search).get("q")
+  );
 
   useEffect(() => {
     dispatch(loadSearchResults(query));
