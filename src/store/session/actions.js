@@ -10,6 +10,7 @@ export const FETCH_SESSION_USER_SUCCESS = "FETCH_SESSION_USER_SUCCESS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 
 export const TOGGLE_LIKE = "TOGGLE_LIKE";
+export const TOGGLE_FOLLOW = "TOGGLE_FOLLOW";
 
 export const login = () => {
   return {
@@ -20,7 +21,7 @@ export const login = () => {
 export const loginSuccess = oauthToken => {
   return {
     type: LOGIN_SUCCESS,
-    oauthToken,
+    oauthToken: oauthToken || Cookies.get(COOKIE_PATH),
   };
 };
 
@@ -54,11 +55,17 @@ export const initAuth = dispatch => {
 };
 
 export const toggleLikeRequest = ({ id, liked, oauthToken }) => {
-  // const oauthToken = Cookies.get(COOKIE_PATH);
   return {
     type: TOGGLE_LIKE,
     id,
     liked,
-    oauthToken,
+    oauthToken: oauthToken || Cookies.get(COOKIE_PATH),
   };
 };
+
+export const toggleFollowRequest = ({ id, following, oauthToken }) => ({
+  type: TOGGLE_FOLLOW,
+  id,
+  following,
+  oauthToken: oauthToken || Cookies.get(COOKIE_PATH),
+});

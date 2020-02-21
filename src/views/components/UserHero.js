@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { createSelector } from "reselect";
 import StyledUserHero from "../styles/UserHero";
@@ -9,10 +9,12 @@ import renderHTML from "../../utils/render-html";
 import { getFollowings } from "../../store/session/selectors";
 import { StyledButton } from "../styles/Buttons";
 import UserHeroPlayButton from "./UserHeroPlayButton";
+import { toggleFollowRequest } from "../../store/session/actions";
 
 const UserHero = ({
   user: { avatarUrl, bannerUrl, description, social, username, id },
 }) => {
+  const dispatch = useDispatch();
   const { isFollowing } = useSelector(
     createSelector(getFollowings, followings => {
       return {
@@ -34,8 +36,19 @@ const UserHero = ({
               </div>
               <div className="entry-meta">
                 <UserHeroPlayButton />
-                <StyledButton type="button">
-                  {isFollowing ? "Following" : "Follow"}
+                <StyledButton
+                  aria-label={
+                    isFollowing ? `Unfollow ${username}` : `Follow ${username}`
+                  }
+                  onClick={() => {
+                    !isFollowing &&
+                      dispatch(
+                        toggleFollowRequest({ id, following: isFollowing })
+                      );
+                  }}
+                  type="button"
+                >
+                  {isFollowing ? "Unfollow" : "Follow"}
                 </StyledButton>
                 <div className="user-links">
                   {social.map(item => {

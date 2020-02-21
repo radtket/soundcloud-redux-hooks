@@ -5,6 +5,7 @@ import {
   FETCH_SESSION_USER_SUCCESS,
   LOGIN_SUCCESS,
   TOGGLE_LIKE,
+  TOGGLE_FOLLOW,
 } from "./actions";
 
 const SessionState = new Record({
@@ -19,7 +20,7 @@ const SessionState = new Record({
 
 export default (
   state = new SessionState(),
-  { oauthToken, type, id, avatarUrl, username, liked, collection }
+  { oauthToken, type, id, avatarUrl, username, liked, collection, following }
 ) => {
   switch (type) {
     case LOGIN_SUCCESS:
@@ -62,6 +63,12 @@ export default (
       return state.set("likes", {
         ...state.likes,
         [id]: !liked,
+      });
+
+    case TOGGLE_FOLLOW:
+      return state.set("followings", {
+        ...state.followings,
+        [id]: !following,
       });
 
     default:

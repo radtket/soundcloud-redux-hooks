@@ -9,6 +9,7 @@ import {
   FETCH_OAUTH_TOKEN,
   LOGIN_SUCCESS,
   TOGGLE_LIKE,
+  TOGGLE_FOLLOW,
 } from "./actions";
 import api from "../api/api-service";
 
@@ -37,6 +38,15 @@ function* toggleLike({ id, liked, oauthToken }) {
   console.log({ error });
 }
 
+function* toggleFollow({ id, following, oauthToken }) {
+  const { error, ...rest } = yield call(api.toggleFollow, {
+    id,
+    following,
+    oauthToken,
+  });
+  console.log({ error, rest });
+}
+
 //= ====================================
 //  WATCHERS
 //-------------------------------------
@@ -53,8 +63,13 @@ function* watchToggleLike() {
   yield takeLatest(TOGGLE_LIKE, toggleLike);
 }
 
+function* watchToggleFollow() {
+  yield takeLatest(TOGGLE_FOLLOW, toggleFollow);
+}
+
 export default [
   fork(watchLoadOAuthToken),
   fork(watchLogin),
   fork(watchToggleLike),
+  fork(watchToggleFollow),
 ];

@@ -6,7 +6,6 @@ import ArtworkPlay from "./ArtworkPlay";
 import { StyledHistorySong } from "../styles/HistorySidebar";
 import { IconEllipsis, IconHeart } from "./Icons";
 import Popup from "./Popup";
-import IconButton from "./IconButton";
 import StyledDropdownMenu from "../styles/DropdownMenu";
 
 const HistorySong = ({

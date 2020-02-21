@@ -158,6 +158,14 @@ const api = {
       oauthToken,
     });
   },
+
+  toggleFollow({ id, following, oauthToken }) {
+    return dispatch({
+      method: !following ? "put" : "delete",
+      url: `${API_SESSION_FOLLOWINGS_URL}/${id}`,
+      oauthToken,
+    });
+  },
 };
 
 export default api;
