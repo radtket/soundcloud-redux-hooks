@@ -4,6 +4,7 @@ import StyledArtworkPlay from "./ArtworkPlay";
 
 export const StyledHistorySong = styled.li`
   display: flex;
+  justify-content: space-between;
   transition: background-color linear 0.2s;
   padding: 6px 16px;
 

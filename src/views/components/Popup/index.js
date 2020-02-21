@@ -1,9 +1,13 @@
-import React from "react";
+import React, { PureComponent, cloneElement } from "react";
 import PropTypes from "prop-types";
 import { POSITION_TYPES, TRIGGER_TYPES, calculatePosition } from "./utils";
-import styles from "./styles";
+import {
+  StyledPopupArrow,
+  StyledPopupOverlay,
+  StyledPopupContent,
+} from "./styles";
 
-class Popup extends React.PureComponent {
+class Popup extends PureComponent {
   constructor(props) {
     super(props);
     const { open, modal, defaultOpen, trigger } = props;
@@ -63,8 +67,10 @@ class Popup extends React.PureComponent {
     this.setPosition();
   };
 
-  onEscape = e => {
-    if (e.key === "Escape") this.closePopup();
+  onEscape = ({ key }) => {
+    if (key === "Escape") {
+      this.closePopup();
+    }
   };
 
   lockScroll = () => {
@@ -126,9 +132,7 @@ class Popup extends React.PureComponent {
     let boundingBox = {
       top: 0,
       left: 0,
-
       width: window.innerWidth,
-
       height: window.innerHeight,
     };
     if (typeof keepTooltipInside === "string") {
@@ -207,20 +211,17 @@ class Popup extends React.PureComponent {
     const { contentStyle, className, on } = this.props;
     const { modal } = this.state;
 
-    const popupContentStyle = modal
-      ? styles.popupContent.modal
-      : styles.popupContent.tooltip;
-
     const childrenElementProps = {
       className: `popup-content ${
         className !== "" ? `${className}-content` : ""
       }`,
-      style: { ...popupContentStyle, ...contentStyle },
+      style: contentStyle,
       ref: this.setContentRef,
       onClick: e => {
         e.stopPropagation();
       },
     };
+
     if (!modal && on.indexOf("hover") >= 0) {
       childrenElementProps.onMouseEnter = this.onMouseEnter;
       childrenElementProps.onMouseLeave = this.onMouseLeave;
@@ -250,26 +251,23 @@ class Popup extends React.PureComponent {
     }
 
     if (typeof trigger === "function")
-      return !!trigger && React.cloneElement(trigger(isOpen), triggerProps);
+      return !!trigger && cloneElement(trigger(isOpen), triggerProps);
 
-    return !!trigger && React.cloneElement(trigger, triggerProps);
+    return !!trigger && cloneElement(trigger, triggerProps);
   };
 
   renderContent = () => {
     const { arrow, arrowStyle, children } = this.props;
     const { modal, isOpen } = this.state;
     return (
-      <div {...this.addWarperAction()} key="C">
+      <StyledPopupContent isModal={modal} {...this.addWarperAction()} key="C">
         {arrow && !modal && (
-          <div
-            ref={this.setArrowRef}
-            style={{ ...styles.popupArrow, ...arrowStyle }}
-          />
+          <StyledPopupArrow ref={this.setArrowRef} style={{ ...arrowStyle }} />
         )}
         {typeof children === "function"
           ? children(this.closePopup, isOpen)
           : children}
-      </div>
+      </StyledPopupContent>
     );
   };
 
@@ -277,7 +275,7 @@ class Popup extends React.PureComponent {
     const { overlayStyle, closeOnDocumentClick, className, on } = this.props;
     const { modal, isOpen } = this.state;
     const overlay = isOpen && !(on.indexOf("hover") >= 0);
-    const ovStyle = modal ? styles.overlay.modal : styles.overlay.tooltip;
+
     return [
       this.renderTrigger(),
       isOpen && (
@@ -288,16 +286,17 @@ class Popup extends React.PureComponent {
         />
       ),
       overlay && (
-        <div
+        <StyledPopupOverlay
           key="O"
           className={`popup-overlay ${
             className !== "" ? `${className}-overlay` : ""
           }`}
-          onClick={closeOnDocumentClick ? this.closePopup : undefined}
-          style={{ ...ovStyle, ...overlayStyle }}
+          isModal={modal}
+          onClick={closeOnDocumentClick && this.closePopup}
+          style={{ ...overlayStyle }}
         >
           {modal && this.renderContent()}
-        </div>
+        </StyledPopupOverlay>
       ),
       isOpen && !modal && this.renderContent(),
     ];
@@ -347,27 +346,27 @@ Popup.propTypes = {
 };
 
 Popup.defaultProps = {
-  trigger: null,
-  onOpen: () => {},
-  onClose: () => {},
-  defaultOpen: false,
-  open: false,
-  disabled: false,
-  closeOnDocumentClick: true,
-  repositionOnResize: true,
-  closeOnEscape: true,
-  on: ["click"],
-  contentStyle: {},
-  arrowStyle: {},
-  overlayStyle: {},
-  className: "",
-  position: "bottom center",
-  modal: false,
-  lockScroll: false,
   arrow: true,
-  offsetX: 0,
-  offsetY: 0,
+  arrowStyle: {},
+  className: "",
+  closeOnDocumentClick: true,
+  closeOnEscape: true,
+  contentStyle: {},
+  defaultOpen: false,
+  disabled: false,
+  keepTooltipInside: false,
+  lockScroll: false,
+  modal: false,
   mouseEnterDelay: 100,
   mouseLeaveDelay: 100,
-  keepTooltipInside: false,
+  offsetX: 0,
+  offsetY: 0,
+  on: ["click"],
+  onClose: () => {},
+  onOpen: () => {},
+  open: false,
+  overlayStyle: {},
+  position: "bottom center",
+  repositionOnResize: true,
+  trigger: null,
 };
