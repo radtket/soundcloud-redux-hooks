@@ -3,7 +3,11 @@ import { TRACKS_PER_PAGE, SESSION_HISTORY_TRACKLIST_ID } from "../constants";
 import { getTracks } from "../tracks/selectors";
 import getBrowserMedia from "../browser/selectors";
 import { audio } from "../player/audio-service";
-import { getPlayerIsPlaying, getPlayerTrackId } from "../player/selectors";
+import {
+  getPlayerIsPlaying,
+  getPlayerTrackId,
+  getIsHistoryDrawerOpen,
+} from "../player/selectors";
 
 export const getTracklists = state => state.tracklists;
 
@@ -75,11 +79,13 @@ export const getHistorySidebarState = createSelector(
   getPlayerIsPlaying,
   getPlayerTrackId,
   getTracksForHistoryTracklist,
-  (isPlaying, selectedTrackId, tracks) => ({
+  getIsHistoryDrawerOpen,
+  (isPlaying, selectedTrackId, tracks, isOpen) => ({
     isPlaying,
     pause: audio.pause,
     play: audio.play,
     selectedTrackId,
     tracks,
+    isOpen,
   })
 );

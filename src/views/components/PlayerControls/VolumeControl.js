@@ -12,9 +12,8 @@ import { IconSound, IconMute } from "../Icons";
 import { StyledRangeSlider, StyledVolumeControl } from "../../styles/Inputs";
 
 const VolumeControl = () => {
-  const { changeVolume, toggleMuted, volume, isMuted } = useSelector(() => {
+  const { volume, isMuted } = useSelector(() => {
     return {
-      ...audio,
       volume: getVolume(),
       isMuted: getIsMuted(),
     };
@@ -30,7 +29,7 @@ const VolumeControl = () => {
         <IconButton
           aria-label={isMuted ? "unmute volume" : "mute volume"}
           name="toggle-mute-button"
-          onClick={toggleMuted}
+          onClick={audio.toggleMuted}
         >
           {isMuted ? <IconMute /> : <IconSound />}
         </IconButton>
@@ -40,7 +39,7 @@ const VolumeControl = () => {
             min={0}
             name="volume-slider"
             onChange={({ target }) => {
-              changeVolume(target.value / 100);
+              audio.changeVolume(target.value / 100);
             }}
             type="range"
             value={activeVolume * 100}

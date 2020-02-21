@@ -9,6 +9,7 @@ import {
   AUDIO_REPEAT_CHANGED,
   AUDIO_VOLUME_CHANGED,
   PLAY_SELECTED_TRACK,
+  TOGGLE_HISTORY_DRAWER_OPEN,
 } from "./actions";
 
 const PlayerState = new Record({
@@ -17,6 +18,7 @@ const PlayerState = new Record({
   trackId: null,
   tracklistId: FEATURED_TRACKLIST_ID,
   volume: PLAYER_INITIAL_VOLUME,
+  isHistoryDrawerOpen: false,
 });
 
 export default (
@@ -42,6 +44,9 @@ export default (
         trackId,
         tracklistId: tracklistId || state.get("tracklistId"),
       });
+
+    case TOGGLE_HISTORY_DRAWER_OPEN:
+      return state.set("isHistoryDrawerOpen", !state.isHistoryDrawerOpen);
 
     default:
       return state;

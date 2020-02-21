@@ -8,14 +8,11 @@ import StyledAudioTimeline from "../styles/AudioTimeline";
 
 const AudioTimeline = () => {
   const {
-    seek,
-    times: { currentTime, duration, percentBuffered, percentCompleted },
-  } = useSelector(state => {
-    return {
-      ...audio,
-      times: getPlayerTimes(state),
-    };
-  });
+    currentTime,
+    duration,
+    percentBuffered,
+    percentCompleted,
+  } = useSelector(getPlayerTimes);
 
   return (
     <StyledAudioTimeline
@@ -28,7 +25,7 @@ const AudioTimeline = () => {
         max={(duration || 0) * 100}
         min={0}
         onChange={({ target }) => {
-          seek(target.value / 100);
+          audio.seek(target.value / 100);
         }}
         type="range"
         value={currentTime * 100}

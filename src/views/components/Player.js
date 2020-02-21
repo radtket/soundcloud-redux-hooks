@@ -1,12 +1,10 @@
 import React from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import { createSelector } from "reselect";
-import { playSelectedTrack } from "../../store/player/actions";
 import {
-  getPlayer,
-  getPlayerTrack,
-  getPlayerTracklistCursor,
-} from "../../store/player/selectors";
+  playSelectedTrack,
+  toggleHistoryDrawerOpen,
+} from "../../store/player/actions";
+import { getPlayerState } from "../../store/player/selectors";
 import { audio } from "../../store/player/audio-service";
 
 // Components
@@ -16,14 +14,20 @@ import FormattedTime from "./FormattedTime";
 import IconButton from "./IconButton";
 
 import StyledPlayer from "../styles/Player";
-import { IconPlay, IconPause, IconNext, IconPrev, IconHeart } from "./Icons";
+import {
+  IconPlay,
+  IconPause,
+  IconNext,
+  IconPrev,
+  IconHeart,
+  IconPlaylist,
+} from "./Icons";
 
 import FormattedTrackTitle from "./FormattedTrackTitle";
 import { StyledFavoriteButton } from "../styles/Buttons";
 
 import RepeatButton from "./PlayerControls/RepeatButton";
 import VolumeControl from "./PlayerControls/VolumeControl";
-import { getLikes, getOauthToken } from "../../store/session/selectors";
 import { toggleLikeRequest } from "../../store/session/actions";
 
 const Player = () => {
@@ -32,49 +36,13 @@ const Player = () => {
   const {
     isPlaying,
     liked,
-    nextTrack,
-    pause,
-    play,
-    previousTrack,
-    track,
+    nextTrackId,
     oauthToken,
-  } = useSelector(
-    createSelector(
-      getPlayer,
-      getPlayerTrack,
-      getPlayerTracklistCursor,
-      getLikes,
-      getOauthToken,
-      (player, track_, { nextTrackId, previousTrackId }, likes, token) => {
-        const getNextTrack = () =>
-          dispatch(
-            playSelectedTrack({
-              trackId: nextTrackId,
-              tracklistId: player.tracklistId,
-            })
-          );
-
-        const getPreviousTrack = () =>
-          dispatch(
-            playSelectedTrack({
-              trackId: previousTrackId,
-              tracklistId: player.tracklistId,
-            })
-          );
-
-        return {
-          ...audio,
-          isPlaying: player.isPlaying,
-          nextTrack: nextTrackId && getNextTrack,
-          previousTrack: previousTrackId && getPreviousTrack,
-          track: track_,
-          liked: Boolean(track_ && likes[track_.id]),
-          oauthToken: token,
-        };
-      }
-    ),
-    shallowEqual
-  );
+    previousTrackId,
+    track,
+    tracklistId,
+    isHistoryDrawerOpen,
+  } = useSelector(getPlayerState, shallowEqual);
 
   if (!track) {
     return null;
@@ -108,15 +76,24 @@ const Player = () => {
           <RepeatButton />
           <IconButton
             aria-label="Skip to previous track"
-            disabled={!nextTrack}
-            onClick={previousTrack}
+            disabled={!previousTrackId}
+            onClick={() => {
+              if (previousTrackId) {
+                dispatch(
+                  playSelectedTrack({
+                    trackId: previousTrackId,
+                    tracklistId,
+                  })
+                );
+              }
+            }}
           >
             <IconPrev />
           </IconButton>
 
           <IconButton
             aria-label={isPlaying ? "Pause" : "Play"}
-            onClick={isPlaying ? pause : play}
+            onClick={isPlaying ? audio.pause : audio.play}
             size="lg"
           >
             {isPlaying ? <IconPause /> : <IconPlay />}
@@ -124,8 +101,17 @@ const Player = () => {
 
           <IconButton
             aria-label="Skip to next track"
-            disabled={!nextTrack}
-            onClick={nextTrack}
+            disabled={!nextTrackId}
+            onClick={() => {
+              if (nextTrackId) {
+                dispatch(
+                  playSelectedTrack({
+                    trackId: nextTrackId,
+                    tracklistId,
+                  })
+                );
+              }
+            }}
           >
             <IconNext />
           </IconButton>
@@ -138,6 +124,16 @@ const Player = () => {
       </div>
 
       <div className="now-playing-bar__right">
+        <IconButton
+          aria-label={
+            isHistoryDrawerOpen ? "Close History Drawer" : "Open History Drawer"
+          }
+          onClick={() => {
+            dispatch(toggleHistoryDrawerOpen());
+          }}
+        >
+          <IconPlaylist />
+        </IconButton>
         <VolumeControl />
       </div>
     </StyledPlayer>

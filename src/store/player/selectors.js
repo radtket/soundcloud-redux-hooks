@@ -1,4 +1,6 @@
+import { createSelector } from "reselect";
 import { getTrackById } from "../tracks/selectors";
+import { getLikes, getOauthToken } from "../session/selectors";
 
 const getTracklistCursor = ({ selectedTrackId, trackIds }) => {
   const index = trackIds.indexOf(selectedTrackId);
@@ -31,6 +33,8 @@ export const getPlayerTrackId = state => state.player.trackId;
 
 export const getPlayerTracklistId = state => state.player.tracklistId;
 
+export const getIsHistoryDrawerOpen = state => state.player.isHistoryDrawerOpen;
+
 export const getPlayerTrack = state => {
   const trackId = getPlayerTrackId(state);
   return getTrackById({ state, trackId });
@@ -46,3 +50,25 @@ export const getPlayerTracklistCursor = state => {
   const { trackIds } = getPlayerTracklist(state);
   return getTracklistCursor({ selectedTrackId, trackIds });
 };
+
+export const getPlayerState = createSelector(
+  getPlayer,
+  getPlayerTrack,
+  getPlayerTracklistCursor,
+  getLikes,
+  getOauthToken,
+  (player, track_, { nextTrackId, previousTrackId }, likes, token) => {
+    return {
+      tracklistId: player.tracklistId,
+      isPlaying: player.isPlaying,
+      nextTrack: getPlayerTracklistCursor.nextTrackId,
+      previousTrack: getPlayerTracklistCursor.previousTrackId,
+      track: track_,
+      liked: Boolean(track_ && likes[track_.id]),
+      oauthToken: token,
+      nextTrackId,
+      previousTrackId,
+      isHistoryDrawerOpen: player.isHistoryDrawerOpen,
+    };
+  }
+);

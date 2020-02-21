@@ -5,6 +5,7 @@ export const AUDIO_REPEAT_CHANGED = "AUDIO_REPEAT_CHANGED";
 export const AUDIO_TIME_UPDATED = "AUDIO_TIME_UPDATED";
 export const AUDIO_VOLUME_CHANGED = "AUDIO_VOLUME_CHANGED";
 export const PLAY_SELECTED_TRACK = "PLAY_SELECTED_TRACK";
+export const TOGGLE_HISTORY_DRAWER_OPEN = "TOGGLE_HISTORY_DRAWER_OPEN";
 
 export const audioEnded = () => ({
   type: AUDIO_ENDED,
@@ -40,5 +41,11 @@ export const playSelectedTrack = ({ trackId, tracklistId }) => {
     type: PLAY_SELECTED_TRACK,
     trackId,
     tracklistId,
+  };
+};
+
+export const toggleHistoryDrawerOpen = () => {
+  return {
+    type: TOGGLE_HISTORY_DRAWER_OPEN,
   };
 };
