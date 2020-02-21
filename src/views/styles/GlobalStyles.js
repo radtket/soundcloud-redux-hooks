@@ -110,4 +110,8 @@ export default createGlobalStyle`
     margin-right: -1px;
   }
 
+  #root {
+    position: relative;
+  }
+
 `;

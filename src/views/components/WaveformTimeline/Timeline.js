@@ -7,17 +7,15 @@ import { audio } from "../../../store/player/audio-service";
 import { StyledTimeline } from "../../styles/Waveform";
 
 const Timeline = () => {
-  const { seek, times } = useSelector(state => {
-    return {
-      ...audio,
-      times: getPlayerTimes(state),
-    };
-  });
-
-  const { bufferedTime, percentBuffered, percentCompleted, duration } = times;
+  const {
+    bufferedTime,
+    percentBuffered,
+    percentCompleted,
+    duration,
+  } = useSelector(getPlayerTimes);
 
   const onClick = ({ currentTarget, pageX }) => {
-    seek(
+    audio.seek(
       ((pageX - currentTarget.getBoundingClientRect().left) /
         currentTarget.offsetWidth) *
         duration

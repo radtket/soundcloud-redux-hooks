@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import {
   FEATURED_TRACKLIST_ID,
   COOKIE_PATH,
-  HISTORY_TRACKLIST_ID,
+  SESSION_HISTORY_TRACKLIST_ID,
 } from "../constants";
 import Tracklist from "./tracklist";
 import tracklistReducer from "./tracklist-reducer";
@@ -25,8 +25,8 @@ const initialState = new Map({
     isNew: true,
     oauthToken: Cookies.get(COOKIE_PATH),
   }),
-  [HISTORY_TRACKLIST_ID]: new Tracklist({
-    id: HISTORY_TRACKLIST_ID,
+  [SESSION_HISTORY_TRACKLIST_ID]: new Tracklist({
+    id: SESSION_HISTORY_TRACKLIST_ID,
     isNew: true,
   }),
 });
@@ -38,11 +38,11 @@ export default (
   switch (type) {
     case PLAY_SELECTED_TRACK:
       return state.withMutations(tracklist => {
-        const history = tracklist.get(HISTORY_TRACKLIST_ID);
+        const history = tracklist.get(SESSION_HISTORY_TRACKLIST_ID);
         const ids = history.trackIds.toJS();
 
         tracklist.set(
-          HISTORY_TRACKLIST_ID,
+          SESSION_HISTORY_TRACKLIST_ID,
           history.merge({
             trackIds: ids.includes(trackId)
               ? history.trackIds

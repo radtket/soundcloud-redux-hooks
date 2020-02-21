@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { TRACKS_PER_PAGE, HISTORY_TRACKLIST_ID } from "../constants";
+import { TRACKS_PER_PAGE, SESSION_HISTORY_TRACKLIST_ID } from "../constants";
 import { getTracks } from "../tracks/selectors";
 import getBrowserMedia from "../browser/selectors";
 import { audio } from "../player/audio-service";
@@ -66,7 +66,7 @@ export const getTracklistState = createSelector(
 );
 
 export const getTracksForHistoryTracklist = createSelector(
-  state => getTracklists(state).get(HISTORY_TRACKLIST_ID).trackIds,
+  state => getTracklists(state).get(SESSION_HISTORY_TRACKLIST_ID).trackIds,
   getTracks,
   (trackIds, tracks) => trackIds.map(id => tracks.get(id))
 );
