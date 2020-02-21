@@ -4,13 +4,15 @@ import { useDispatch } from "react-redux";
 import { initAuth } from "../store/session/actions";
 
 // Pages
+import Callback from "./pages/Callback";
+import GenresPage from "./pages/GenresPage";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
+import TrackPage from "./pages/TrackPage";
 import UserPage from "./pages/UserPage";
-import GenresPage from "./pages/GenresPage";
-import Callback from "./pages/Callback";
 
 // Session
+import FollowingPage from "./pages/Session/FollowingPage";
 import LikesPage from "./pages/Session/LikesPage";
 import StreamPage from "./pages/Session/StreamPage";
 
@@ -18,7 +20,6 @@ import StreamPage from "./pages/Session/StreamPage";
 import Navbar from "./components/Navbar";
 import Player from "./components/Player";
 import HistorySidebar from "./components/HistorySidebar";
-import FollowingPage from "./pages/Session/FollowingPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,8 @@ const App = () => {
         <Route component={HomePage} exact path="/" />
         <Route component={GenresPage} path={["/genres/:id", "/genres"]} />
         <Route component={SearchPage} path="/search" />
-        <Route component={UserPage} path="/users/:id/:resource" />
+        <Route component={UserPage} exact path="/users/:id/:resource" />
+        <Route component={TrackPage} path="/users/:id/:resource/:trackId" />
 
         {/* Session */}
         <Route component={LikesPage} path="/me/likes" />

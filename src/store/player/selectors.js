@@ -37,7 +37,7 @@ export const getIsHistoryDrawerOpen = state => state.player.isHistoryDrawerOpen;
 
 export const getPlayerTrack = state => {
   const trackId = getPlayerTrackId(state);
-  return getTrackById({ state, trackId });
+  return getTrackById(state, trackId);
 };
 
 export const getPlayerTracklist = state => {

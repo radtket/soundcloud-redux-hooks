@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { size, padding } from "polished";
+import { size, padding, margin } from "polished";
 import { StyledFavoriteButton } from "./Buttons";
 
 const StyledPlayer = styled.div`
@@ -64,6 +64,8 @@ const StyledPlayer = styled.div`
     }
 
     .song-info {
+      ${padding("16px", null)};
+      ${margin(0, null)};
       letter-spacing: 0.006em;
       max-width: 200px;
 
@@ -75,6 +77,18 @@ const StyledPlayer = styled.div`
       dd {
         font-size: 14px;
         color: #99999f;
+      }
+
+      .username {
+        border-bottom: 1px solid transparent;
+        position: relative;
+        transition: none;
+
+        &:hover,
+        &:focus {
+          color: #fff;
+          border-bottom-color: currentcolor;
+        }
       }
     }
 

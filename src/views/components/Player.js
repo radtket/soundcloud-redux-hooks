@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   playSelectedTrack,
   toggleHistoryDrawerOpen,
@@ -56,9 +57,21 @@ const Player = () => {
         </figure>
         <dl className="song-info ellipsis-one-line">
           <dt className="ellipsis-one-line">
-            <FormattedTrackTitle title={track.title} />
+            <Link
+              className="ellipsis-one-line username"
+              to={`/users/${track.userId}/tracks/${track.id}`}
+            >
+              <FormattedTrackTitle title={track.title} />
+            </Link>
           </dt>
-          <dd className="ellipsis-one-line">{track.username}</dd>
+          <dd>
+            <Link
+              className="ellipsis-one-line username"
+              to={`/users/${track.userId}/tracks`}
+            >
+              {track.username}
+            </Link>
+          </dd>
         </dl>
 
         <StyledFavoriteButton
