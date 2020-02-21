@@ -27,6 +27,7 @@ const Navbar = () => {
         <nav className="nav-secondary">
           <NavLink to="/me/stream">Stream</NavLink>
           <NavLink to="/me/likes">Likes</NavLink>
+          <NavLink to="/me/followings">Following</NavLink>
         </nav>
         <nav className="nav-search">
           <SearchBar />

@@ -18,6 +18,7 @@ import StreamPage from "./pages/Session/StreamPage";
 import Navbar from "./components/Navbar";
 import Player from "./components/Player";
 import HistorySidebar from "./components/HistorySidebar";
+import FollowingPage from "./pages/Session/FollowingPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const App = () => {
         {/* Session */}
         <Route component={LikesPage} path="/me/likes" />
         <Route component={StreamPage} path="/me/stream" />
+        <Route component={FollowingPage} path="/me/followings" />
         <Route path="/callback">
           <Callback />
         </Route>

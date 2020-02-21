@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import LoadingIndicator from "../components/LoadingIndicator";
 
 const Callback = () => {
   useEffect(() => {
@@ -6,11 +7,7 @@ const Callback = () => {
     window.setTimeout(opener.SC.connectCallback, 1);
   }, []);
 
-  return (
-    <div>
-      <p>This page should close soon.</p>
-    </div>
-  );
+  return <LoadingIndicator />;
 };
 
 export default Callback;
