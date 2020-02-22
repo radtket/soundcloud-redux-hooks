@@ -39,7 +39,7 @@ const Playlists = () => {
   }
 
   return (
-    <div style={{ marginTop: "100px" }}>
+    <div>
       <h1>Playlists</h1>
       <section className="container">
         <StyledPlaylistGrid>

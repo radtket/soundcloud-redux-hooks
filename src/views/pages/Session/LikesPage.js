@@ -7,6 +7,8 @@ import {
 } from "../../../store/constants";
 import { loadUserTracks } from "../../../store/users/actions";
 import { getOauthToken } from "../../../store/session/selectors";
+import PageTitle from "../../components/PageTitle";
+import backgroundImage from "../../../assets/images/background-2.jpg";
 
 const LikesPage = () => {
   const dispatch = useDispatch();
@@ -25,7 +27,7 @@ const LikesPage = () => {
 
   return (
     <>
-      <h1>Likess Page</h1>
+      <PageTitle activePage="Liked" {...{ backgroundImage }} />
       <section className="container">
         <TrackGrid />
       </section>

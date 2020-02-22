@@ -7,6 +7,8 @@ import {
 import { getOauthToken } from "../../../store/session/selectors";
 import FollowingsGrid from "../../components/FollowingsGrid";
 import { loadUserFollowings } from "../../../store/followings/actions";
+import PageTitle from "../../components/PageTitle";
+import backgroundImage from "../../../assets/images/background-3.jpg";
 
 const FollowingPage = () => {
   const dispatch = useDispatch();
@@ -25,7 +27,13 @@ const FollowingPage = () => {
 
   return (
     <>
-      <h1>Following Page</h1>
+      <PageTitle
+        activePage="Following"
+        style={{
+          backgroundPosition: "50% 35%",
+        }}
+        {...{ backgroundImage }}
+      />
       <section className="container">
         <FollowingsGrid />
       </section>

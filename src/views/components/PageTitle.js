@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import StyledPageTitle from "../styles/PageTitle";
 
-const PageTitle = ({ activePage, backgroundImage }) => {
+const PageTitle = ({ activePage, backgroundImage, style }) => {
   return (
     <StyledPageTitle
       style={{
+        ...style,
         backgroundImage: `url('${backgroundImage}')`,
       }}
     >
@@ -30,6 +31,11 @@ const PageTitle = ({ activePage, backgroundImage }) => {
 PageTitle.propTypes = {
   activePage: PropTypes.string.isRequired,
   backgroundImage: PropTypes.string.isRequired,
+  style: PropTypes.shape,
+};
+
+PageTitle.defaultProps = {
+  style: {},
 };
 
 export default PageTitle;

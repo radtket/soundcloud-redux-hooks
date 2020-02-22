@@ -14,7 +14,7 @@ const GenresPage = () => {
   }, [dispatch, id]);
 
   return (
-    <div style={{ marginTop: "100px" }}>
+    <div>
       <GenreNav {...{ genre: id }} />
       <h1>Genres</h1>
       <section className="container">

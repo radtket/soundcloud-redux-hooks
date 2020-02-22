@@ -7,6 +7,8 @@ import {
 } from "../../../store/constants";
 import { loadUserTracks } from "../../../store/users/actions";
 import { getOauthToken } from "../../../store/session/selectors";
+import PageTitle from "../../components/PageTitle";
+import backgroundImage from "../../../assets/images/background-1.jpg";
 
 const StreamPage = () => {
   const dispatch = useDispatch();
@@ -25,7 +27,7 @@ const StreamPage = () => {
 
   return (
     <>
-      <h1>Stream Page</h1>
+      <PageTitle activePage="Stream" {...{ backgroundImage }} />
       <section className="container">
         <TrackGrid />
       </section>
