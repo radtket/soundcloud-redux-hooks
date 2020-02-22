@@ -31,7 +31,12 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <main className="main">
+      <main
+        className="main"
+        style={{
+          paddingTop: "84px",
+        }}
+      >
         <Route component={HomePage} exact path="/" />
         <Route component={GenresPage} path={["/genres/:id", "/genres"]} />
         <Route component={SearchPage} path="/search" />
