@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { padding } from "polished";
 
 const StyledPageTitle = styled.header`
+  background-image: ${({ backgroundImage }) => `url('${backgroundImage}')`};
   text-align: center;
   background-position: 50% 50%;
   background-repeat: no-repeat;
