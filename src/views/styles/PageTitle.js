@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { padding } from "polished";
+import { padding, cover } from "polished";
+import { BODY_COLOR } from "./GlobalStyles";
 
 const StyledPageTitle = styled.header`
   background-image: ${({ backgroundImage }) => `url('${backgroundImage}')`};
@@ -12,14 +13,13 @@ const StyledPageTitle = styled.header`
   z-index: 2;
 
   &::before {
+    ${cover()}
     content: "";
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    background-color: rgba(0, 0, 0, 0.4);
+    background: linear-gradient(
+      0deg,
+      ${BODY_COLOR} 5%,
+      rgba(0, 0, 0, 0.4) 100%
+    );
   }
 
   .page-heading__inner {
