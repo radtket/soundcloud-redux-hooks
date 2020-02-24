@@ -13,7 +13,6 @@ const SessionState = new Record({
   followings: {},
   id: null,
   likes: {},
-  newStreamSongs: [],
   oauthToken: null,
   username: null,
 });

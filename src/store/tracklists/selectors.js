@@ -1,5 +1,9 @@
 import { createSelector } from "reselect";
-import { TRACKS_PER_PAGE, SESSION_HISTORY_TRACKLIST_ID } from "../constants";
+import {
+  TRACKS_PER_PAGE,
+  SESSION_HISTORY_TRACKLIST_ID,
+  SESSION_LIKES_TRACKLIST_ID,
+} from "../constants";
 import { getTracks } from "../tracks/selectors";
 import getBrowserMedia from "../browser/selectors";
 import { audio } from "../player/audio-service";
@@ -17,6 +21,12 @@ export const getTracklistById = (state, tracklistId) =>
 export const getCurrentTracklist = state => {
   const tracklists = getTracklists(state);
   return tracklists.get(tracklists.get("currentTracklistId"));
+};
+
+export const getIsTrackLiked = (state, trackId) => {
+  const likes = getTracklistById(state, SESSION_LIKES_TRACKLIST_ID);
+  return likes && likes.trackIds.contains(trackId);
+  // return likes && likes.trackIds.indexOf(trackId) !== -1;
 };
 
 //= ====================================
