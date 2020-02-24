@@ -8,20 +8,23 @@ const GenreNav = ({ genre, time }) => {
   return (
     <StyledGenreNav>
       <div className="container">
-        {Object.entries(GENRES).map(([key, value]) => {
-          return (
-            <NavLink
-              className={key === genre ? "active" : ""}
-              {...{ key }}
-              to={{
-                pathname: `/genres/${key}`,
-                // state: { g: key, ...(time ? { t: time } : {}) },
-              }}
-            >
-              {value}
-            </NavLink>
-          );
-        })}
+        <ul className="nav">
+          {Object.entries(GENRES).map(([key, value]) => {
+            return (
+              <li {...{ key }}>
+                <NavLink
+                  className={key === genre ? "active" : ""}
+                  to={{
+                    pathname: `/genres/${key}`,
+                    // state: { g: key, ...(time ? { t: time } : {}) },
+                  }}
+                >
+                  {value}
+                </NavLink>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </StyledGenreNav>
   );

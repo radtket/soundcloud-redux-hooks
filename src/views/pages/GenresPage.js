@@ -4,7 +4,9 @@ import { useParams } from "react-router-dom";
 
 import TrackGrid from "../components/TrackGrid";
 import GenreNav from "../components/GenreNav";
+import PageTitle from "../components/PageTitle";
 import { loadSearchResults } from "../../store/search/actions";
+import backgroundImage from "../../assets/images/background-4.jpg";
 
 const GenresPage = () => {
   const { id = "house" } = useParams();
@@ -15,8 +17,8 @@ const GenresPage = () => {
 
   return (
     <div>
+      <PageTitle activePage="Genres" {...{ backgroundImage }} />
       <GenreNav {...{ genre: id }} />
-      <h1>Genres</h1>
       <section className="container">
         <TrackGrid />
       </section>
