@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import StyledArtistCard from "../styles/ArtistCard";
 import { User } from "../../store/users/user";
 import { IconHeart } from "./Icons";
-import FormattedInteger from "./FormattedInteger";
+import FormattedInteger from "./Formatters/FormattedInteger";
 
 const ArtistCard = ({
   user: { avatarUrl, followersCount, username, fullName, id },

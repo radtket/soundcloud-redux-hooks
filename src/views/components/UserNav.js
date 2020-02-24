@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { User } from "../../store/users/user";
 import StyledUserNav from "../styles/UserNav";
-import FormattedInteger from "./FormattedInteger";
+import FormattedInteger from "./Formatters/FormattedInteger";
 
 const UserNav = ({
   user: {

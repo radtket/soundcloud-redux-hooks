@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Track } from "../../store/tracks/track";
-import FormattedTrackTitle from "./FormattedTrackTitle";
+import FormattedTrackTitle from "./Formatters/FormattedTrackTitle";
 import ArtworkPlay from "./ArtworkPlay";
 import { StyledHistorySong } from "../styles/HistorySidebar";
 import { IconEllipsis, IconHeart } from "./Icons";

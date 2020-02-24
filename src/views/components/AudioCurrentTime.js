@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { getPlayerTimes } from "../../store/player/selectors";
-import FormattedTime from "./FormattedTime";
+import FormattedTime from "./Formatters/FormattedTime";
 
 const AudioCurrentTime = () => {
   const { currentTime } = useSelector(getPlayerTimes);

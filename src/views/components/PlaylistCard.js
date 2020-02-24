@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { trackImageUrl } from "../../store/tracks/utils";
 import StyledPlaylistCard from "../styles/PlaylistCard";
-import FormattedTime from "./FormattedTime";
-import FormattedInteger from "./FormattedInteger";
+import FormattedTime from "./Formatters/FormattedTime";
+import FormattedInteger from "./Formatters/FormattedInteger";
 
 const PlaylistCard = ({ playlist }) => {
   const { title, tracks, user, artworkUrl } = playlist;

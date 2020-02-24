@@ -5,7 +5,7 @@ import {
   StyledPopupArrow,
   StyledPopupOverlay,
   StyledPopupContent,
-} from "./styles";
+} from "../../styles/Popup";
 
 class Popup extends PureComponent {
   constructor(props) {
