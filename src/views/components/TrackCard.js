@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import StyledTrackCard from "../styles/TrackCard";
 import { Track } from "../../store/tracks/track";
-import FormattedTrackTitle from "./FormattedTrackTitle";
+import FormattedTrackTitle from "./Formatters/FormattedTrackTitle";
 import WaveformTimeline from "./WaveformTimeline";
 import ArtworkPlay from "./ArtworkPlay";
 
