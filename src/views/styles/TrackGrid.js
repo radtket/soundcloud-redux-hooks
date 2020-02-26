@@ -4,10 +4,8 @@ const StyledTrackGrid = styled.div`
   display: flex;
   width: 100%;
   margin: 32px 0;
-  ${({ compactLayout }) => {
-    console.log({ compactLayout });
-    return compactLayout ? `flex-wrap: wrap;` : `flex-direction: column;`;
-  }}
+  ${({ compactLayout }) =>
+    compactLayout ? `flex-wrap: wrap;` : `flex-direction: column;`}
 
   > div {
     padding: 0 12px;

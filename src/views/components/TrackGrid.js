@@ -16,6 +16,7 @@ import { loadNextTracks } from "../../store/tracklists/actions";
 import StyledTrackGrid from "../styles/TrackGrid";
 import TrackCard from "./TrackCard";
 import LoadingIndicator from "./LoadingIndicator";
+import TrackCardLarge from "./TrackCardLarge";
 
 const TrackGrid = ({ compactLayout }) => {
   const dispatch = useDispatch();
@@ -45,29 +46,30 @@ const TrackGrid = ({ compactLayout }) => {
 
   return (
     <>
-      <StyledTrackGrid>
+      <StyledTrackGrid {...{ compactLayout }}>
         {tracks.map((track, idx) => {
           const { id } = track;
           const isSelected = id === selectedTrackId;
-
+          const isCompact = compactLayout || !isMediaLarge;
+          const props = {
+            isCompact: compactLayout || !isMediaLarge,
+            isPlaying: isSelected && isPlaying,
+            isSelected,
+            pause,
+            play: () => {
+              isSelected
+                ? play()
+                : dispatch(playSelectedTrack({ trackId: id, tracklistId }));
+            },
+            track,
+          };
           return (
             <div {...{ key: id + idx }}>
-              <TrackCard
-                {...{
-                  isCompact: compactLayout || !isMediaLarge,
-                  isPlaying: isSelected && isPlaying,
-                  isSelected,
-                  pause,
-                  play: () => {
-                    isSelected
-                      ? play()
-                      : dispatch(
-                          playSelectedTrack({ trackId: id, tracklistId })
-                        );
-                  },
-                  track,
-                }}
-              />
+              {isCompact ? (
+                <TrackCard {...props} />
+              ) : (
+                <TrackCardLarge {...props} />
+              )}
             </div>
           );
         })}
