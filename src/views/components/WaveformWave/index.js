@@ -90,7 +90,7 @@ const WaveformWave = ({
     <>
       <StyledTimesList
         style={{
-          bottom: waveHeight / 2,
+          bottom: height / 2,
         }}
       >
         <li>
@@ -108,8 +108,9 @@ const WaveformWave = ({
         // }}
         {...{ onClick }}
         style={{
-          bottom: `${-waveHeight / 2}px`,
-          height: waveHeight,
+          // maxHeight: height,
+          height,
+          bottom: `${-height / 2}px`,
         }}
       >
         <WaveCanvas
