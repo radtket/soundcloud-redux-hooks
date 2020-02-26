@@ -28,6 +28,8 @@ const App = () => {
     initAuth(dispatch);
   }, [dispatch]);
 
+  console.log(process.env.REACT_APP_AUTH_REDIRECT_URI);
+
   return (
     <>
       <Navbar />
