@@ -1,6 +1,4 @@
 import React, { useRef, useLayoutEffect } from "react";
-import ReactDOM from "react-dom";
-import { isEqual } from "lodash";
 import PropTypes from "prop-types";
 
 const WaveCanvas = ({
