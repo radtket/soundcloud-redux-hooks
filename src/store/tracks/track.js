@@ -8,6 +8,8 @@ import {
 
 export const Track = new Record({
   artworkUrl: null,
+  commentCount: null,
+  downloadUrl: null,
   duration: null,
   id: null,
   liked: null,
@@ -38,9 +40,14 @@ export const createTrack = ({
   userFavorite,
   userId,
   waveformUrl,
+  commentCount,
+  downloadable,
+  downloadUrl,
 }) => {
   return new Track({
     artworkUrl: trackImageUrl({ artworkUrl, user }),
+    commentCount: commentCount || 0,
+    downloadUrl: (downloadable && downloadUrl) || null,
     duration,
     id,
     liked: !!userFavorite,

@@ -6,10 +6,20 @@ import styled from "styled-components";
 import { size, position } from "polished";
 import WaveCanvas from "./WaveCanvas";
 import { getPixelRatio } from "../../../utils/helpers";
+import FormattedTime from "../Formatters/FormattedTime";
+
+const StyledTimesList = styled.ul`
+  display: flex;
+  font-size: 12px;
+  justify-content: space-between;
+  padding-right: 24px;
+  position: absolute;
+  width: 100%;
+`;
 
 const StyledWaveformWave = styled.div`
   ${size("100%")};
-  position: relative;
+  position: absolute;
   cursor: pointer;
 `;
 
@@ -34,6 +44,7 @@ const WaveformWave = ({
   pos, // num of seconds
   onClick,
   displayProgress,
+  track,
 }) => {
   const ref = useRef();
   const wrapper = ref && ref.current;
@@ -76,65 +87,79 @@ const WaveformWave = ({
   };
 
   return (
-    <StyledWaveformWave
-      {...{ ref }}
-      // onClick={e => {
-      //   const percentageOffsetX = e.nativeEvent.offsetX / width;
-      //   onClick(Math.round(percentageOffsetX * duration));
-      // }}
-      {...{ onClick }}
-    >
-      <WaveCanvas
-        {...{
-          ...sharedProps,
-          color,
-          gradientColors,
+    <>
+      <StyledTimesList
+        style={{
+          bottom: waveHeight / 2,
         }}
-      />
-      {displayProgress && (
-        <StyledWaveformWaveProgressWrap
-          style={{
-            height: `${height}px`,
-            width: `${width * (pos / duration)}px`,
-            transition: `width ${transitionDuration}ms ease-in-out`,
+      >
+        <li>
+          <FormattedTime value={displayProgress ? pos : 0} />
+        </li>
+        <li>
+          <FormattedTime unit="ms" value={track.duration} />
+        </li>
+      </StyledTimesList>
+      <StyledWaveformWave
+        {...{ ref }}
+        // onClick={e => {
+        //   const percentageOffsetX = e.nativeEvent.offsetX / width;
+        //   onClick(Math.round(percentageOffsetX * duration));
+        // }}
+        {...{ onClick }}
+        style={{
+          bottom: `${-waveHeight / 2}px`,
+          height: waveHeight,
+        }}
+      >
+        <WaveCanvas
+          {...{
+            ...sharedProps,
+            color,
+            gradientColors,
           }}
-        >
-          <WaveCanvas
-            {...{
-              ...sharedProps,
-              color: progressColor,
-              gradientColors: progressGradientColors,
-              className: "progress",
+        />
+        {displayProgress && (
+          <StyledWaveformWaveProgressWrap
+            style={{
+              height: `${height}px`,
+              width: `${width * (pos / duration)}px`,
+              transition: `width ${transitionDuration}ms ease-in-out`,
             }}
-          />
-        </StyledWaveformWaveProgressWrap>
-      )}
-    </StyledWaveformWave>
+          >
+            <WaveCanvas
+              {...{
+                ...sharedProps,
+                color: progressColor,
+                gradientColors: progressGradientColors,
+                className: "progress",
+              }}
+            />
+          </StyledWaveformWaveProgressWrap>
+        )}
+      </StyledWaveformWave>
+    </>
   );
 };
 
 WaveformWave.propTypes = {
   displayProgress: PropTypes.bool,
   barWidth: PropTypes.number,
-  color: PropTypes.string,
   duration: PropTypes.number,
-  gradientColors: PropTypes.arrayOf(
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string]))
-  ),
   height: PropTypes.number,
   onClick: PropTypes.func,
   peaks: PropTypes.arrayOf(PropTypes.number),
   pos: PropTypes.number, // num of seconds
-  progressColor: PropTypes.string,
-  progressGradientColors: PropTypes.arrayOf(
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string]))
-  ),
   transitionDuration: PropTypes.number,
+
+  color: PropTypes.string,
+  gradientColors: PropTypes.arrayOf(PropTypes.string),
+  progressColor: PropTypes.string,
+  progressGradientColors: PropTypes.arrayOf(PropTypes.string),
 };
 
 WaveformWave.defaultProps = {
   barWidth: null,
-  color: "#bada55",
   displayProgress: false,
   duration: 0,
   height: 30,
@@ -142,6 +167,11 @@ WaveformWave.defaultProps = {
   peaks: [],
   pos: 0,
   transitionDuration: 200,
+
+  color: "#bada55",
+  gradientColors: null,
+  progressColor: null,
+  progressGradientColors: null,
 };
 
 export default WaveformWave;

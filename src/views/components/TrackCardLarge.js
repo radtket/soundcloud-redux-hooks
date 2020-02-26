@@ -1,11 +1,19 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import StyledTrackCardLarge from "../styles/TrackCardLarge";
-import WaveformTimeline from "./WaveformTimeline";
 import FormattedTrackTitle from "./Formatters/FormattedTrackTitle";
-import IconButton from "./IconButton";
-import { IconPlay } from "./Icons";
-import { StyledPlayHoverButton } from "../styles/Buttons";
+import {
+  IconPlay,
+  IconHeadphones,
+  IconHeart,
+  IconComment,
+  IconPause,
+} from "./Icons";
+import { StyledTrackCardLargePlay } from "../styles/Buttons";
+import ExampleWaveform from "./WaveformWave/Example";
+import FormattedInteger from "./Formatters/FormattedInteger";
+import { Track } from "../../store/tracks/track";
 
 const TrackCardLarge = ({
   isCompact,
@@ -19,14 +27,30 @@ const TrackCardLarge = ({
   return (
     <StyledTrackCardLarge>
       <figure className="cover">
-        <img src={track.artworkUrl} />
+        <img alt={track.title} src={track.artworkUrl} />
       </figure>
-
       <div className="content">
+        <ul className="track-card__stats">
+          <li>
+            <IconHeadphones />
+            <FormattedInteger value={track.playbackCount} />
+          </li>
+          <li>
+            <IconHeart />
+            <FormattedInteger value={track.likesCount} />
+          </li>
+          <li>
+            <IconComment />
+            <FormattedInteger value={track.commentCount} />
+          </li>
+        </ul>
         <div className="flex-row">
-          <StyledPlayHoverButton onClick={isPlaying ? pause : play}>
-            <IconPlay />
-          </StyledPlayHoverButton>
+          <StyledTrackCardLargePlay onClick={isPlaying ? pause : play}>
+            {!isPlaying ? <IconPause /> : <IconPlay />}
+            <span className="visuallyhidden">
+              {!isPlaying ? "Pause" : "Play"}
+            </span>
+          </StyledTrackCardLargePlay>
           <figcaption className="ellipsis-one-line">
             <h6 className="ellipsis-one-line">
               <FormattedTrackTitle title={track.title} />
@@ -40,15 +64,24 @@ const TrackCardLarge = ({
             </cite>
           </figcaption>
         </div>
-
-        <WaveformTimeline
+        <ExampleWaveform
           background="#5C3E54"
           displayProgress={isSelected}
+          {...{ track }}
           url={track.waveformUrl}
         />
       </div>
     </StyledTrackCardLarge>
   );
+};
+
+TrackCardLarge.propTypes = {
+  isCompact: PropTypes.bool.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  pause: PropTypes.func.isRequired,
+  play: PropTypes.func.isRequired,
+  track: PropTypes.instanceOf(Track).isRequired,
 };
 
 export default TrackCardLarge;

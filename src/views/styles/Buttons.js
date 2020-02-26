@@ -385,3 +385,66 @@ export const StyledPlayHoverButton = styled.button`
     border: 0;
   }
 `;
+
+export const StyledTrackCardLargePlay = styled.button`
+  ${size("48px")};
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  display: inline-block;
+  outline: 0;
+  position: relative;
+  transform: translateY(0) scale(1);
+  transition: transform 0.9s ease 0.35s, opacity 0.9s ease 0.35s;
+  vertical-align: middle;
+
+    &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:before {
+    ${size("100%")};
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(17, 21, 23, 0.3);
+    border-color: #B82E6D;
+    border-radius: 100%;
+    border-style: solid;
+    border-width: 2px;
+    transition: background-color 0.3s ease, transform 0.3s ease,
+      border-color 0.3s ease;
+
+    /* @media screen and (min-width: 64em) {
+      border-width: 4px;
+    } */
+  }
+
+
+    &:hover {
+    &:before {
+      transform: scale(1.2);
+      background-color: rgba(17, 21, 23, 0.8);
+      border-color: #fff;
+    }
+
+    svg {
+      fill: #fff;
+    }
+  }
+
+  svg {
+    height: 48px;
+    display: inline-block;
+    width: 16px;
+    transition: fill 0.3s ease;
+       fill: #B82E6D;
+       position: relative;
+  }
+}`;

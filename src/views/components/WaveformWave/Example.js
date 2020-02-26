@@ -7,7 +7,7 @@ import WaveformWave from ".";
 import { getPlayerTimes } from "../../../store/player/selectors";
 import { audio } from "../../../store/player/audio-service";
 
-const ExampleWaveform = ({ displayProgress, url }) => {
+const ExampleWaveform = ({ track, displayProgress, url }) => {
   const [state, setState] = useState({ isReady: false });
   const { duration, currentTime } = useSelector(getPlayerTimes);
 
@@ -49,11 +49,9 @@ const ExampleWaveform = ({ displayProgress, url }) => {
         duration,
         // onClick,
         displayProgress,
+        track,
       }}
-      progressGradientColors={[
-        [0, "#888"],
-        [1, "#aaa"],
-      ]}
+      progressGradientColors={["#A53377", "#C794B3"]}
     />
   );
 };

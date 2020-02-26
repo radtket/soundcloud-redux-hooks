@@ -60,11 +60,12 @@ const WaveCanvas = ({
     const scale = peaks.length / width;
 
     if (gradientColors) {
-      const gradient = context.createLinearGradient(0, 0, width, 0);
-      gradientColors.forEach(([color1, color2]) => {
+      const gradient = context.createLinearGradient(0, 0, 0, height / 2);
+      gradientColors.forEach((color_, idx) => {
         // The first position of each array is the stop position between 0 and 1
         // The second position is the color
-        gradient.addColorStop(color1, color2);
+        const stopPosition = idx % 2 === 0 ? 0 : 1;
+        gradient.addColorStop(stopPosition, color_);
       });
       context.fillStyle = gradient;
     } else {
@@ -98,11 +99,7 @@ WaveCanvas.propTypes = {
   peaks: PropTypes.arrayOf(PropTypes.number.isRequired),
   pixelRatio: PropTypes.number,
   color: PropTypes.string,
-  gradientColors: PropTypes.arrayOf(
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired
-    )
-  ),
+  gradientColors: PropTypes.arrayOf(PropTypes.string),
 };
 
 WaveCanvas.defaultProps = {

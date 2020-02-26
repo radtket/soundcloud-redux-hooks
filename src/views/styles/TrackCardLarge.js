@@ -13,7 +13,7 @@ const StyledTrackCardLarge = styled.div`
     border-radius: 10px;
     position: relative;
     margin: 24px 0 24px 24px;
-    width: 200px;
+    width: 225px;
 
     img {
       width: 100%;
@@ -25,8 +25,38 @@ const StyledTrackCardLarge = styled.div`
     }
   }
 
+  .track-card__stats {
+    color: #777777;
+    font-size: 14px;
+    line-height: 1;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: flex-end;
+
+    li {
+      display: flex;
+      align-items: center;
+      margin-right: 24px;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+      svg {
+        fill: #cccccc;
+        height: 14px;
+        vertical-align: middle;
+        margin-top: 1px;
+      }
+
+      span {
+        margin-left: 6px;
+      }
+    }
+  }
+
   .content {
-    margin-top: 48px;
+    margin-top: 24px;
     padding-left: 24px;
     display: flex;
     flex-direction: column;
