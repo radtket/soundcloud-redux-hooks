@@ -28,8 +28,6 @@ const App = () => {
     initAuth(dispatch);
   }, [dispatch]);
 
-  console.log(process.env.REACT_APP_AUTH_REDIRECT_URI);
-
   return (
     <>
       <Navbar />
@@ -49,9 +47,7 @@ const App = () => {
         <Route component={LikesPage} path="/me/likes" />
         <Route component={StreamPage} path="/me/stream" />
         <Route component={FollowingPage} path="/me/followings" />
-        <Route path="/callback">
-          <Callback />
-        </Route>
+        <Route component={Callback} path="/callback" />
       </main>
       <Player />
       <HistorySidebar />

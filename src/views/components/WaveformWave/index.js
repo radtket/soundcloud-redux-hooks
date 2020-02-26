@@ -2,7 +2,24 @@
 import React, { useRef, useState, useEffect, useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 
+import styled from "styled-components";
+import { size, position } from "polished";
 import WaveCanvas from "./WaveCanvas";
+import { getPixelRatio } from "../../../utils/helpers";
+
+const StyledWaveformWave = styled.div`
+  ${size("100%")};
+  position: relative;
+  cursor: pointer;
+`;
+
+const StyledWaveformWaveProgressWrap = styled.div`
+  ${position("absolute", 0, null, 0, 0)};
+  z-index: 2;
+  overflow: hidden;
+  display: block;
+  box-sizing: border-box;
+`;
 
 const WaveformWave = ({
   barWidth,
@@ -16,11 +33,11 @@ const WaveformWave = ({
   duration,
   pos, // num of seconds
   onClick,
-  pixelRatio,
   displayProgress,
 }) => {
   const ref = useRef();
   const wrapper = ref && ref.current;
+  const pixelRatio = getPixelRatio();
   const [state, setState] = useState({
     width: (wrapper && wrapper.clientWidth) || 0,
     waveWidth: (wrapper && wrapper.clientWidth + pixelRatio) || 0,
@@ -50,63 +67,54 @@ const WaveformWave = ({
   });
 
   const { waveHeight, waveWidth, width } = state;
+
+  const sharedProps = {
+    barWidth,
+    height: waveHeight,
+    peaks,
+    width: waveWidth,
+  };
+
   return (
-    <div
+    <StyledWaveformWave
       {...{ ref }}
       // onClick={e => {
       //   const percentageOffsetX = e.nativeEvent.offsetX / width;
       //   onClick(Math.round(percentageOffsetX * duration));
       // }}
       {...{ onClick }}
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "100%",
-        cursor: "pointer",
-      }}
     >
       <WaveCanvas
         {...{
-          barWidth,
+          ...sharedProps,
           color,
           gradientColors,
-          height: waveHeight,
-          peaks,
-          width: waveWidth,
         }}
       />
-      <div
-        style={{
-          position: "absolute",
-          zIndex: 2,
-          left: 0,
-          top: 0,
-          bottom: 0,
-          overflow: "hidden",
-          height: `${height}px`,
-          width: displayProgress ? `${width * (pos / duration)}px` : 0,
-          display: "block",
-          transition: `width ${transitionDuration}ms ease-in-out`,
-          boxSizing: "border-box",
-        }}
-      >
-        <WaveCanvas
-          {...{
-            barWidth,
-            className: "progress",
-            color: progressColor,
-            gradientColors: progressGradientColors,
-            height: waveHeight,
-            peaks,
-            width: waveWidth,
+      {displayProgress && (
+        <StyledWaveformWaveProgressWrap
+          style={{
+            height: `${height}px`,
+            width: `${width * (pos / duration)}px`,
+            transition: `width ${transitionDuration}ms ease-in-out`,
           }}
-        />
-      </div>
-    </div>
+        >
+          <WaveCanvas
+            {...{
+              ...sharedProps,
+              color: progressColor,
+              gradientColors: progressGradientColors,
+              className: "progress",
+            }}
+          />
+        </StyledWaveformWaveProgressWrap>
+      )}
+    </StyledWaveformWave>
   );
 };
 
 WaveformWave.propTypes = {
+  displayProgress: PropTypes.bool,
   barWidth: PropTypes.number,
   color: PropTypes.string,
   duration: PropTypes.number,
@@ -116,7 +124,6 @@ WaveformWave.propTypes = {
   height: PropTypes.number,
   onClick: PropTypes.func,
   peaks: PropTypes.arrayOf(PropTypes.number),
-  pixelRatio: PropTypes.number,
   pos: PropTypes.number, // num of seconds
   progressColor: PropTypes.string,
   progressGradientColors: PropTypes.arrayOf(
@@ -128,13 +135,12 @@ WaveformWave.propTypes = {
 WaveformWave.defaultProps = {
   barWidth: null,
   color: "#bada55",
-  peaks: [],
+  displayProgress: false,
   duration: 0,
   height: 30,
-  pos: 0,
   onClick: () => {},
-  // eslint-disable-next-line no-restricted-globals
-  pixelRatio: window.devicePixelRatio || screen.deviceXDPI / screen.logicalXDPI,
+  peaks: [],
+  pos: 0,
   transitionDuration: 200,
 };
 

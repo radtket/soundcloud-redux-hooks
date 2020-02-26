@@ -9,6 +9,7 @@ const WaveCanvas = ({
   pixelRatio,
   gradientColors,
   width,
+  ...props
 }) => {
   const ref = useRef(null);
 
@@ -28,21 +29,21 @@ const WaveCanvas = ({
       return max;
     };
 
-    const waveCanvasCtx = canvas.getContext("2d");
-    waveCanvasCtx.canvas.width = width;
-    waveCanvasCtx.canvas.height = height;
-    waveCanvasCtx.canvas.style.width = `${Math.round(width / pixelRatio)}px`;
-    waveCanvasCtx.canvas.style.height = `${Math.round(height / pixelRatio)}px`;
+    const context = canvas.getContext("2d");
+    context.canvas.width = width;
+    context.canvas.height = height;
+    context.canvas.style.width = `${Math.round(width / pixelRatio)}px`;
+    context.canvas.style.height = `${Math.round(height / pixelRatio)}px`;
 
-    waveCanvasCtx.clearRect(0, 0, width, height);
+    context.clearRect(0, 0, width, height);
 
     // Bar wave draws the bottom only as a reflection of the top,
     // so we don't need negative values
-
-    if (peaks.some(val => val < 0)) {
+    let samples = peaks;
+    if (samples.some(val => val < 0)) {
       // If the first value is negative, add 1 to the filtered indices
-      const indexOffset = peaks[0] < 0 ? 1 : 0;
-      peaks = peaks.filter((_, index) => (index + indexOffset) % 2 == 0);
+      const indexOffset = samples[0] < 0 ? 1 : 0;
+      samples = samples.filter((_, index) => (index + indexOffset) % 2 == 0);
     }
 
     // A half-pixel offset makes lines crisp
@@ -59,18 +60,18 @@ const WaveCanvas = ({
     const scale = peaks.length / width;
 
     if (gradientColors) {
-      const gradient = waveCanvasCtx.createLinearGradient(0, 0, width, 0);
+      const gradient = context.createLinearGradient(0, 0, width, 0);
       gradientColors.forEach(([color1, color2]) => {
         // The first position of each array is the stop position between 0 and 1
         // The second position is the color
         gradient.addColorStop(color1, color2);
       });
-      waveCanvasCtx.fillStyle = gradient;
+      context.fillStyle = gradient;
     } else {
-      waveCanvasCtx.fillStyle = color;
+      context.fillStyle = color;
     }
 
-    if (!waveCanvasCtx) {
+    if (!context) {
       return;
     }
 
@@ -79,15 +80,15 @@ const WaveCanvas = ({
       if (h === 0) {
         h = 1;
       }
-      waveCanvasCtx.fillRect(i + $, halfH - h + offsetY, bar + $, h * 2);
+      context.fillRect(i + $, halfH - h + offsetY, bar + $, h * 2);
     }
-  }, [barWidth, height, peaks, pixelRatio, width]);
+  }, [barWidth, color, gradientColors, height, peaks, pixelRatio, width]);
 
   if (!peaks) {
     return null;
   }
 
-  return <canvas {...{ ref }} />;
+  return <canvas {...{ ...props, ref }} />;
 };
 
 WaveCanvas.propTypes = {

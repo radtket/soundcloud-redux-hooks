@@ -61,3 +61,7 @@ export const convertAttr = attr => {
   const key = attr.replace(/[-:]/g, "").toLowerCase();
   return HTML_ELEMENTS[key] || attr;
 };
+
+export const getPixelRatio = () =>
+  // eslint-disable-next-line no-restricted-globals
+  window.devicePixelRatio || screen.deviceXDPI / screen.logicalXDPI;
