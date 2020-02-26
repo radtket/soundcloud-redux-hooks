@@ -154,9 +154,9 @@ class WaveformWave extends Component {
           }}
         >
           <WaveCanvas
-            ref={instance => {
-              this.progress = instance;
-            }}
+            // ref={instance => {
+            //   this.progress = instance;
+            // }}
             {...{
               barWidth,
               className: "progress",
