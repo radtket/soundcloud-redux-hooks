@@ -118,7 +118,9 @@ const api = {
   loginToSoundCloud: () => {
     SC.initialize({
       client_id: process.env.REACT_APP_AUTH_CLIENT_ID,
-      redirect_uri: `${window.location.protocol}//${window.location.host}/callback`,
+      redirect_uri:
+        process.env.REACT_APP_AUTH_REDIRECT_URI ||
+        `${window.location.protocol}//${window.location.host}/callback`,
     });
 
     return SC.connect()
