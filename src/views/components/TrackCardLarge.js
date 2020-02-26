@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import StyledTrackCardLarge from "../styles/TrackCardLarge";
+import StyledTrackCardLarge, {
+  StyledTrackCardStatsLists,
+} from "../styles/TrackCardLarge";
 import FormattedTrackTitle from "./Formatters/FormattedTrackTitle";
 import {
   IconPlay,
@@ -30,7 +32,7 @@ const TrackCardLarge = ({
         <img alt={track.title} src={track.artworkUrl} />
       </figure>
       <div className="content">
-        <ul className="track-card__stats">
+        <StyledTrackCardStatsLists>
           <li>
             <IconHeadphones />
             <FormattedInteger value={track.playbackCount} />
@@ -43,12 +45,12 @@ const TrackCardLarge = ({
             <IconComment />
             <FormattedInteger value={track.commentCount} />
           </li>
-        </ul>
+        </StyledTrackCardStatsLists>
         <div className="flex-row">
           <StyledTrackCardLargePlay onClick={isPlaying ? pause : play}>
-            {!isPlaying ? <IconPause /> : <IconPlay />}
+            {isPlaying ? <IconPause /> : <IconPlay />}
             <span className="visuallyhidden">
-              {!isPlaying ? "Pause" : "Play"}
+              {isPlaying ? "Pause" : "Play"}
             </span>
           </StyledTrackCardLargePlay>
           <figcaption className="ellipsis-one-line">

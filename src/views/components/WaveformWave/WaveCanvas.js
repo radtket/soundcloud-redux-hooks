@@ -43,7 +43,7 @@ const WaveCanvas = ({
     if (samples.some(val => val < 0)) {
       // If the first value is negative, add 1 to the filtered indices
       const indexOffset = samples[0] < 0 ? 1 : 0;
-      samples = samples.filter((_, index) => (index + indexOffset) % 2 == 0);
+      samples = samples.filter((_, index) => (index + indexOffset) % 2 === 0);
     }
 
     // A half-pixel offset makes lines crisp

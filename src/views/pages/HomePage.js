@@ -21,7 +21,7 @@ const HomePage = () => {
     <>
       <Hero />
       <section className="container">
-        <TrackGrid />
+        <TrackGrid compactLayout />
       </section>
     </>
   );

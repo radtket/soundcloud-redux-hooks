@@ -2,14 +2,17 @@ import styled from "styled-components";
 
 const StyledTrackGrid = styled.div`
   display: flex;
-  flex-wrap: wrap;
   width: 100%;
   margin: 32px 0;
+  ${({ compactLayout }) => {
+    console.log({ compactLayout });
+    return compactLayout ? `flex-wrap: wrap;` : `flex-direction: column;`;
+  }}
 
   > div {
     padding: 0 12px;
     margin-bottom: 30px;
-    width: 20%;
+    width: ${({ compactLayout }) => (compactLayout ? "20%" : "100%")};
   }
 `;
 

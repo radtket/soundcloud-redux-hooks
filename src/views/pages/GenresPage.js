@@ -20,7 +20,7 @@ const GenresPage = () => {
       <PageTitle activePage="Genres" {...{ backgroundImage }} />
       <GenreNav {...{ genre: id }} />
       <section className="container">
-        <TrackGrid />
+        <TrackGrid compactLayout />
       </section>
     </div>
   );

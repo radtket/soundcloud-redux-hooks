@@ -20,7 +20,7 @@ const SearchPage = () => {
   return (
     <section className="container">
       <h1>SearchPage</h1>
-      <TrackGrid />
+      <TrackGrid compactLayout />
     </section>
   );
 };

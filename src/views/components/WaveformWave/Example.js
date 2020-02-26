@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import request from "superagent";
+import PropTypes from "prop-types";
 import WaveformWave from ".";
 
 // Player
 import { getPlayerTimes } from "../../../store/player/selectors";
-import { audio } from "../../../store/player/audio-service";
+import { Track } from "../../../store/tracks/track";
 
 const ExampleWaveform = ({ track, displayProgress, url }) => {
   const [state, setState] = useState({ isReady: false });
@@ -47,13 +48,19 @@ const ExampleWaveform = ({ track, displayProgress, url }) => {
         peaks: samples,
         height,
         duration,
-        // onClick,
+        onClick: e => console.log(e),
         displayProgress,
         track,
       }}
       progressGradientColors={["#A53377", "#C794B3"]}
     />
   );
+};
+
+ExampleWaveform.propTypes = {
+  displayProgress: PropTypes.bool.isRequired,
+  url: PropTypes.string.isRequired,
+  track: PropTypes.instanceOf(Track).isRequired,
 };
 
 export default ExampleWaveform;

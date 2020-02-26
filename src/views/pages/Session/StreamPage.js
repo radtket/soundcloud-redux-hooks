@@ -29,7 +29,7 @@ const StreamPage = () => {
     <>
       <PageTitle activePage="Stream" {...{ backgroundImage }} />
       <section className="container">
-        <TrackGrid />
+        <TrackGrid compactLayout />
       </section>
     </>
   );

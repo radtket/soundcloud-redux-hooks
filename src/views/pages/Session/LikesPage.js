@@ -29,7 +29,7 @@ const LikesPage = () => {
     <>
       <PageTitle activePage="Liked" {...{ backgroundImage }} />
       <section className="container">
-        <TrackGrid />
+        <TrackGrid compactLayout />
       </section>
     </>
   );
