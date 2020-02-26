@@ -17,6 +17,7 @@ const WaveformWave = ({
   pos, // num of seconds
   onClick,
   pixelRatio,
+  displayProgress,
 }) => {
   const ref = useRef();
   const wrapper = ref && ref.current;
@@ -83,7 +84,7 @@ const WaveformWave = ({
           bottom: 0,
           overflow: "hidden",
           height: `${height}px`,
-          width: `${width * (pos / duration)}px`,
+          width: displayProgress ? `${width * (pos / duration)}px` : 0,
           display: "block",
           transition: `width ${transitionDuration}ms ease-in-out`,
           boxSizing: "border-box",
@@ -127,22 +128,13 @@ WaveformWave.propTypes = {
 WaveformWave.defaultProps = {
   barWidth: null,
   color: "#bada55",
-  gradientColors: [
-    [0, "#888"],
-    [1, "#aaa"],
-  ],
   peaks: [],
   duration: 0,
   height: 30,
   pos: 0,
   onClick: () => {},
-  progressGradientColors: [
-    [0, "#888"],
-    [1, "#aaa"],
-  ],
   // eslint-disable-next-line no-restricted-globals
   pixelRatio: window.devicePixelRatio || screen.deviceXDPI / screen.logicalXDPI,
-  progressColor: "#555555",
   transitionDuration: 200,
 };
 

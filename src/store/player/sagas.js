@@ -18,7 +18,7 @@ import { INIT_APP } from "../app/actions";
 function* playNextTrack() {
   const { nextTrackId } = yield select(getPlayerTracklistCursor);
   if (nextTrackId) {
-    yield put(playSelectedTrack(nextTrackId));
+    yield put(playSelectedTrack({ trackId: nextTrackId }));
   }
 }
 
