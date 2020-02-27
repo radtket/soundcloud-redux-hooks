@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { normalize, hideVisually } from "polished";
+import { normalize, hideVisually, padding } from "polished";
 
 export const BODY_COLOR = "#141625";
 // color: #F1F1F2;
@@ -95,11 +95,13 @@ export default createGlobalStyle`
   }
 
   .container {
-    padding-left: 24px;
-    padding-right: 24px;
+    ${padding(null, "24px")};
     margin: 0 auto;
-    max-width: 1200px;
     position: relative;
+
+    @media only screen and (min-width: 992px) {
+      ${padding(null, "10%")};
+    }
   }
 
   .ellipsis-one-line {
