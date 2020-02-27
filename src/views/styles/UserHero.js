@@ -3,12 +3,11 @@ import { position, size, padding } from "polished";
 import { BODY_COLOR } from "./GlobalStyles";
 
 const StyledUserHero = styled.div`
-  background: ${({ visual }) => (visual ? `url(${visual})` : "#bada55")};
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
-  /* height: 500px; */
+  transition: background-image 1s ease-in-out;
 
   &:before {
     ${position("absolute", null, 0, 0, 0)};

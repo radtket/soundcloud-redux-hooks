@@ -35,7 +35,7 @@ const FollowingsGrid = () => {
 
   return (
     <>
-      <StyledTrackGrid>
+      <StyledTrackGrid compactLayout>
         {tracks.map(user => {
           return (
             <div key={user.id}>

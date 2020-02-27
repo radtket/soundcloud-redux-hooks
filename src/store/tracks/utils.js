@@ -5,6 +5,7 @@ import {
   WAVEFORM_IMAGE_HOST,
   WAVEFORM_JSON_HOST,
 } from "../constants";
+import AVATAR_PLACEHOLDER from "../../assets/svg/avatar-placeholder.svg";
 
 const EN_DASH = String.fromCharCode(8211);
 
@@ -22,6 +23,9 @@ export const trackImageUrl = (
   size = IMAGE_XLARGE_SIZE
 ) => {
   const image = artworkUrl || avatarUrl || user.avatarUrl;
+  if (image.includes("default_avatar_large.png")) {
+    return AVATAR_PLACEHOLDER;
+  }
   return image ? image.replace(IMAGE_DEFAULT_SIZE, size) : "";
 };
 

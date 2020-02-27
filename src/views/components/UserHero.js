@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 import { createSelector } from "reselect";
 import StyledUserHero from "../styles/UserHero";
 import { User } from "../../store/users/user";
-import SocialMediaIcon from "./SocialMediaIcon";
 import renderHTML from "../../utils/render-html";
 import { getFollowings } from "../../store/session/selectors";
 import { StyledButton } from "../styles/Buttons";
 import UserHeroPlayButton from "./UserHeroPlayButton";
 import { toggleFollowRequest } from "../../store/session/actions";
 import SocialMediaLink from "./SocialMediaLink";
+import BG_PLACEHOLDER from "../../assets/svg/bg-placeholder.svg";
 
 const UserHero = ({
   user: { avatarUrl, bannerUrl, description, social, username, id },
@@ -21,7 +21,11 @@ const UserHero = ({
   );
 
   return (
-    <StyledUserHero {...{ visual: bannerUrl }}>
+    <StyledUserHero
+      style={{
+        backgroundImage: `url(${bannerUrl || BG_PLACEHOLDER})`,
+      }}
+    >
       <div className="container">
         <header className="entry-header">
           <div className="entry-header__inner">

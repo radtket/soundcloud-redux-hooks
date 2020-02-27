@@ -6,7 +6,7 @@ const StyledArtistCard = styled.div`
 
   figure {
     img {
-      max-height: 150px;
+      width: 85%;
       margin: auto;
       border-radius: 50%;
       overflow: hidden;
