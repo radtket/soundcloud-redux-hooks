@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { size, padding } from "polished";
-import StyledArtworkPlay from "./ArtworkPlay";
+import { StyledArtworkPlay } from "./ArtworkPlay";
 
 export const StyledHistorySong = styled.li`
   display: flex;

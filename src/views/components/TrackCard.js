@@ -5,7 +5,7 @@ import StyledTrackCard from "../styles/TrackCard";
 import { Track } from "../../store/tracks/track";
 import FormattedTrackTitle from "./Formatters/FormattedTrackTitle";
 import WaveformTimeline from "./WaveformTimeline";
-import ArtworkPlay from "./ArtworkPlay";
+import ArtworkPlayRecordSpin from "./ArtworkPlayRecordSpin";
 
 const TrackCard = ({
   isCompact,
@@ -17,7 +17,7 @@ const TrackCard = ({
 }) => {
   return (
     <StyledTrackCard>
-      <ArtworkPlay
+      <ArtworkPlayRecordSpin
         onClick={isPlaying ? pause : play}
         {...{ isSelected, track, isPlaying }}
       />

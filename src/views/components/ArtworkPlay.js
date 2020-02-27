@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { IconPause, IconPlay } from "./Icons";
 import { Track } from "../../store/tracks/track";
-import StyledArtworkPlay from "../styles/ArtworkPlay";
+import { StyledArtworkPlay } from "../styles/ArtworkPlay";
 
 const ArtworkPlay = ({ isSelected, onClick, track, isPlaying, ...props }) => {
   return (
