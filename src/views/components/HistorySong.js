@@ -8,14 +8,7 @@ import { IconEllipsis, IconHeart } from "./Icons";
 import Popup from "./Popup";
 import StyledDropdownMenu from "../styles/DropdownMenu";
 
-const HistorySong = ({
-  isCompact,
-  isPlaying,
-  isSelected,
-  pause,
-  play,
-  track,
-}) => {
+const HistorySong = ({ isPlaying, isSelected, pause, play, track }) => {
   return (
     <StyledHistorySong
       className={`tracklist-row ${isSelected ? "is-active" : ""}`}
@@ -83,7 +76,6 @@ const HistorySong = ({
 };
 
 HistorySong.propTypes = {
-  isCompact: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   isSelected: PropTypes.bool.isRequired,
   pause: PropTypes.func.isRequired,

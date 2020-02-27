@@ -32,8 +32,6 @@ const WaveCanvas = ({
     const context = canvas.getContext("2d");
     context.canvas.width = width;
     context.canvas.height = height;
-    context.canvas.style.width = `${Math.round(width / pixelRatio)}px`;
-    context.canvas.style.height = `${Math.round(height / pixelRatio)}px`;
 
     context.clearRect(0, 0, width, height);
 
@@ -89,7 +87,18 @@ const WaveCanvas = ({
     return null;
   }
 
-  return <canvas {...{ ...props, ref }} />;
+  return (
+    <canvas
+      {...{
+        ...props,
+        ref,
+        style: {
+          width: `${Math.round(width / pixelRatio)}px`,
+          height: `${Math.round(height / pixelRatio)}px`,
+        },
+      }}
+    />
+  );
 };
 
 WaveCanvas.propTypes = {

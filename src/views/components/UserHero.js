@@ -10,17 +10,14 @@ import { getFollowings } from "../../store/session/selectors";
 import { StyledButton } from "../styles/Buttons";
 import UserHeroPlayButton from "./UserHeroPlayButton";
 import { toggleFollowRequest } from "../../store/session/actions";
+import SocialMediaLink from "./SocialMediaLink";
 
 const UserHero = ({
   user: { avatarUrl, bannerUrl, description, social, username, id },
 }) => {
   const dispatch = useDispatch();
-  const { isFollowing } = useSelector(
-    createSelector(getFollowings, followings => {
-      return {
-        isFollowing: Boolean(followings[id]),
-      };
-    })
+  const isFollowing = useSelector(
+    createSelector(getFollowings, followings => Boolean(followings[id]))
   );
 
   return (
@@ -51,23 +48,9 @@ const UserHero = ({
                   {isFollowing ? "Unfollow" : "Follow"}
                 </StyledButton>
                 <div className="user-links">
-                  {social.map(item => {
-                    const { id: key, service, title, url } = item;
-                    return (
-                      <a
-                        {...{ key, title }}
-                        aria-label={title || service}
-                        href={url}
-                        rel="external noopener noreferrer"
-                        target="blank"
-                      >
-                        <span className="visuallyhidden">
-                          {title || service}
-                        </span>
-                        <SocialMediaIcon {...{ service }} />
-                      </a>
-                    );
-                  })}
+                  {social.map(item => (
+                    <SocialMediaLink {...{ ...item, key: item.id }} />
+                  ))}
                 </div>
               </div>
             </figcaption>

@@ -44,7 +44,6 @@ const HistorySidebar = () => {
               <HistorySong
                 {...{
                   key: `${id}-history-playlist`,
-                  isCompact: false,
                   isPlaying: isSelected && isPlaying,
                   isSelected,
                   pause,
