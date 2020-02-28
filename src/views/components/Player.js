@@ -30,6 +30,7 @@ import { StyledFavoriteButton } from "../styles/Buttons";
 import RepeatButton from "./PlayerControls/RepeatButton";
 import VolumeControl from "./PlayerControls/VolumeControl";
 import { toggleLikeRequest } from "../../store/session/actions";
+import ShuffleButton from "./PlayerControls/ShuffleButton";
 
 const Player = () => {
   const dispatch = useDispatch();
@@ -128,6 +129,7 @@ const Player = () => {
           >
             <IconNext />
           </IconButton>
+          <ShuffleButton />
         </nav>
         <div className="player-timeline">
           <AudioCurrentTime />

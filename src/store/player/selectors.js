@@ -2,10 +2,32 @@ import { createSelector } from "reselect";
 import { getTrackById } from "../tracks/selectors";
 import { getLikes, getOauthToken } from "../session/selectors";
 
-const getTracklistCursor = ({ selectedTrackId, trackIds }) => {
-  const index = trackIds.indexOf(selectedTrackId);
+const getRandomTrack = ({ selectedTrackId, trackIds }) => {
+  const randomIndex = Math.floor(Math.random() * (trackIds.size - 1) + 0);
+  const randomTrack = trackIds.get(randomIndex);
+
+  if (selectedTrackId === randomTrack) {
+    return getRandomTrack({ selectedTrackId, trackIds });
+  }
+
+  return {
+    randomTrack,
+    randomIndex,
+  };
+};
+
+const getTracklistCursor = ({ selectedTrackId, trackIds, isShuffle }) => {
+  let index = trackIds.indexOf(selectedTrackId);
   let nextTrackId = null;
   let previousTrackId = null;
+
+  if (isShuffle) {
+    const { randomIndex } = getRandomTrack({
+      selectedTrackId,
+      trackIds,
+    });
+    index = randomIndex;
+  }
 
   if (index !== -1) {
     if (index < trackIds.size - 1) {
@@ -35,6 +57,8 @@ export const getPlayerTracklistId = state => state.player.tracklistId;
 
 export const getIsHistoryDrawerOpen = state => state.player.isHistoryDrawerOpen;
 
+export const getIsShuffle = state => state.player.isShuffle;
+
 export const getPlayerTrack = state => {
   const trackId = getPlayerTrackId(state);
   return getTrackById(state, trackId);
@@ -46,9 +70,13 @@ export const getPlayerTracklist = state => {
 };
 
 export const getPlayerTracklistCursor = state => {
-  const selectedTrackId = getPlayerTrackId(state);
   const { trackIds } = getPlayerTracklist(state);
-  return getTracklistCursor({ selectedTrackId, trackIds });
+
+  return getTracklistCursor({
+    selectedTrackId: getPlayerTrackId(state),
+    trackIds,
+    isShuffle: getIsShuffle(state),
+  });
 };
 
 export const getPlayerState = createSelector(
@@ -57,18 +85,22 @@ export const getPlayerState = createSelector(
   getPlayerTracklistCursor,
   getLikes,
   getOauthToken,
-  (player, track_, { nextTrackId, previousTrackId }, likes, token) => {
+  (
+    { isPlaying, isHistoryDrawerOpen, tracklistId },
+    track,
+    { nextTrackId, previousTrackId },
+    likes,
+    oauthToken
+  ) => {
     return {
-      tracklistId: player.tracklistId,
-      isPlaying: player.isPlaying,
-      nextTrack: getPlayerTracklistCursor.nextTrackId,
-      previousTrack: getPlayerTracklistCursor.previousTrackId,
-      track: track_,
-      liked: Boolean(track_ && likes[track_.id]),
-      oauthToken: token,
+      isHistoryDrawerOpen,
+      isPlaying,
+      liked: Boolean(track && likes[track.id]),
       nextTrackId,
+      oauthToken,
       previousTrackId,
-      isHistoryDrawerOpen: player.isHistoryDrawerOpen,
+      track,
+      tracklistId,
     };
   }
 );

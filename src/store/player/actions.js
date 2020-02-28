@@ -2,6 +2,7 @@ export const AUDIO_ENDED = "AUDIO_ENDED";
 export const AUDIO_PAUSED = "AUDIO_PAUSED";
 export const AUDIO_PLAYING = "AUDIO_PLAYING";
 export const AUDIO_REPEAT_CHANGED = "AUDIO_REPEAT_CHANGED";
+export const AUDIO_SHUFFLE_CHANGED = "AUDIO_SHUFFLE_CHANGED";
 export const AUDIO_TIME_UPDATED = "AUDIO_TIME_UPDATED";
 export const AUDIO_VOLUME_CHANGED = "AUDIO_VOLUME_CHANGED";
 export const PLAY_SELECTED_TRACK = "PLAY_SELECTED_TRACK";
@@ -35,6 +36,11 @@ export const audioRepeatChanged = isRepeat => {
     isRepeat,
   };
 };
+
+export const audioShuffleChanged = isShuffle => ({
+  type: AUDIO_SHUFFLE_CHANGED,
+  isShuffle,
+});
 
 export const playSelectedTrack = ({ trackId, tracklistId }) => {
   return {

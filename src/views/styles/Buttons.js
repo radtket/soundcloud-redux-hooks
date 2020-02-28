@@ -4,10 +4,11 @@ import { size } from "polished";
 
 export const StyledIconButton = styled.button`
   svg {
-    height: ${({ size }) => {
-      return size === "lg" ? "26px" : "18px";
+    height: ${props => {
+      return props.size === "lg" ? "26px" : "18px";
     }};
     vertical-align: middle;
+    ${({ isActive }) => isActive && `fill: #2dceef !important`}
   }
 `;
 

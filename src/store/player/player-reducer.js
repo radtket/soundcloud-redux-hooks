@@ -10,11 +10,13 @@ import {
   AUDIO_VOLUME_CHANGED,
   PLAY_SELECTED_TRACK,
   TOGGLE_HISTORY_DRAWER_OPEN,
+  AUDIO_SHUFFLE_CHANGED,
 } from "./actions";
 
 const PlayerState = new Record({
   isPlaying: false,
   isRepeat: false,
+  isShuffle: false,
   trackId: null,
   tracklistId: FEATURED_TRACKLIST_ID,
   volume: PLAYER_INITIAL_VOLUME,
@@ -23,7 +25,7 @@ const PlayerState = new Record({
 
 export default (
   state = new PlayerState(),
-  { isRepeat, volume, trackId, tracklistId, type }
+  { isRepeat, volume, trackId, tracklistId, type, isShuffle }
 ) => {
   switch (type) {
     case AUDIO_ENDED:
@@ -38,6 +40,9 @@ export default (
 
     case AUDIO_REPEAT_CHANGED:
       return state.set("isRepeat", isRepeat);
+
+    case AUDIO_SHUFFLE_CHANGED:
+      return state.set("isShuffle", isShuffle);
 
     case PLAY_SELECTED_TRACK:
       return state.merge({

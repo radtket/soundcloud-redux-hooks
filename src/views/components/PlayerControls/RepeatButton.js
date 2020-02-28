@@ -17,15 +17,9 @@ const RepeatButton = () => {
     };
   });
 
-  const style = isRepeat
-    ? {
-        fill: "red",
-      }
-    : {};
-
   return (
-    <IconButton {...{ onClick }}>
-      <IconRepeat {...{ style }} />
+    <IconButton {...{ onClick, isActive: isRepeat }}>
+      <IconRepeat />
     </IconButton>
   );
 };
