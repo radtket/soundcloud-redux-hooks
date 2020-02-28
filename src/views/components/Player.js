@@ -15,22 +15,14 @@ import FormattedTime from "./Formatters/FormattedTime";
 import IconButton from "./IconButton";
 
 import StyledPlayer from "../styles/Player";
-import {
-  IconPlay,
-  IconPause,
-  IconNext,
-  IconPrev,
-  IconHeart,
-  IconPlaylist,
-} from "./Icons";
+import { IconPlay, IconPause, IconNext, IconPrev, IconPlaylist } from "./Icons";
 
 import FormattedTrackTitle from "./Formatters/FormattedTrackTitle";
-import { StyledFavoriteButton } from "../styles/Buttons";
 
 import RepeatButton from "./PlayerControls/RepeatButton";
 import VolumeControl from "./PlayerControls/VolumeControl";
-import { toggleLikeRequest } from "../../store/session/actions";
 import ShuffleButton from "./PlayerControls/ShuffleButton";
+import FavoriteButton from "./PlayerControls/FavoriteButton";
 
 const Player = () => {
   const dispatch = useDispatch();
@@ -75,14 +67,7 @@ const Player = () => {
           </dd>
         </dl>
 
-        <StyledFavoriteButton
-          className={liked ? "active" : ""}
-          onClick={() => {
-            dispatch(toggleLikeRequest({ id: track.id, liked, oauthToken }));
-          }}
-        >
-          <IconHeart />
-        </StyledFavoriteButton>
+        <FavoriteButton {...{ liked, id: track.id, oauthToken }} />
       </div>
 
       <div className="now-playing-bar__center">
