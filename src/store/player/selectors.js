@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
 import { getTrackById } from "../tracks/selectors";
 import { getLikes, getOauthToken } from "../session/selectors";
+import getBrowserMedia from "../browser/selectors";
 
 const getRandomTrack = ({ selectedTrackId, trackIds }) => {
   const randomIndex = Math.floor(Math.random() * (trackIds.size - 1) + 0);
@@ -85,12 +86,14 @@ export const getPlayerState = createSelector(
   getPlayerTracklistCursor,
   getLikes,
   getOauthToken,
+  getBrowserMedia,
   (
     { isPlaying, isHistoryDrawerOpen, tracklistId },
     track,
     { nextTrackId, previousTrackId },
     likes,
-    oauthToken
+    oauthToken,
+    media
   ) => {
     return {
       isHistoryDrawerOpen,
@@ -101,6 +104,7 @@ export const getPlayerState = createSelector(
       previousTrackId,
       track,
       tracklistId,
+      media,
     };
   }
 );

@@ -6,6 +6,11 @@ export const media = [
     id: "large",
     minWidth: 980,
   },
+
+  {
+    id: "mobile",
+    maxWidth: 600,
+  },
 ];
 
 export const initApp = config => ({

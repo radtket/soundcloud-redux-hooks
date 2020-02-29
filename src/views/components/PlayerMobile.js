@@ -69,6 +69,7 @@ const PlayerMobile = ({ isMobilePlayerOpen, setisMobilePlayerOpen }) => {
       />
 
       <div className="now-playing-bar">
+
         {/* ONLY MOBILE */}
         <header className="player_header">
           <IconButton onClick={() => setisMobilePlayerOpen(false)}>

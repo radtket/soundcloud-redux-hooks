@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { size, padding, margin } from "polished";
+import { size, padding, margin, hideVisually } from "polished";
 import { StyledFavoriteButton } from "./Buttons";
 
 const StyledPlayer = styled.div`
@@ -16,8 +16,6 @@ const StyledPlayer = styled.div`
   background: #3a3a3d;
   backdrop-filter: blur(10px);
   bottom: 0;
-  display: flex;
-  align-items: center;
   height: 86px;
   left: 0;
   position: fixed;
@@ -31,6 +29,10 @@ const StyledPlayer = styled.div`
   animation-duration: 300ms;
 
   .now-playing-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     &__center {
       display: flex;
       flex-direction: column;
@@ -57,10 +59,6 @@ const StyledPlayer = styled.div`
     .song-image {
       ${size("58px")};
       margin-right: 14px;
-
-      img {
-        display: block;
-      }
     }
 
     .song-info {
@@ -103,6 +101,7 @@ const StyledPlayer = styled.div`
         fill: #99999f;
       }
     }
+
     svg {
       fill: #fff;
     }
@@ -115,7 +114,15 @@ const StyledPlayer = styled.div`
     margin-bottom: 6px;
 
     button {
-      margin-right: 50px;
+      margin-right: 24px;
+
+      @media only screen and (min-width: 768px) {
+        margin-right: 32px;
+      }
+
+      @media only screen and (min-width: 992px) {
+        margin-right: 48px;
+      }
 
       &:last-of-type {
         margin-right: 0;
