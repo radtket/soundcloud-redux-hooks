@@ -1,7 +1,36 @@
 import styled from "styled-components";
-import { padding, margin, size } from "polished";
+import { padding, margin, size, cover } from "polished";
 
-const StyledPlayerMobile = styled.div`
+export const StyledPlayerMobileBackground = styled.div`
+  ${cover()};
+  /* ${size("100%")}; */
+  background-position: center;
+  background-size: cover;
+  display: block;
+  filter: blur(10px);
+  transition: background-image 0.25s ease;
+  z-index: 99;
+
+  &::before {
+    ${size("100%")};
+    background: #333;
+    content: "";
+    display: block;
+    opacity: 0.5;
+    position: absolute;
+  }
+
+  &::after {
+    ${size("100%")};
+    content: "";
+    display: block;
+    position: absolute;
+    background: transparent;
+    background: linear-gradient(to bottom, transparent 50%, #323232 100%);
+  }
+`;
+
+export const StyledPlayerMobile = styled.div`
   background-position: center;
   background-size: cover;
   background: #333;
@@ -12,7 +41,7 @@ const StyledPlayerMobile = styled.div`
   top: 0;
   width: 100%;
   z-index: 100;
-  /* transform: translateY(100%); */
+  transform: translateY(100%);
   transition: transform 0.55s;
 
   &.is-active {
@@ -28,44 +57,6 @@ const StyledPlayerMobile = styled.div`
 
     svg {
       fill: #fff;
-    }
-  }
-
-  #background {
-    background-size: cover;
-    background-position: center;
-    display: block;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 99;
-    filter: blur(10px);
-    transition: background-image 0.25s ease;
-
-    &::before {
-      background: #333;
-      content: "";
-      display: block;
-      height: 100%;
-      opacity: 0.5;
-      position: absolute;
-      width: 100%;
-    }
-
-    &::after {
-      content: "";
-      display: block;
-      height: 100%;
-      position: absolute;
-      width: 100%;
-      background: rgba(0, 0, 0, 0);
-      background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0) 50%,
-        #323232 100%
-      );
     }
   }
 
@@ -134,10 +125,8 @@ const StyledPlayerMobile = styled.div`
     }
   }
 
-  .sub-controls {
+  .now-playing-bar__right {
     display: flex;
     justify-content: space-between;
   }
 `;
-
-export default StyledPlayerMobile;

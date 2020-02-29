@@ -20,10 +20,13 @@ import PlayTrackButton from "./PlayerControls/PlayTrackButton";
 import PreviousTrackButton from "./PlayerControls/PreviousTrackButton";
 import RepeatButton from "./PlayerControls/RepeatButton";
 import ShuffleButton from "./PlayerControls/ShuffleButton";
-import StyledPlayerMobile from "../styles/PlayerMobile";
+import {
+  StyledPlayerMobile,
+  StyledPlayerMobileBackground,
+} from "../styles/PlayerMobile";
 import PlayerOptionsMenu from "./PlayerOptionsMenu";
 
-const PlayerMobile = () => {
+const PlayerMobile = ({ isMobilePlayerOpen, setisMobilePlayerOpen }) => {
   const [isOptionsMenuOpen, setOptionsMenuOpen] = useState(false);
   const dispatch = useDispatch();
   const [backgroundColor, setBackgroundColor] = useState(null);
@@ -57,18 +60,18 @@ const PlayerMobile = () => {
   }
 
   return (
-    <StyledPlayerMobile>
-      <div
-        id="background"
+    <StyledPlayerMobile className={isMobilePlayerOpen ? "is-active" : ""}>
+      <StyledPlayerMobileBackground
         style={{
           backgroundColor,
           // backgroundImage: `url("${track.artworkUrl}")`,
         }}
       />
+
       <div className="now-playing-bar">
         {/* ONLY MOBILE */}
         <header className="player_header">
-          <IconButton>
+          <IconButton onClick={() => setisMobilePlayerOpen(false)}>
             <IconChevronDown />
           </IconButton>
           <span>Now Playing</span>
@@ -118,17 +121,18 @@ const PlayerMobile = () => {
               }}
             />
           </nav>
+
           <div className="player-timeline">
             <AudioCurrentTime />
             <AudioTimeline />
             <FormattedTime unit="ms" value={track.duration} />
           </div>
+        </div>
 
-          <nav className="sub-controls">
-            <RepeatButton />
-            <ShuffleButton />
-            <FavoriteButton />
-          </nav>
+        <div className="now-playing-bar__right">
+          <RepeatButton />
+          <ShuffleButton />
+          <FavoriteButton />
         </div>
       </div>
 
