@@ -42,6 +42,10 @@ const PlayerMobile = ({ isMobilePlayerOpen, setisMobilePlayerOpen }) => {
   } = useSelector(getPlayerState, shallowEqual);
 
   useEffect(() => {
+    document.body.style.overflow = isMobilePlayerOpen ? "hidden" : "unset";
+  }, [isMobilePlayerOpen]);
+
+  useEffect(() => {
     const init = ({ artworkUrl }) => {
       Vibrant.from(artworkUrl)
         .getPalette()
@@ -69,7 +73,6 @@ const PlayerMobile = ({ isMobilePlayerOpen, setisMobilePlayerOpen }) => {
       />
 
       <div className="now-playing-bar">
-
         {/* ONLY MOBILE */}
         <header className="player_header">
           <IconButton onClick={() => setisMobilePlayerOpen(false)}>
@@ -124,9 +127,11 @@ const PlayerMobile = ({ isMobilePlayerOpen, setisMobilePlayerOpen }) => {
           </nav>
 
           <div className="player-timeline">
-            <AudioCurrentTime />
             <AudioTimeline />
-            <FormattedTime unit="ms" value={track.duration} />
+            <div className="player-timeline-meta">
+              <AudioCurrentTime />
+              <FormattedTime unit="ms" value={track.duration} />
+            </div>
           </div>
         </div>
 

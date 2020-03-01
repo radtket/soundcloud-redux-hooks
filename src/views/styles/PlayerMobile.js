@@ -68,6 +68,11 @@ export const StyledPlayerMobile = styled.div`
 
     overflow-y: scroll;
     overflow-x: hidden;
+
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .song {
@@ -123,6 +128,16 @@ export const StyledPlayerMobile = styled.div`
       &:last-of-type {
         margin-right: 0;
       }
+    }
+  }
+
+  .player-timeline {
+    margin-bottom: 24px;
+
+    .player-timeline-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
     }
   }
 
