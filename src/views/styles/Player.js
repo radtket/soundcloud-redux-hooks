@@ -19,7 +19,8 @@ const StyledPlayer = styled.div`
   height: 86px;
   left: 0;
   position: fixed;
-  transform: translateZ(0);
+  transition: all 0.3s ease-in-out;
+  transform: translate3d(0, 0, 0);
   width: 100%;
   z-index: 100;
 
@@ -27,6 +28,45 @@ const StyledPlayer = styled.div`
   animation-iteration-count: 1;
   animation-timing-function: ease-in-out;
   animation-duration: 300ms;
+
+  &.is-hidden {
+    transform: translate3d(0, 115%, 0);
+    transition: all 0.3s ease-in-out;
+  }
+
+  &.is-expanded {
+    transform: translateY(0%);
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    animation-name: slideDown;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+
+    .now-playing-bar {
+      flex-direction: column-reverse;
+    }
+
+    .song {
+      flex-direction: column;
+
+      .song-image {
+        ${size("300px")};
+        margin-right: 0;
+      }
+
+      .song-info {
+        max-width: 100%;
+        text-align: center;
+
+        dt {
+          font-size: 24px;
+          font-weight: 500;
+          letter-spacing: 0.3px;
+        }
+      }
+    }
+  }
 
   .now-playing-bar {
     display: flex;
@@ -134,9 +174,27 @@ const StyledPlayer = styled.div`
     align-items: center;
     display: flex;
 
+    @media only screen and (max-width: 768px) {
+      margin-right: 32px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      justify-content: space-between;
+
+      > div {
+        position: absolute;
+        top: -8px;
+      }
+    }
+
     > span {
       font-size: 14px;
       margin: 0 14px;
+
+      @media only screen and (max-width: 768px) {
+        ${hideVisually()};
+      }
     }
   }
 `;

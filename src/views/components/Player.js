@@ -48,7 +48,9 @@ const Player = () => {
   return (
     <>
       <PlayerMobile {...{ isMobilePlayerOpen, setisMobilePlayerOpen }} />
-      <StyledPlayer className="player">
+      <StyledPlayer
+        className={`player ${isMobilePlayerOpen ? "is-hidden" : ""}`}
+      >
         <div className="now-playing-bar">
           <div className="song now-playing-bar__left">
             <figure

@@ -41,11 +41,12 @@ export const StyledPlayerMobile = styled.div`
   top: 0;
   width: 100%;
   z-index: 100;
-  transform: translateY(100%);
-  transition: transform 0.55s;
+  transform: translate3d(0, 100%, 0);
+  transition: all 0.3s ease-in-out;
 
   &.is-active {
-    transform: translateY(0);
+    transition: all 0.3s ease-in-out;
+    transform: translate3d(0, 0, 0);
   }
 
   .player_header {
