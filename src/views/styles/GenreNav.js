@@ -1,11 +1,13 @@
 import styled from "styled-components";
-import { size, position } from "polished";
+import { position } from "polished";
 import { BODY_COLOR } from "./GlobalStyles";
 
 const StyledGenreNav = styled.nav`
+  ${position("sticky", "84px", 0, null, 0)};
   background: ${BODY_COLOR};
   border-bottom: 1px solid rgba(100, 110, 120, 0.15);
   color: #fff;
+  overflow-x: scroll;
   position: sticky;
   top: 84px;
   z-index: 2;

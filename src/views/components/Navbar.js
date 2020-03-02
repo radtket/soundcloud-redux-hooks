@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import StyledNavbar from "../styles/Navbar";
@@ -8,11 +8,11 @@ import UserAccountButton from "./UserAccountButton";
 import { getSession } from "../../store/session/selectors";
 import SidebarDrawer from "./SidebarDrawer";
 
-const Navbar = () => {
+const Navbar = forwardRef((props, ref) => {
   const { id } = useSelector(getSession);
   return (
     <>
-      <StyledNavbar>
+      <StyledNavbar {...{ ref }}>
         <div className="nav-container">
           <nav className="nav-primary">
             <Link className="nav-logo" to="/">
@@ -43,6 +43,6 @@ const Navbar = () => {
       <SidebarDrawer />
     </>
   );
-};
+});
 
 export default Navbar;

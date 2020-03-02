@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useMeasure } from "react-use";
 import { initAuth } from "../store/session/actions";
 
 // Pages
@@ -23,6 +24,7 @@ import HistorySidebar from "./components/HistorySidebar";
 
 const App = () => {
   const dispatch = useDispatch();
+  const [ref, { height: navbarHeight }] = useMeasure();
 
   useEffect(() => {
     initAuth(dispatch);
@@ -30,11 +32,11 @@ const App = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar {...{ ref }} />
       <main
         className="main"
         style={{
-          paddingTop: "84px",
+          paddingTop: navbarHeight,
         }}
       >
         <Route component={HomePage} exact path="/" />
