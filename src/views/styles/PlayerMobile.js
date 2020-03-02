@@ -3,12 +3,11 @@ import { padding, margin, size, cover } from "polished";
 
 export const StyledPlayerMobileBackground = styled.div`
   ${cover()};
-  /* ${size("100%")}; */
   background-position: center;
   background-size: cover;
   display: block;
   filter: blur(10px);
-  transition: background-image 0.25s ease;
+  /* transition: background-image 0.25s ease; */
   z-index: 99;
 
   &::before {
@@ -49,16 +48,24 @@ export const StyledPlayerMobile = styled.div`
     transform: translate3d(0, 0, 0);
   }
 
+  button {
+    svg {
+      fill: rgba(255, 255, 255, 0.87);
+    }
+
+    &:hover {
+      svg {
+        fill: #fff;
+      }
+    }
+  }
+
   .player_header {
     position: relative;
     display: flex;
     z-index: 100;
     justify-content: space-between;
     align-items: center;
-
-    svg {
-      fill: #fff;
-    }
   }
 
   .now-playing-bar {

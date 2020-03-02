@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import * as Vibrant from "node-vibrant";
+import Vibrant from "node-vibrant";
 import { getPlayerState } from "../../store/player/selectors";
 // Components
 import AudioCurrentTime from "./AudioCurrentTime";
@@ -50,7 +50,8 @@ const PlayerMobile = ({ isMobilePlayerOpen, setisMobilePlayerOpen }) => {
       Vibrant.from(artworkUrl)
         .getPalette()
         .then(palette => {
-          setBackgroundColor(palette.Vibrant.hex);
+          const { hex } = palette.Vibrant;
+          setBackgroundColor(hex);
         });
     };
 

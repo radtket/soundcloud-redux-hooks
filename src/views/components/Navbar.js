@@ -6,38 +6,42 @@ import Logo from "./Logo";
 import SearchBar from "./SearchBar";
 import UserAccountButton from "./UserAccountButton";
 import { getSession } from "../../store/session/selectors";
+import SidebarDrawer from "./SidebarDrawer";
 
 const Navbar = () => {
   const { id } = useSelector(getSession);
   return (
-    <StyledNavbar>
-      <div className="nav-container">
-        <nav className="nav-primary">
-          <Link className="nav-logo" to="/">
-            <Logo />
-          </Link>
-          <NavLink className="nav-item" exact to="/">
-            Home
-          </NavLink>
-          <NavLink className="nav-item" to="/genres">
-            Genres
-          </NavLink>
-        </nav>
-
-        {id && (
-          <nav className="nav-secondary">
-            <NavLink to="/me/stream">Stream</NavLink>
-            <NavLink to="/me/likes">Likes</NavLink>
-            <NavLink to="/me/followings">Following</NavLink>
+    <>
+      <StyledNavbar>
+        <div className="nav-container">
+          <nav className="nav-primary">
+            <Link className="nav-logo" to="/">
+              <Logo />
+            </Link>
+            <NavLink className="nav-item" exact to="/">
+              Home
+            </NavLink>
+            <NavLink className="nav-item" to="/genres">
+              Genres
+            </NavLink>
           </nav>
-        )}
 
-        <nav className="nav-search">
-          <SearchBar />
-          <UserAccountButton />
-        </nav>
-      </div>
-    </StyledNavbar>
+          {id && (
+            <nav className="nav-secondary">
+              <NavLink to="/me/stream">Stream</NavLink>
+              <NavLink to="/me/likes">Likes</NavLink>
+              <NavLink to="/me/followings">Following</NavLink>
+            </nav>
+          )}
+
+          <nav className="nav-search">
+            <SearchBar />
+            <UserAccountButton />
+          </nav>
+        </div>
+      </StyledNavbar>
+      <SidebarDrawer />
+    </>
   );
 };
 
