@@ -26,20 +26,21 @@ import {
 } from "../styles/PlayerMobile";
 import PlayerOptionsMenu from "./PlayerOptionsMenu";
 
-const PlayerMobile = ({ isMobilePlayerOpen, setisMobilePlayerOpen }) => {
+const PlayerMobile = ({
+  isPlaying,
+  nextTrackId,
+  previousTrackId,
+  track,
+  tracklistId,
+  isMobilePlayerOpen,
+  setisMobilePlayerOpen,
+  liked,
+  oauthToken,
+  isHistoryDrawerOpen,
+  media,
+}) => {
   const [isOptionsMenuOpen, setOptionsMenuOpen] = useState(false);
-  const dispatch = useDispatch();
   const [backgroundColor, setBackgroundColor] = useState(null);
-  const {
-    isPlaying,
-    liked,
-    nextTrackId,
-    oauthToken,
-    previousTrackId,
-    track,
-    tracklistId,
-    isHistoryDrawerOpen,
-  } = useSelector(getPlayerState, shallowEqual);
 
   useEffect(() => {
     document.body.style.overflow = isMobilePlayerOpen ? "hidden" : "unset";
