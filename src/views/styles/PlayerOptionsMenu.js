@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { padding, margin, size } from "polished";
-import { StyledButton } from "./Buttons";
 
 const StyledPlayerOptionsMenu = styled.div`
   ${size("100%")};

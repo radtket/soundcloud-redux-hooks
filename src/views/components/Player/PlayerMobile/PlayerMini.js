@@ -22,12 +22,11 @@ const PlayerMini = ({
   navbarHeight,
 }) => {
   const { percentCompleted } = useSelector(getPlayerTimes);
-
   return (
     <StyledPlayerMini
       className={`${isMobilePlayerOpen ? "is-hidden" : ""}`}
       style={{
-        bottom: `${6 + navbarHeight}px` || "56px",
+        bottom: `${6 + navbarHeight}px`,
       }}
     >
       <div className="inner">
@@ -71,11 +70,15 @@ const PlayerMini = ({
 PlayerMini.propTypes = {
   isMobilePlayerOpen: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
-  navbarHeight: PropTypes.number.isRequired,
+  navbarHeight: PropTypes.number,
   nextTrackId: PropTypes.number.isRequired,
   setisMobilePlayerOpen: PropTypes.func.isRequired,
   track: PropTypes.instanceOf(Track).isRequired,
   tracklistId: PropTypes.string.isRequired,
+};
+
+PlayerMini.defaultProps = {
+  navbarHeight: 75,
 };
 
 export default PlayerMini;
