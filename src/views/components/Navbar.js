@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
-import StyledNavbar from "../styles/Navbar";
+import { StyledNavbar } from "../styles/Navbar";
 import Logo from "./Logo";
 import SearchBar from "./SearchBar";
 import UserAccountButton from "./UserAccountButton";

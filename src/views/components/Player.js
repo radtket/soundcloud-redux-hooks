@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toggleHistoryDrawerOpen } from "../../store/player/actions";
@@ -25,7 +25,6 @@ import VolumeControl from "./PlayerControls/VolumeControl";
 
 const Player = () => {
   const dispatch = useDispatch();
-  const [isMobilePlayerOpen, setisMobilePlayerOpen] = useState(false);
   const {
     isPlaying,
     liked,
@@ -43,7 +42,7 @@ const Player = () => {
   }
 
   return (
-    <StyledPlayer className={`player ${isMobilePlayerOpen ? "is-hidden" : ""}`}>
+    <StyledPlayer className="player">
       <div className="now-playing-bar">
         <div className="song now-playing-bar__left">
           <figure className="song-image">

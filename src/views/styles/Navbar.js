@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledNavbar = styled.header`
+export const StyledNavbar = styled.header`
   background: #161a1a;
   color: #99999f;
   left: 0;
@@ -148,4 +148,61 @@ const StyledNavbar = styled.header`
   }
 `;
 
-export default StyledNavbar;
+export const StyledMobileAppBar = styled.header`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 98;
+  /* width: 100%; */
+  color: white;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  background-color: #303033;
+
+  @media only screen and (min-width: 650px) {
+    display: none;
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+
+    a {
+      display: inline-block;
+      font-size: 14px;
+      letter-spacing: 0.28px;
+      margin: 0 0.25rem;
+      padding: 14px;
+      text-align: center;
+      text-decoration: none;
+      transition: all 170ms ease-out;
+      will-change: color;
+
+      &.active {
+        color: #2dceef;
+
+        svg {
+          fill: #2dceef;
+        }
+      }
+
+      &:hover {
+        color: #fff;
+
+        svg {
+          fill: #fff;
+        }
+      }
+
+      svg {
+        fill: rgba(255, 255, 255, 0.5);
+        display: block;
+        height: 24px;
+        margin: 0 auto 2px;
+      }
+    }
+  }
+`;

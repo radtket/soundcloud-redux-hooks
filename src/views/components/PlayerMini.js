@@ -25,9 +25,7 @@ const PlayerMini = ({
   }
 
   return (
-    <StyledPlayerMini
-      className={`player ${isMobilePlayerOpen ? "is-hidden" : ""}`}
-    >
+    <StyledPlayerMini className={`${isMobilePlayerOpen ? "is-hidden" : ""}`}>
       <div className="inner">
         <button
           className="song-meta"
