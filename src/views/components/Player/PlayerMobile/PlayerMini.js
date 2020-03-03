@@ -1,14 +1,16 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { getPlayerTimes } from "../../store/player/selectors";
-import FormattedTrackTitle from "./Formatters/FormattedTrackTitle";
+import { getPlayerTimes } from "../../../../store/player/selectors";
+import FormattedTrackTitle from "../../Formatters/FormattedTrackTitle";
 
 // Controls
-import NextTrackButton from "./PlayerControls/NextTrackButton";
-import PlayTrackButton from "./PlayerControls/PlayTrackButton";
+import NextTrackButton from "../../PlayerControls/NextTrackButton";
+import PlayTrackButton from "../../PlayerControls/PlayTrackButton";
 
 // Styles
-import { StyledPlayerMini } from "../styles/PlayerMobile";
+import { StyledPlayerMini } from "../../../styles/PlayerMobile";
+import { Track } from "../../../../store/tracks/track";
 
 const PlayerMini = ({
   isPlaying,
@@ -21,14 +23,12 @@ const PlayerMini = ({
 }) => {
   const { percentCompleted } = useSelector(getPlayerTimes);
 
-  if (!track) {
-    return null;
-  }
-
   return (
     <StyledPlayerMini
-      {...{ navbarHeight }}
       className={`${isMobilePlayerOpen ? "is-hidden" : ""}`}
+      style={{
+        bottom: `${6 + navbarHeight}px` || "56px",
+      }}
     >
       <div className="inner">
         <button
@@ -66,6 +66,16 @@ const PlayerMini = ({
       </div>
     </StyledPlayerMini>
   );
+};
+
+PlayerMini.propTypes = {
+  isMobilePlayerOpen: PropTypes.bool.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  navbarHeight: PropTypes.number.isRequired,
+  nextTrackId: PropTypes.number.isRequired,
+  setisMobilePlayerOpen: PropTypes.func.isRequired,
+  track: PropTypes.instanceOf(Track).isRequired,
+  tracklistId: PropTypes.string.isRequired,
 };
 
 export default PlayerMini;

@@ -157,28 +157,43 @@ export const StyledPlayerMobile = styled.div`
 export const StyledPlayerMini = styled.nav`
   @keyframes show-player-mobile {
     0% {
-      bottom: -80px;
+      transform: translate3d(0, 115%, 0);
     }
     100% {
-      bottom: ${({ navbarHeight }) => `${6 + navbarHeight}px` || "56px"};
+      transform: translate3d(0, 0, 0);
     }
   }
 
-  &.is-hidden {
-    transform: translate3d(0, 115%, 0);
-    transition: all 0.3s ease-in-out;
+  @keyframes hide-player-mobile {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(0, 115%, 0);
+    }
   }
 
-  animation-name: show-player-mobile;
   backdrop-filter: blur(20px);
   border-radius: 6px;
-  bottom: ${({ navbarHeight }) => `${6 + navbarHeight}px` || "56px"};
   left: 6px;
   position: fixed;
   right: 6px;
   transform: translate3d(0, 0, 0);
   transition: all 0.3s ease-in-out;
   z-index: 100;
+
+  animation-name: show-player-mobile;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+  animation-duration: 300ms;
+
+  &.is-hidden {
+    transform: translate3d(0, 115%, 0);
+    animation-name: hide-player-mobile;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+    animation-duration: 300ms;
+  }
 
   .inner {
     ${padding(null, "14px")};

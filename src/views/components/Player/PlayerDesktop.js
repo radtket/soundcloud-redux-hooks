@@ -1,51 +1,38 @@
 import React from "react";
-import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { toggleHistoryDrawerOpen } from "../../store/player/actions";
-import { getPlayerState } from "../../store/player/selectors";
 
 // Components
-import AudioCurrentTime from "./AudioCurrentTime";
-import AudioTimeline from "./AudioTimeline";
-import FormattedTime from "./Formatters/FormattedTime";
-import IconButton from "./IconButton";
-import StyledPlayer from "../styles/Player";
-import { IconPlaylist } from "./Icons";
-
-import FormattedTrackTitle from "./Formatters/FormattedTrackTitle";
+import AudioCurrentTime from "../AudioCurrentTime";
+import AudioTimeline from "../AudioTimeline";
+import FormattedTime from "../Formatters/FormattedTime";
+import IconButton from "../IconButton";
+import StyledPlayer from "../../styles/Player";
+import { IconPlaylist } from "../Icons";
+import { Track } from "../../../store/tracks/track";
+import FormattedTrackTitle from "../Formatters/FormattedTrackTitle";
 
 // Controlls
-import FavoriteButton from "./PlayerControls/FavoriteButton";
-import NextTrackButton from "./PlayerControls/NextTrackButton";
-import PlayTrackButton from "./PlayerControls/PlayTrackButton";
-import PreviousTrackButton from "./PlayerControls/PreviousTrackButton";
-import RepeatButton from "./PlayerControls/RepeatButton";
-import ShuffleButton from "./PlayerControls/ShuffleButton";
-import VolumeControl from "./PlayerControls/VolumeControl";
-import PlayerMobileContainer from "./PlayerMobileContainer";
+import FavoriteButton from "../PlayerControls/FavoriteButton";
+import NextTrackButton from "../PlayerControls/NextTrackButton";
+import PlayTrackButton from "../PlayerControls/PlayTrackButton";
+import PreviousTrackButton from "../PlayerControls/PreviousTrackButton";
+import RepeatButton from "../PlayerControls/RepeatButton";
+import ShuffleButton from "../PlayerControls/ShuffleButton";
+import VolumeControl from "../PlayerControls/VolumeControl";
 
-const Player = ({ navbarHeight }) => {
-  const dispatch = useDispatch();
-  const {
-    isPlaying,
-    liked,
-    nextTrackId,
-    oauthToken,
-    previousTrackId,
-    track,
-    tracklistId,
-    isHistoryDrawerOpen,
-    media,
-  } = useSelector(getPlayerState, shallowEqual);
-
-  if (!track) {
-    return null;
-  }
-
-  if (media.mobile) {
-    return <PlayerMobileContainer {...{ navbarHeight }} />;
-  }
-
+const PlayerDesktop = ({
+  isHistoryDrawerOpen,
+  isPlaying,
+  liked,
+  media,
+  nextTrackId,
+  oauthToken,
+  previousTrackId,
+  toggleHistoryDrawerOpen,
+  track,
+  tracklistId,
+}) => {
   return (
     <StyledPlayer className="player">
       <div className="now-playing-bar">
@@ -110,9 +97,7 @@ const Player = ({ navbarHeight }) => {
                 ? "Close History Drawer"
                 : "Open History Drawer"
             }
-            onClick={() => {
-              dispatch(toggleHistoryDrawerOpen());
-            }}
+            onClick={toggleHistoryDrawerOpen}
           >
             <IconPlaylist />
           </IconButton>
@@ -123,4 +108,26 @@ const Player = ({ navbarHeight }) => {
   );
 };
 
-export default Player;
+PlayerDesktop.propTypes = {
+  isHistoryDrawerOpen: PropTypes.bool.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  liked: PropTypes.bool.isRequired,
+  media: PropTypes.shape({
+    mobile: PropTypes.bool,
+    large: PropTypes.bool,
+  }).isRequired,
+  nextTrackId: PropTypes.number,
+  oauthToken: PropTypes.string,
+  previousTrackId: PropTypes.number,
+  toggleHistoryDrawerOpen: PropTypes.func.isRequired,
+  track: PropTypes.instanceOf(Track).isRequired,
+  tracklistId: PropTypes.string.isRequired,
+};
+
+PlayerDesktop.defaultProps = {
+  oauthToken: null,
+  previousTrackId: null,
+  nextTrackId: null,
+};
+
+export default PlayerDesktop;

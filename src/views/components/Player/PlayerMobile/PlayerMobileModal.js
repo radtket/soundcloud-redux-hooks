@@ -1,43 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Vibrant from "node-vibrant";
-import { getPlayerState } from "../../store/player/selectors";
+
 // Components
-import AudioCurrentTime from "./AudioCurrentTime";
-import AudioTimeline from "./AudioTimeline";
-import FormattedTime from "./Formatters/FormattedTime";
-import IconButton from "./IconButton";
+import AudioCurrentTime from "../../AudioCurrentTime";
+import AudioTimeline from "../../AudioTimeline";
+import FormattedTime from "../../Formatters/FormattedTime";
+import IconButton from "../../IconButton";
 
-import { IconChevronDown, IconEllipsis } from "./Icons";
+import { IconChevronDown, IconEllipsis } from "../../Icons";
 
-import FormattedTrackTitle from "./Formatters/FormattedTrackTitle";
+import FormattedTrackTitle from "../../Formatters/FormattedTrackTitle";
 
 // Controlls
-import FavoriteButton from "./PlayerControls/FavoriteButton";
-import NextTrackButton from "./PlayerControls/NextTrackButton";
-import PlayTrackButton from "./PlayerControls/PlayTrackButton";
-import PreviousTrackButton from "./PlayerControls/PreviousTrackButton";
-import RepeatButton from "./PlayerControls/RepeatButton";
-import ShuffleButton from "./PlayerControls/ShuffleButton";
+import FavoriteButton from "../../PlayerControls/FavoriteButton";
+import NextTrackButton from "../../PlayerControls/NextTrackButton";
+import PlayTrackButton from "../../PlayerControls/PlayTrackButton";
+import PreviousTrackButton from "../../PlayerControls/PreviousTrackButton";
+import RepeatButton from "../../PlayerControls/RepeatButton";
+import ShuffleButton from "../../PlayerControls/ShuffleButton";
 import {
   StyledPlayerMobile,
   StyledPlayerMobileBackground,
-} from "../styles/PlayerMobile";
-import PlayerOptionsMenu from "./PlayerOptionsMenu";
+} from "../../../styles/PlayerMobile";
+import PlayerOptionsMenu from "../../PlayerOptionsMenu";
+import { Track } from "../../../../store/tracks/track";
 
-const PlayerMobile = ({
+const PlayerMobileModal = ({
+  isHistoryDrawerOpen,
+  isMobilePlayerOpen,
   isPlaying,
+  liked,
   nextTrackId,
+  oauthToken,
   previousTrackId,
+  setisMobilePlayerOpen,
   track,
   tracklistId,
-  isMobilePlayerOpen,
-  setisMobilePlayerOpen,
-  liked,
-  oauthToken,
-  isHistoryDrawerOpen,
-  media,
 }) => {
   const [isOptionsMenuOpen, setOptionsMenuOpen] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState(null);
@@ -60,10 +60,6 @@ const PlayerMobile = ({
       init(track);
     }
   }, [track]);
-
-  if (!track) {
-    return null;
-  }
 
   return (
     <StyledPlayerMobile className={isMobilePlayerOpen ? "is-active" : ""}>
@@ -155,4 +151,23 @@ const PlayerMobile = ({
   );
 };
 
-export default PlayerMobile;
+PlayerMobileModal.propTypes = {
+  isHistoryDrawerOpen: PropTypes.bool.isRequired,
+  isMobilePlayerOpen: PropTypes.bool.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  liked: PropTypes.bool.isRequired,
+  nextTrackId: PropTypes.number,
+  oauthToken: PropTypes.string,
+  previousTrackId: PropTypes.number,
+  setisMobilePlayerOpen: PropTypes.func.isRequired,
+  track: PropTypes.instanceOf(Track).isRequired,
+  tracklistId: PropTypes.string.isRequired,
+};
+
+PlayerMobileModal.defaultProps = {
+  oauthToken: null,
+  previousTrackId: null,
+  nextTrackId: null,
+};
+
+export default PlayerMobileModal;

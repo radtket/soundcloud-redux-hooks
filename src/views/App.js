@@ -32,7 +32,7 @@ const App = () => {
 
   return (
     <>
-      <Navbar {...{ ref }} />
+      <Navbar {...{ ref, mobile }} />
       <main
         className="main"
         style={{
@@ -51,7 +51,7 @@ const App = () => {
         <Route component={FollowingPage} path="/me/followings" />
         <Route component={Callback} path="/callback" />
       </main>
-      <Player />
+      <Player {...{ navbarHeight }} />
       <HistorySidebar />
     </>
   );
