@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useMeasure } from "react-use";
 import { initAuth } from "../store/session/actions";
 
@@ -21,14 +21,20 @@ import StreamPage from "./pages/Session/StreamPage";
 import Navbar from "./components/Navbar";
 import Player from "./components/Player";
 import HistorySidebar from "./components/HistorySidebar";
+import getBrowserMedia from "../store/browser/selectors";
 
 const App = () => {
   const dispatch = useDispatch();
   const [ref, { height: navbarHeight }] = useMeasure();
+  const { mobile } = useSelector(getBrowserMedia);
 
   useEffect(() => {
     initAuth(dispatch);
   }, [dispatch]);
+
+  const padding = mobile
+    ? `0 0 ${navbarHeight}px 0`
+    : `${navbarHeight}px 0 0 0`;
 
   return (
     <>
@@ -36,7 +42,7 @@ const App = () => {
       <main
         className="main"
         style={{
-          paddingTop: navbarHeight,
+          padding,
         }}
       >
         <Route component={HomePage} exact path="/" />
