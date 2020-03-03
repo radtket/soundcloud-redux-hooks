@@ -22,8 +22,9 @@ import PreviousTrackButton from "./PlayerControls/PreviousTrackButton";
 import RepeatButton from "./PlayerControls/RepeatButton";
 import ShuffleButton from "./PlayerControls/ShuffleButton";
 import VolumeControl from "./PlayerControls/VolumeControl";
+import PlayerMobileContainer from "./PlayerMobileContainer";
 
-const Player = () => {
+const Player = ({ navbarHeight }) => {
   const dispatch = useDispatch();
   const {
     isPlaying,
@@ -39,6 +40,10 @@ const Player = () => {
 
   if (!track) {
     return null;
+  }
+
+  if (media.mobile) {
+    return <PlayerMobileContainer {...{ navbarHeight }} />;
   }
 
   return (

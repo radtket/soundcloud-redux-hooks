@@ -17,6 +17,7 @@ const PlayerMini = ({
   tracklistId,
   isMobilePlayerOpen,
   setisMobilePlayerOpen,
+  navbarHeight,
 }) => {
   const { percentCompleted } = useSelector(getPlayerTimes);
 
@@ -25,7 +26,10 @@ const PlayerMini = ({
   }
 
   return (
-    <StyledPlayerMini className={`${isMobilePlayerOpen ? "is-hidden" : ""}`}>
+    <StyledPlayerMini
+      {...{ navbarHeight }}
+      className={`${isMobilePlayerOpen ? "is-hidden" : ""}`}
+    >
       <div className="inner">
         <button
           className="song-meta"

@@ -40,7 +40,7 @@ export const StyledPlayerMobile = styled.div`
   top: 0;
   width: 100%;
   z-index: 100;
-  transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 110%, 0);
   transition: all 0.3s ease-in-out;
 
   &.is-active {
@@ -160,7 +160,7 @@ export const StyledPlayerMini = styled.nav`
       bottom: -80px;
     }
     100% {
-      bottom: 56px;
+      bottom: ${({ navbarHeight }) => `${6 + navbarHeight}px` || "56px"};
     }
   }
 
@@ -172,7 +172,7 @@ export const StyledPlayerMini = styled.nav`
   animation-name: show-player-mobile;
   backdrop-filter: blur(20px);
   border-radius: 6px;
-  bottom: 56px;
+  bottom: ${({ navbarHeight }) => `${6 + navbarHeight}px` || "56px"};
   left: 6px;
   position: fixed;
   right: 6px;

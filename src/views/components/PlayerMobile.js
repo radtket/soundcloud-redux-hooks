@@ -140,7 +140,7 @@ const PlayerMobile = ({
         <div className="now-playing-bar__right">
           <RepeatButton />
           <ShuffleButton />
-          <FavoriteButton />
+          <FavoriteButton {...{ liked, id: track.id, oauthToken }} />
         </div>
       </div>
 

@@ -7,7 +7,7 @@ import PlayerMobile from "./PlayerMobile";
 import PlayerMini from "./PlayerMini";
 import { toggleHistoryDrawerOpen } from "../../store/player/actions";
 
-const PlayerMobileContainer = () => {
+const PlayerMobileContainer = ({ navbarHeight }) => {
   const [isMobilePlayerOpen, setisMobilePlayerOpen] = useState(false);
   const dispatch = useDispatch();
   const state = useSelector(getPlayerState, shallowEqual);
@@ -19,7 +19,12 @@ const PlayerMobileContainer = () => {
   return (
     <>
       <PlayerMini
-        {...{ ...state, isMobilePlayerOpen, setisMobilePlayerOpen }}
+        {...{
+          ...state,
+          isMobilePlayerOpen,
+          setisMobilePlayerOpen,
+          navbarHeight,
+        }}
       />
       <PlayerMobile
         {...{
