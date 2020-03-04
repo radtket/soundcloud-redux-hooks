@@ -28,10 +28,10 @@ const Navbar = forwardRef(({ mobile }, ref) => {
             {isHomeActive ? <IconHome /> : <IconHomeOutline />}
             <span>Home</span>
           </NavLink>
-          <Link to="/">
+          <button type="button">
             <IconSearch />
             <span>Search</span>
-          </Link>
+          </button>
           <NavLink to="/genres">
             <IconDiscover />
             <span>Discover</span>

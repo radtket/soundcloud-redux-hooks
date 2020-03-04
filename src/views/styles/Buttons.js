@@ -3,10 +3,74 @@ import { Link } from "react-router-dom";
 import { size } from "polished";
 
 export const StyledIconButton = styled.button`
+  .icon-xs svg {
+    width: 8px;
+    max-height: 8px;
+  }
+
+  .icon-sm svg {
+    width: 12px;
+    max-height: 14px;
+  }
+
+  .icon-1x svg {
+    width: 16px;
+    max-height: 18px;
+  }
+
+  .icon-0x svg {
+    width: 17px;
+    max-height: 18px;
+  }
+
+  .icon-2x svg {
+    width: 18px;
+    max-height: 20px;
+  }
+
+  .icon-3x svg {
+    width: 20px;
+    max-height: 22px;
+  }
+
+  .icon-4x svg {
+    width: 25px;
+    max-height: 27px;
+  }
+
+  .icon-5x svg {
+    width: 30px;
+    max-height: 32px;
+  }
+
+  .icon-6x svg {
+    width: 35px;
+    max-height: 38px;
+  }
+
+  .icon-7x svg {
+    width: 40px;
+    max-height: 45px;
+  }
+
+  .icon-8x svg {
+    width: 50px;
+    max-height: 55px;
+  }
+
+  .icon-9x svg {
+    width: 60px;
+    max-height: 65px;
+  }
+
+  .icon-10x svg {
+    width: 70px;
+    max-height: 75px;
+  }
+
   svg {
-    height: ${props => {
-      return props.size === "lg" ? "26px" : "18px";
-    }};
+    width: ${props => (props.size === "lg" ? "25px" : "18px")};
+    max-height: ${props => (props.size === "lg" ? "27px" : "20px")};
     vertical-align: middle;
     ${({ isActive }) => isActive && `fill: #2dceef !important`}
   }

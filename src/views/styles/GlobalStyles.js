@@ -60,6 +60,12 @@ export default createGlobalStyle`
     text-decoration: none;
     transition: color 0.2s ease;
     color: rgba(255, 255, 255, .50);
+    outline: 0;
+
+    &.focus,
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+    }
   }
 
   figure {
@@ -87,11 +93,17 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     font-weight: 400;
     line-height: 1;
+    outline: 0;
     text-align: center;
     text-decoration: none;
     user-select: none;
     vertical-align: middle;
     white-space: nowrap;
+
+    &.focus,
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+    }
   }
 
   .container {

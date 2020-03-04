@@ -1,6 +1,16 @@
 import styled from "styled-components";
 import { padding } from "polished";
 
+export const PageTopBackgroundAccent = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 33vh;
+  opacity: 0.72;
+  background: linear-gradient(to bottom, transparent, #141625);
+  transition: all 0.3s ease-in-out;
+`;
+
 export const Section = styled.section`
   background-attachment: fixed;
   background-position: center center;

@@ -17,8 +17,22 @@ export const StyledNavbar = styled.header`
     justify-content: space-between;
   }
 
-  .nav-primary {
+  .nav-primary,
+  .nav-secondary,
+  .nav-search {
     display: flex;
+  }
+
+  .nav-secondary,
+  .nav-search {
+    align-items: center;
+  }
+
+  .nav-search {
+    justify-content: flex-end;
+  }
+
+  .nav-primary {
     font-size: 20px;
     letter-spacing: 0.12px;
 
@@ -114,9 +128,15 @@ export const StyledNavbar = styled.header`
   }
 
   .nav-secondary {
-    margin-left: 42px;
     font-size: 18px;
     letter-spacing: 0.11px;
+    justify-content: center;
+    width: auto;
+
+    @media (min-width: 1200px) {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
 
     a {
       margin-right: 40px;
@@ -140,11 +160,6 @@ export const StyledNavbar = styled.header`
         }
       }
     }
-  }
-
-  .nav-search {
-    align-items: center;
-    display: flex;
   }
 `;
 
@@ -170,7 +185,7 @@ export const StyledMobileAppBar = styled.header`
     justify-content: space-around;
     width: 100%;
 
-    a {
+    > * {
       display: inline-block;
       font-size: 14px;
       letter-spacing: 0.28px;
@@ -197,11 +212,17 @@ export const StyledMobileAppBar = styled.header`
         }
       }
 
+      span {
+        color: rgba(255, 255, 255, 0.5);
+        display: block;
+        margin-top: 4px;
+      }
+
       svg {
         fill: rgba(255, 255, 255, 0.5);
         display: block;
         height: 24px;
-        margin: 0 auto 2px;
+        margin: 0 auto;
       }
     }
   }
