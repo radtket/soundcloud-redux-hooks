@@ -16,7 +16,10 @@ const ShuffleButton = () => {
   });
 
   return (
-    <IconButton {...{ onClick, isActive: isShuffle }}>
+    <IconButton
+      className={`button-state ${isShuffle ? "is-active" : ""}`}
+      {...{ onClick }}
+    >
       <IconShuffle />
     </IconButton>
   );

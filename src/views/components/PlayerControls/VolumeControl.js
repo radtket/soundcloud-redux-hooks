@@ -28,6 +28,7 @@ const VolumeControl = () => {
       <Flex alignItems="center">
         <IconButton
           aria-label={isMuted ? "unmute volume" : "mute volume"}
+          className="button-solid"
           name="toggle-mute-button"
           onClick={audio.toggleMuted}
         >

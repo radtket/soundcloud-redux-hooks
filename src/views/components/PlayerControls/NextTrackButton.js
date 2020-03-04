@@ -5,11 +5,12 @@ import IconButton from "../IconButton";
 import { IconNext } from "../Icons";
 import { playSelectedTrack } from "../../../store/player/actions";
 
-const NextTrackButton = ({ trackId, tracklistId }) => {
+const NextTrackButton = ({ trackId, tracklistId, ...props }) => {
   const dispatch = useDispatch();
 
   return (
     <IconButton
+      {...props}
       aria-label="Skip to next track"
       disabled={!trackId}
       onClick={() => {

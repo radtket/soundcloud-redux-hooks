@@ -18,7 +18,10 @@ const RepeatButton = () => {
   });
 
   return (
-    <IconButton {...{ onClick, isActive: isRepeat }}>
+    <IconButton
+      className={`button-state ${isRepeat ? "is-active" : ""}`}
+      {...{ onClick }}
+    >
       <IconRepeat />
     </IconButton>
   );

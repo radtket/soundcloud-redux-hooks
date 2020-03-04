@@ -4,9 +4,10 @@ import IconButton from "../IconButton";
 import { IconPause, IconPlay } from "../Icons";
 import { audio } from "../../../store/player/audio-service";
 
-const PlayTrackButton = ({ isPlaying }) => {
+const PlayTrackButton = ({ isPlaying, ...props }) => {
   return (
     <IconButton
+      {...props}
       aria-label={isPlaying ? "Pause" : "Play"}
       onClick={isPlaying ? audio.pause : audio.play}
       size="lg"
