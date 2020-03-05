@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { NavLink, Link, useLocation } from "react-router-dom";
@@ -14,12 +14,13 @@ import {
   IconDiscover,
   IconSoundCloudAuth,
 } from "./Icons";
+import SearchMobile from "./SearchMobile";
 
 const Navbar = forwardRef(({ mobile }, ref) => {
   const { id } = useSelector(getSession);
   const { pathname } = useLocation();
   const isHomeActive = pathname === "/";
-
+  const [isMobileSearchOpen, setMobileSearchOpen] = useState(false);
   if (mobile) {
     return (
       <StyledMobileAppBar {...{ ref }}>
@@ -28,7 +29,10 @@ const Navbar = forwardRef(({ mobile }, ref) => {
             {isHomeActive ? <IconHome /> : <IconHomeOutline />}
             <span>Home</span>
           </NavLink>
-          <button type="button">
+          <button
+            onClick={() => setMobileSearchOpen(prev => !prev)}
+            type="button"
+          >
             <IconSearch />
             <span>Search</span>
           </button>
@@ -45,6 +49,7 @@ const Navbar = forwardRef(({ mobile }, ref) => {
             </Link>
           )}
         </div>
+        <SearchMobile {...{ isMobileSearchOpen, setMobileSearchOpen }} />
       </StyledMobileAppBar>
     );
   }
