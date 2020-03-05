@@ -10,6 +10,7 @@ import { loadSingleTrack } from "../../store/tracks/actions";
 import WaveformTimeline from "../components/WaveformTimeline";
 import { playSelectedTrack } from "../../store/player/actions";
 import { getPlayerTimes } from "../../store/player/selectors";
+import { CLIENT_ID_PARAM } from "../../store/constants";
 
 const StyledTrackPage = styled.div`
   margin-top: 200px;
@@ -70,7 +71,7 @@ const TrackPage = () => {
     dispatch(loadSingleTrack(trackId));
     const init = () => {
       fetch(
-        "https://api.soundcloud.com/tracks/17602302/comments?client_id=d02c42795f3bcac39f84eee0ae384b00"
+        `https://api.soundcloud.com/tracks/17602302/comments?${CLIENT_ID_PARAM}`
       )
         .then(res => res.json())
         .then(json =>
