@@ -5,7 +5,7 @@ import { StyledIconButton } from "./Buttons";
 const thumbHeight = 16;
 const trackHeight = "9px";
 // f23005
-const ACTIVE_STATE_COLOR = "#f23005";
+const ACTIVE_STATE_COLOR = "#753fdc";
 const thumbColor = "#ddd";
 const thumbHoverColor = "#ccc";
 const lowerColor = "#292929";

@@ -1,6 +1,6 @@
 import React from "react";
 import { rgba } from "polished";
-import StyledHero from "../styles/Hero";
+import { StyledHero } from "../styles/Hero";
 import { BODY_COLOR } from "../styles/GlobalStyles";
 
 const Hero = () => {

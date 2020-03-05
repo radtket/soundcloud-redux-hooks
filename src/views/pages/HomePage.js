@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import TrackGrid from "../components/TrackGrid";
-import Hero from "../components/Hero";
 import { API_USERS_URL, FEATURED_TRACKLIST_ID } from "../../store/constants";
 import { loadUserTracks } from "../../store/users/actions";
 import GenresGrid from "../components/GenresGrid";
 import getBrowserMedia from "../../store/browser/selectors";
 import MobileSectionTitle from "../components/MobileSectionTitle";
 import { SmallSection } from "../styles/General";
+import HeroFeaturedArtist from "../components/HeroFeaturedArtist";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -25,12 +25,11 @@ const HomePage = () => {
 
   return (
     <>
-      {large && <Hero />}
+      <HeroFeaturedArtist artist="RIFFA" to="/users/3027428/tracks" />
       <section className="container">
-        {!large && <GenresGrid />}
-
+        <GenresGrid />
         <SmallSection>
-          {!large && <MobileSectionTitle title="Featured Tracks" />}
+          <MobileSectionTitle title="Featured Tracks" />
           <TrackGrid compactLayout />
         </SmallSection>
       </section>

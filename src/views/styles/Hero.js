@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import riffa from "../../assets/images/home-hero.jpg";
 
-const StyledHero = styled.article`
+export const StyledHero = styled.article`
   background: linear-gradient(
     60deg,
     rgba(84, 58, 183, 1) 0%,
@@ -71,4 +72,71 @@ const StyledHero = styled.article`
   }
 `;
 
-export default StyledHero;
+export const StyledHeroFeaturedArtist = styled.article`
+  display: block;
+  background-color: #111517;
+  background-image: url(${riffa});
+  background-position: 50%;
+  background-size: cover;
+  height: 600px;
+  width: 100vw;
+  min-height: 560px;
+  position: relative;
+
+  .container {
+    position: static;
+  }
+
+  .text {
+    position: absolute;
+    bottom: 0;
+    text-align: left;
+  }
+
+  h1 {
+    display: inline-block;
+    font-weight: 800;
+    color: transparent;
+    font-size: 10vw;
+    line-height: 1;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #fff;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  span {
+    border-color: transparent;
+    border-radius: 0;
+    border: 2px solid transparent;
+    box-shadow: none;
+    color: #fff;
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    line-height: 1.25;
+    padding-left: 0;
+    padding-right: 0;
+    padding: 0.8rem 2rem;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all 0.15s ease-in-out;
+    user-select: none;
+    white-space: nowrap;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      height: 1px;
+      width: 40px;
+      vertical-align: middle;
+      margin-right: 1.5rem;
+      background-color: #fff;
+      @media (min-width: 768px) {
+        width: 80px;
+      }
+    }
+  }
+`;
