@@ -3,9 +3,9 @@ import api from "./api-service";
 
 // Actions
 import { tracklistRequestActions } from "../tracklists/actions";
-import { userRequestActions } from "../users/actions";
-import { followingListRequestActions } from "../followings/actions";
-import { trackRequestActions } from "../tracks/actions";
+import { FETCH_USER_ACTIONS } from "../users/actions";
+import { FETCH_FOLLOWINGS_ACTIONS } from "../followings/actions";
+import { FETCH_SINGLE_TRACK_ACTIONS } from "../tracks/actions";
 
 function* fetchEntities(
   apiFunction,
@@ -54,23 +54,23 @@ export const fetchUserTracks = fetchEntities.bind(
 export const fetchUserFollowings = fetchEntities.bind(
   null,
   api.fetchUserFollowings,
-  followingListRequestActions
+  FETCH_FOLLOWINGS_ACTIONS
 );
 
 export const fetchNextFollowings = fetchEntities.bind(
   null,
   api.fetch,
-  followingListRequestActions
+  FETCH_FOLLOWINGS_ACTIONS
 );
 
 export const fetchUser = fetchEntities.bind(
   null,
   api.fetchUser,
-  userRequestActions
+  FETCH_USER_ACTIONS
 );
 
 export const fetchSingleTrack = fetchEntities.bind(
   null,
   api.fetch,
-  trackRequestActions
+  FETCH_SINGLE_TRACK_ACTIONS
 );

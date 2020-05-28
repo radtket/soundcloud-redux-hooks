@@ -32,10 +32,10 @@ const never$ = NEVER;
 const pause$ = new Subject();
 
 const checkPosition$ = scrollData$.pipe(
-  filter(data => {
+  filter(({ windowInnerHeight, windowPageYOffset, bodyScrollHeight }) => {
     return (
-      data.windowInnerHeight + data.windowPageYOffset >=
-      data.bodyScrollHeight - data.windowInnerHeight
+      windowInnerHeight + windowPageYOffset >=
+      bodyScrollHeight - windowInnerHeight
     );
   })
 );

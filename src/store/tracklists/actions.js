@@ -5,30 +5,6 @@ export const FETCH_TRACKS_PENDING = "FETCH_TRACKS_PENDING";
 export const LOAD_NEXT_TRACKS = "LOAD_NEXT_TRACKS";
 export const UPDATE_TRACKS_PAGINATION = "UPDATE_TRACKS_PAGINATION";
 
-export const fetchTracksPending = ({ id }) => {
-  return {
-    type: FETCH_TRACKS_PENDING,
-    tracklistId: id,
-  };
-};
-
-export const fetchTracksFulfilled = ({
-  id,
-  data: { collection, nextHref },
-}) => {
-  return {
-    type: FETCH_TRACKS_FULFILLED,
-    collection,
-    nextHref,
-    tracklistId: id,
-  };
-};
-
-export const fetchTracksFailed = error => ({
-  type: FETCH_TRACKS_FAILED,
-  error,
-});
-
 export const loadNextTracks = () => ({
   type: LOAD_NEXT_TRACKS,
 });
@@ -39,7 +15,22 @@ export const updateTracksPagination = page => ({
 });
 
 export const tracklistRequestActions = {
-  failed: fetchTracksFailed,
-  fulfilled: fetchTracksFulfilled,
-  pending: fetchTracksPending,
+  failed: error => ({
+    type: FETCH_TRACKS_FAILED,
+    error,
+  }),
+  fulfilled: ({ id, data: { collection, nextHref } }) => {
+    return {
+      type: FETCH_TRACKS_FULFILLED,
+      collection,
+      nextHref,
+      tracklistId: id,
+    };
+  },
+  pending: ({ id }) => {
+    return {
+      type: FETCH_TRACKS_PENDING,
+      tracklistId: id,
+    };
+  },
 };
