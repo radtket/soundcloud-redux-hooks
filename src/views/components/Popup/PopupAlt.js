@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  cloneElement,
-  Fragment,
-} from "react";
+import React, { useState, useEffect, useRef, cloneElement } from "react";
 import PropTypes from "prop-types";
 import { useMeasure, useWindowSize } from "react-use";
 import {
