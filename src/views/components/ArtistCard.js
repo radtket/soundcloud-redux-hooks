@@ -9,16 +9,17 @@ import FormattedInteger from "./Formatters/FormattedInteger";
 const ArtistCard = ({
   user: { avatarUrl, followersCount, username, fullName, id },
 }) => {
+  const to = `/users/${id}/tracks`;
   return (
-    <StyledArtistCard to={`/users/${id}/tracks`}>
-      <Link to={`/users/${id}/tracks`}>
+    <StyledArtistCard {...{ to }}>
+      <Link {...{ to }}>
         <figure>
           <img alt={fullName || username} src={avatarUrl} />
         </figure>
       </Link>
 
       <figcaption className="ellipsis-one-line">
-        <Link className="ellipsis-one-line" to={`/users/${id}/tracks`}>
+        <Link className="ellipsis-one-line" {...{ to }}>
           {username}
         </Link>
 
